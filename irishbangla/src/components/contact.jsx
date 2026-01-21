@@ -10,31 +10,40 @@ const ContactSection = forwardRef((props, ref) => {
     message: "",
   });
 
+  const [successMessage, setSuccessMessage] = useState("");
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const whatsappNumber = "8801973180723";
+    const response = await fetch(
+      "https://formsubmit.co/ajax/fineanswer2025@gmail.com",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          date: formData.date,
+          message: formData.message,
+          _subject: "New Consultation Booking",
+          _captcha: false,
+        }),
+      }
+    );
 
-    const text = `
-📌 *New Consultation Booking*
-
-👤 Name: ${formData.name}
-📞 Phone: ${formData.phone}
-📅 Appointment Date: ${formData.date}
-
-📝 Message:
-${formData.message}
-    `;
-
-    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-      text
-    )}`;
-
-    window.open(whatsappURL, "_blank");
+    if (response.ok) {
+      setSuccessMessage("✅ Your meeting has been scheduled successfully!");
+      setFormData({ name: "", phone: "", date: "", message: "" });
+    } else {
+      setSuccessMessage("❌ Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -67,25 +76,52 @@ ${formData.message}
         <div className="contact-card">
           <h3 className="form-title">Book a Free Consultation</h3>
 
+          {successMessage && (
+            <p className="success-message">{successMessage}</p>
+          )}
+
           <form className="contact-form" onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Full Name</label>
-              <input type="text" name="name" required onChange={handleChange} />
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                required
+                onChange={handleChange}
+              />
             </div>
 
             <div className="form-group">
               <label>Phone Number</label>
-              <input type="tel" name="phone" required onChange={handleChange} />
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                required
+                onChange={handleChange}
+              />
             </div>
 
             <div className="form-group">
               <label>Appointment Date</label>
-              <input type="date" name="date" required onChange={handleChange} />
+              <input
+                type="date"
+                name="date"
+                value={formData.date}
+                required
+                onChange={handleChange}
+              />
             </div>
 
             <div className="form-group">
               <label>Your Message</label>
-              <textarea rows="4" name="message" onChange={handleChange} />
+              <textarea
+                rows="4"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+              />
             </div>
 
             <button type="submit" className="send-btn">
