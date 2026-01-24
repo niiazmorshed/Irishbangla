@@ -88,8 +88,11 @@ export default function VisaSearchCard() {
           >
             <option value="">Select visa type</option>
             <option>Tourist Visa</option>
-            <option>Student Visa</option>
-            <option>Work Visa</option>
+            <option>Study Visa</option>
+            <option>Work/Employment Visa</option>
+            <option>Training Visa</option>
+            <option>Family Visit Visa</option>
+            <option>Join Family Visa</option>
           </select>
         </div>
 

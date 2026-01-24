@@ -86,21 +86,21 @@ export default function VisaDetails() {
 
         {/* RIGHT */}
         <aside className="visa-sidebar">
-          <h4>Family member of EU-EEA-Swiss citizen</h4>
+          <h4>Ireland Short- & Long-Stay Visa Services</h4>
 
           <div className="price-box">
             <span className="currency">৳</span>
-            <span className="amount">34,500</span>
+            <span className="amount">54,500</span>
           </div>
 
           <div className="fee-row">
             <span>Service Fee</span>
-            <span>৳ 34,500</span>
+            <span>৳ 54,500</span>
           </div>
 
           <div className="fee-row total">
             <span>Grand Total</span>
-            <span>৳ 34,500</span>
+            <span>৳ 54,500</span>
           </div>
 
           <button className="primary-btn">Start Application</button>
