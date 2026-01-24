@@ -14,6 +14,7 @@ import AboutUs from "./components/aboutus";
 import IrelandTravelProcess from "./components/IrelandTravelProcess";
 import Footer from "./components/Footer";
 import SustainableIreland from "./pages/SustainableIreland";
+import IrelandWeather from "./pages/irelandweather";
 
 // ✅ Home component
 function Home() {
@@ -48,6 +49,7 @@ function App() {
         <Route path="/visa-details" element={<VisaDetails />} />
         <Route path="/track/:trackingId" element={<TrackerPage />} />
         <Route path="/ireland-travel-process" element={<IrelandTravelProcess />} />
+        <Route path="/ireland-weather" element={<IrelandWeather />} />
         <Route path="/sustainable-ireland" element={<SustainableIreland />} />
       </Routes>
     </Router>

@@ -18,6 +18,7 @@ const trips = [
     btn: "Get the forecast",
     img: img2,
     primary: true,
+    link: "/ireland-weather",
   },
   {
     title: "Sustainable Ireland",

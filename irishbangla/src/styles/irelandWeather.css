@@ -1,0 +1,199 @@
+/* =========================
+   Ireland Weather – Animated Full Page
+   ========================= */
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #fdfdfd;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================
+   SECTION STYLES
+========================= */
+.editorial-section {
+  padding: 120px 24px;
+  background: #ffffff;
+}
+
+.editorial-section.alt {
+  background: #f6f8f7;
+}
+
+/* FULL SCREEN SECTIONS */
+.full-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+/* GRID LAYOUT */
+.editorial-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.editorial-grid.reverse {
+  direction: rtl;
+}
+
+.editorial-grid.reverse > * {
+  direction: ltr;
+}
+
+/* TEXT */
+.editorial-text h2 {
+  font-size: 2.6rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #0f3d2e;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+}
+
+.editorial-text p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 18px;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+}
+
+.editorial-text p:nth-of-type(1) {
+  animation-delay: 0.2s;
+}
+.editorial-text p:nth-of-type(2) {
+  animation-delay: 0.35s;
+}
+.editorial-text p:nth-of-type(3) {
+  animation-delay: 0.5s;
+}
+
+/* DROPCAP */
+.dropcap::first-letter {
+  font-size: 3.2rem;
+  font-weight: 600;
+  float: left;
+  line-height: 1;
+  margin-right: 10px;
+  color: #1f6f54;
+}
+
+/* IMAGE */
+.editorial-image {
+  opacity: 0;
+  transform: translateX(60px);
+  animation: imageIn 1.2s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.editorial-grid.reverse .editorial-image {
+  transform: translateX(-60px);
+}
+
+.editorial-image img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
+
+.editorial-image img:hover {
+  transform: scale(1.04);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.18);
+}
+
+/* IMAGE COLLAGE */
+.image-collage {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.image-collage img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.image-collage img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.15);
+}
+
+.image-collage img:nth-child(1) {
+  grid-column: span 2;
+  height: 260px;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes imageIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* FADE IN HELPER */
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 1s ease forwards;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 992px) {
+  .editorial-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .editorial-image img {
+    height: 360px;
+  }
+
+  .editorial-text h2 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .editorial-section {
+    padding: 80px 16px;
+  }
+
+  .editorial-text p {
+    font-size: 1rem;
+  }
+
+  .editorial-image img {
+    height: 280px;
+  }
+
+  .image-collage img:nth-child(1) {
+    height: 220px;
+  }
+}
