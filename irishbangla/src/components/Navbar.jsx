@@ -54,7 +54,21 @@ export default function Navbar() {
 
         {/* MENU */}
         <ul className={`nav-menu ${menuOpen ? "open" : ""}`}>
-          <li className="nav-item">Company</li>
+          <li
+  className="nav-item"
+  onClick={() => {
+    navigate("/");
+    setTimeout(() => {
+      document
+        .querySelector(".about-section")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+    setMenuOpen(false);
+  }}
+>
+  Company
+</li>
+
 
           <li className="nav-item">
             <NavLink
