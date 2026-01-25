@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { FaSearch, FaArrowLeft } from "react-icons/fa";
+import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import "../styles/Navbar.css";
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [trackingId, setTrackingId] = useState("");
+
+  const isHome = location.pathname === "/";
 
   // Hide / show navbar on scroll
   useEffect(() => {
@@ -23,7 +26,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  // Tracking search
+  // Handle tracking search
   const handleTrackingSearch = () => {
     if (!trackingId.trim()) return;
     navigate(`/track/${trackingId.trim()}`);
@@ -35,18 +38,37 @@ export default function Navbar() {
     <header className={`navbar ${show ? "show" : "hide"}`}>
       <div className="nav-container">
 
-        {/* LOGO */}
-        <div className="nav-logo" onClick={() => navigate("/")}>
-          🍀 <span>Emerald Visa & Tours</span>
+        {/* LEFT SIDE (Back + Logo) */}
+        <div className="nav-left">
+          {!isHome && (
+            <button className="back-btn" onClick={() => navigate(-1)}>
+              <FaArrowLeft />
+              <span>Back</span>
+            </button>
+          )}
+
+          <div className="nav-logo" onClick={() => navigate("/")}>
+            🍀 <span>Emerald Visa & Tours</span>
+          </div>
         </div>
 
         {/* MENU */}
         <ul className={`nav-menu ${menuOpen ? "open" : ""}`}>
-
           <li className="nav-item">Company</li>
-          <li className="nav-item">Information</li>
 
-          {/* SERVICES DROPDOWN */}
+          <li className="nav-item">
+            <NavLink
+              to="/ireland-travel-process"
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
+              onClick={() => setMenuOpen(false)}
+            >
+              Information
+            </NavLink>
+          </li>
+
+          {/* SERVICES */}
           <li
             className="nav-item services"
             onMouseEnter={() => setServicesOpen(true)}
@@ -54,7 +76,6 @@ export default function Navbar() {
             onClick={() => setServicesOpen(!servicesOpen)}
           >
             Services ▾
-
             {servicesOpen && (
               <div className="mega-menu">
                 <div className="mega-item">Visa Consultancy</div>
@@ -67,7 +88,7 @@ export default function Navbar() {
             )}
           </li>
 
-          {/* TRACKING BOX */}
+          {/* TRACKING */}
           <li className="tracking-box">
             <input
               type="text"
@@ -81,16 +102,19 @@ export default function Navbar() {
             </button>
           </li>
 
-          <li className="nav-cta" onClick={() => {
-  navigate("/book-trip");
-  setMenuOpen(false);
-}}>
-  Book Trip
-</li>
-
+          {/* CTA */}
+          <li
+            className="nav-cta"
+            onClick={() => {
+              navigate("/book-trip");
+              setMenuOpen(false);
+            }}
+          >
+            Book Trip
+          </li>
         </ul>
 
-        {/* BURGER MENU */}
+        {/* BURGER */}
         <div
           className={`burger ${menuOpen ? "active" : ""}`}
           onClick={() => setMenuOpen(!menuOpen)}
@@ -99,7 +123,6 @@ export default function Navbar() {
           <span></span>
           <span></span>
         </div>
-
       </div>
     </header>
   );

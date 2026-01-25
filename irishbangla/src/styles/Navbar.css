@@ -26,6 +26,32 @@
   justify-content: space-between;
 }
 
+/* LEFT */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Back button */
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: #0a5c4d;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.back-btn:hover {
+  background: rgba(10, 92, 77, 0.08);
+}
+
 /* Logo */
 .nav-logo {
   font-size: 20px;
@@ -34,6 +60,18 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
+}
+
+/* Links */
+.nav-link {
+  color: #222;
+  text-decoration: none;
+}
+
+.nav-link.active {
+  color: #0a5c4d;
+  font-weight: 600;
 }
 
 /* Menu */
@@ -77,38 +115,9 @@
   width: 22px;
   height: 2px;
   background: #0a5c4d;
-  transition: 0.3s;
 }
 
-/* Mobile */
-@media (max-width: 900px) {
-  .burger {
-    display: flex;
-  }
-
-  .nav-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: white;
-    flex-direction: column;
-    width: 100%;
-    padding: 20px;
-    gap: 18px;
-    display: none;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-  }
-
-  .nav-menu.open {
-    display: flex;
-  }
-
-  .nav-cta {
-    width: 100%;
-    text-align: center;
-  }
-}
-
+/* Tracking */
 .tracking-box {
   display: flex;
   align-items: center;
@@ -132,6 +141,8 @@
   padding: 8px 12px;
   cursor: pointer;
 }
+
+/* Services */
 .services {
   position: relative;
 }
@@ -147,8 +158,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-  z-index: 999;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
 }
 
 .mega-item {
@@ -157,26 +167,36 @@
   border-radius: 10px;
   font-size: 14px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 .mega-item:hover {
   background: #e9efff;
 }
+
+/* Mobile */
 @media (max-width: 900px) {
-  .mega-menu {
-    position: static;
-    width: 100%;
-    grid-template-columns: 1fr;
-    box-shadow: none;
+  .burger {
+    display: flex;
   }
 
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+    gap: 18px;
+    display: none;
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+
+  .nav-cta,
   .tracking-box {
     width: 100%;
   }
-
-  .tracking-box input {
-    width: 100%;
-  }
 }
-
