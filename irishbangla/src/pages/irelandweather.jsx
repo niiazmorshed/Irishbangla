@@ -14,9 +14,9 @@ export default function IrelandWeather() {
     <>
       <Navbar />
 
-      {/* SECTION 1 – RAINY MODE */}
+      {/* SECTION 1 – RAINY MODE (IMAGE RIGHT) */}
       <section className="editorial-section full-screen fade-in">
-        <div className="editorial-grid">
+        <div className="editorial-grid image-right">
           <div className="editorial-text">
             <h2>Ireland is always ON mode</h2>
             <p className="dropcap">
@@ -40,9 +40,9 @@ export default function IrelandWeather() {
         </div>
       </section>
 
-      {/* SECTION 2 – SUMMER & LIGHT WEATHER */}
-      <section className="editorial-section alt full-screen fade-in">
-        <div className="editorial-grid reverse">
+      {/* SECTION 2 – SUMMER MODE (IMAGE LEFT) */}
+      <section className="editorial-section full-screen fade-in">
+        <div className="editorial-grid image-left">
           <div className="editorial-image">
             <img src={imgSummer} alt="Irish summer weather" />
           </div>

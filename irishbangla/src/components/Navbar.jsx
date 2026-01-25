@@ -81,7 +81,13 @@ export default function Navbar() {
             </button>
           </li>
 
-          <li className="nav-cta">Book Trip</li>
+          <li className="nav-cta" onClick={() => {
+  navigate("/book-trip");
+  setMenuOpen(false);
+}}>
+  Book Trip
+</li>
+
         </ul>
 
         {/* BURGER MENU */}

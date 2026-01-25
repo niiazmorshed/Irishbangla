@@ -15,6 +15,7 @@ import IrelandTravelProcess from "./components/IrelandTravelProcess";
 import Footer from "./components/Footer";
 import SustainableIreland from "./pages/SustainableIreland";
 import IrelandWeather from "./pages/irelandweather";
+import BookTrip from "./pages/BookTrip";
 
 // ✅ Home component
 function Home() {
@@ -46,6 +47,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} /> {/* only one / route */}
+        <Route path="/book-trip" element={<BookTrip />} />
         <Route path="/visa-details" element={<VisaDetails />} />
         <Route path="/track/:trackingId" element={<TrackerPage />} />
         <Route path="/ireland-travel-process" element={<IrelandTravelProcess />} />

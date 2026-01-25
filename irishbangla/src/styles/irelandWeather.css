@@ -4,29 +4,25 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  background: #fdfdfd;
-  color: #333;
   margin: 0;
   padding: 0;
+  background: #fdfdfd;
+  color: #333;
 }
 
 /* =========================
    SECTION STYLES
 ========================= */
 .editorial-section {
-  padding: 120px 24px;
-  background: #ffffff;
+  padding: 0;
+  background: #fff;
 }
 
-.editorial-section.alt {
-  background: #f6f8f7;
-}
-
-/* FULL SCREEN SECTIONS */
 .full-screen {
   min-height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 /* GRID LAYOUT */
@@ -40,14 +36,14 @@ body {
 }
 
 .editorial-grid.reverse {
-  direction: rtl;
+  direction: rtl; /* image right */
 }
 
 .editorial-grid.reverse > * {
   direction: ltr;
 }
 
-/* TEXT */
+/* TEXT STYLING */
 .editorial-text h2 {
   font-size: 2.6rem;
   font-weight: 600;
@@ -78,7 +74,7 @@ body {
 
 /* DROPCAP */
 .dropcap::first-letter {
-  font-size: 3.2rem;
+  font-size: 3rem;
   font-weight: 600;
   float: left;
   line-height: 1;
@@ -86,7 +82,62 @@ body {
   color: #1f6f54;
 }
 
-/* IMAGE */
+/* IMAGE LEFT / RIGHT SETTINGS */
+.editorial-grid.image-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.editorial-grid.image-left {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.editorial-grid.image-right .editorial-image {
+  order: 2; /* image appears right */
+}
+
+.editorial-grid.image-right .editorial-text {
+  order: 1;
+}
+
+.editorial-grid.image-left .editorial-image {
+  order: 1; /* image appears left */
+}
+
+.editorial-grid.image-left .editorial-text {
+  order: 2;
+}
+
+/* ANIMATION for images */
+.editorial-image {
+  opacity: 0;
+  transform: translateX(60px);
+  animation: imageIn 1.2s ease forwards;
+}
+
+.editorial-grid.image-left .editorial-image {
+  transform: translateX(-60px);
+}
+
+.editorial-image img {
+  width: 100%;
+  height: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
+
+.editorial-image img:hover {
+  transform: scale(1.04);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.18);
+}
+
+/* IMAGE ANIMATION */
 .editorial-image {
   opacity: 0;
   transform: translateX(60px);
@@ -100,7 +151,8 @@ body {
 
 .editorial-image img {
   width: 100%;
-  height: 420px;
+  height: 100%;
+  max-height: 500px;
   object-fit: cover;
   border-radius: 14px;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
@@ -116,12 +168,12 @@ body {
 .image-collage {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 12px; /* reduce gap from 16px to 12px or even 8px */
 }
 
 .image-collage img {
   width: 100%;
-  height: 200px;
+  height: 200px; /* keep consistent height */
   object-fit: cover;
   border-radius: 12px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
@@ -133,14 +185,14 @@ body {
   box-shadow: 0 18px 35px rgba(0, 0, 0, 0.15);
 }
 
+/* make first image span two columns for nicer layout */
 .image-collage img:nth-child(1) {
   grid-column: span 2;
-  height: 260px;
+  height: 260px; /* slightly taller for hero effect */
 }
 
-/* =========================
-   ANIMATIONS
-========================= */
+
+/* ANIMATIONS */
 @keyframes fadeUp {
   to {
     opacity: 1;
@@ -162,9 +214,7 @@ body {
   animation: fadeUp 1s ease forwards;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* RESPONSIVE */
 @media (max-width: 992px) {
   .editorial-grid {
     grid-template-columns: 1fr;
@@ -182,7 +232,7 @@ body {
 
 @media (max-width: 576px) {
   .editorial-section {
-    padding: 80px 16px;
+    padding: 60px 16px;
   }
 
   .editorial-text p {
