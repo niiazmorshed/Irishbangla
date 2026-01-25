@@ -26,7 +26,7 @@ const slides = [
   },
 ];
 
-export default function Hero() {
+export default function Hero({ onConsultClick, onServiceClick }) {
   const [current, setCurrent] = useState(0);
 
   // Auto slide
@@ -50,32 +50,26 @@ export default function Hero() {
 
           <div className="hero-inner">
             <div className="hero-content">
-              <span className="hero-eyebrow">
-                {slide.subtitle}
-              </span>
+              <span className="hero-eyebrow">{slide.subtitle}</span>
 
-              <h1 className="hero-title">
-                {slide.title}
-              </h1>
+              <h1 className="hero-title">{slide.title}</h1>
 
-              <p className="hero-desc">
-                {slide.desc}
-              </p>
+              <p className="hero-desc">{slide.desc}</p>
 
               <div className="hero-actions">
-                <button className="btn-primary">
+                <button
+                  className="btn-primary"
+                  onClick={onConsultClick}
+                >
                   Book a Consultation
                 </button>
-                <button
-  className="btn-secondary"
-  onClick={() => {
-    const section = document.getElementById("services");
-    section && section.scrollIntoView({ behavior: "smooth" });
-  }}
->
-  Explore Services
-</button>
 
+                <button
+                  className="btn-secondary"
+                  onClick={onServiceClick}
+                >
+                  Explore Services
+                </button>
               </div>
 
               <div className="hero-trust">

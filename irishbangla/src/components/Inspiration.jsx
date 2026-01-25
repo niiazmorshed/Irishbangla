@@ -13,35 +13,35 @@ const places = {
     title: "Northern Ireland",
     description:
       "Amazing cliff-walks, Game of Thrones® adventures, Titanic attractions – let Northern Ireland stir your soul.",
-    button: "Embrace a Giant Spirit →",
+    button: "Embrace a Giant Spirit ",
   },
   "Dublin": {
     image: dublinImg,
     title: "Dublin",
     description:
       "A lively capital filled with literary legends, cosy pubs, historic streets and modern energy.",
-    button: "Discover Dublin →",
+    button: "Discover Dublin ",
   },
   "Wild Atlantic Way": {
     image: wildImg,
     title: "Wild Atlantic Way",
     description:
       "Rugged coastlines, dramatic cliffs and endless ocean views along one of the world’s longest coastal routes.",
-    button: "Explore the Wild →",
+    button: "Explore the Wild ",
   },
   "Ireland's Ancient East": {
     image: ancientImg,
     title: "Ireland's Ancient East",
     description:
       "Step into 5,000 years of history through castles, monasteries and medieval towns.",
-    button: "Travel Back in Time →",
+    button: "Travel Back in Time ",
   },
   "Ireland's Hidden Heartlands": {
     image: heartImg,
     title: "Hidden Heartlands",
     description:
       "Slow down and explore Ireland’s peaceful lakes, rivers and charming countryside.",
-    button: "Find Your Calm →",
+    button: "Find Your Calm ",
   },
 };
 

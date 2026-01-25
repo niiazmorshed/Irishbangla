@@ -20,20 +20,38 @@ import BookTrip from "./pages/BookTrip";
 // ✅ Home component
 function Home() {
   const contactRef = useRef(null);
+  const servicesRef = useRef(null);
 
   const scrollToContact = () => {
     contactRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const scrollToServices = () => {
+    servicesRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <>
-      <Hero />
+      {/* ✅ PASS PROPS HERE */}
+      <Hero
+        onConsultClick={scrollToContact}
+        onServiceClick={scrollToServices}
+      />
+
       <VisaSearchCard />
       <ThinkingTrip />
-      <Services onEnquiryClick={scrollToContact} />
+
+      {/* ✅ WRAP SERVICES WITH REF */}
+      <div ref={servicesRef}>
+        <Services onEnquiryClick={scrollToContact} />
+      </div>
+
       <Inspiration />
       <AboutUs />
-      <ContactSection ref={contactRef} /> {/* ✅ attach ref */}
+
+      {/* ✅ CONTACT TARGET */}
+      <ContactSection ref={contactRef} />
+
       <Footer />
     </>
   );
