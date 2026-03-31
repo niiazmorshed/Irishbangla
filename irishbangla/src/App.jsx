@@ -32,13 +32,13 @@ function Home() {
 
   return (
     <>
-      {/* ✅ PASS PROPS HERE */}
-      <Hero
-        onConsultClick={scrollToContact}
-        onServiceClick={scrollToServices}
-      />
-
-      <VisaSearchCard />
+      <div className="home-hero-stack">
+        <Hero
+          onConsultClick={scrollToContact}
+          onServiceClick={scrollToServices}
+        />
+        <VisaSearchCard />
+      </div>
       <ThinkingTrip />
 
       {/* ✅ WRAP SERVICES WITH REF */}

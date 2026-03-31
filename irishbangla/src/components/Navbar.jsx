@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { FaSearch, FaArrowLeft } from "react-icons/fa";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import "../styles/Navbar.css";
+import Breadcrumbs from "./Breadcrumbs";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -138,6 +139,8 @@ export default function Navbar() {
           <span></span>
         </div>
       </div>
+
+      <Breadcrumbs />
     </header>
   );
 }
