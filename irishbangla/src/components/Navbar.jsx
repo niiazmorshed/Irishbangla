@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { FaSearch, FaArrowLeft } from "react-icons/fa";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import "../styles/Navbar.css";
@@ -9,7 +9,8 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const infoRef = useRef(null);
+  const infoCloseTimer = useRef(null);
+  const servicesCloseTimer = useRef(null);
 
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -26,12 +27,25 @@ export default function Navbar() {
       setShow(window.scrollY < lastScrollY || window.scrollY < 80);
       setLastScrollY(window.scrollY);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  // Handle tracking search
+  // Close dropdowns after navigation
+  useEffect(() => {
+    setInfoOpen(false);
+    setServicesOpen(false);
+    setMenuOpen(false);
+  }, [location.pathname]);
+
+  // Cleanup timers on unmount
+  useEffect(() => {
+    return () => {
+      clearTimeout(infoCloseTimer.current);
+      clearTimeout(servicesCloseTimer.current);
+    };
+  }, []);
+
   const handleTrackingSearch = () => {
     if (!trackingId.trim()) return;
     navigate(`/track/${trackingId.trim()}`);
@@ -48,43 +62,51 @@ export default function Navbar() {
     []
   );
 
-  const isMobileNav = () =>
+  const isMobile = () =>
     typeof window !== "undefined" &&
-    window.matchMedia &&
     window.matchMedia("(max-width: 900px)").matches;
 
-  useEffect(() => {
-    // Close dropdown after navigation
-    setInfoOpen(false);
-    setServicesOpen(false);
-  }, [location.pathname]);
+  // ── Information dropdown handlers ──────────────────────────────────
+  const handleInfoEnter = useCallback(() => {
+    if (isMobile()) return;
+    clearTimeout(infoCloseTimer.current);
+    setInfoOpen(true);
+  }, []);
 
-  useEffect(() => {
-    if (!infoOpen) return;
+  const handleInfoLeave = useCallback(() => {
+    if (isMobile()) return;
+    // Delay gives the cursor time to move into the dropdown menu
+    infoCloseTimer.current = setTimeout(() => setInfoOpen(false), 120);
+  }, []);
 
-    const handlePointerDown = (e) => {
-      if (!infoRef.current) return;
-      if (infoRef.current.contains(e.target)) return;
-      setInfoOpen(false);
-    };
+  const handleInfoClick = useCallback(() => {
+    // Mobile: toggle on tap
+    if (!isMobile()) return;
+    setInfoOpen((v) => !v);
+  }, []);
 
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") setInfoOpen(false);
-    };
+  // ── Services dropdown handlers ──────────────────────────────────────
+  const handleServicesEnter = useCallback(() => {
+    if (isMobile()) return;
+    clearTimeout(servicesCloseTimer.current);
+    setServicesOpen(true);
+  }, []);
 
-    document.addEventListener("pointerdown", handlePointerDown);
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("pointerdown", handlePointerDown);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [infoOpen]);
+  const handleServicesLeave = useCallback(() => {
+    if (isMobile()) return;
+    servicesCloseTimer.current = setTimeout(() => setServicesOpen(false), 120);
+  }, []);
+
+  const handleServicesClick = useCallback(() => {
+    if (!isMobile()) return;
+    setServicesOpen((v) => !v);
+  }, []);
 
   return (
     <header className={`navbar ${show ? "show" : "hide"}`}>
       <div className="nav-container">
 
-        {/* LEFT SIDE (Back + Logo) */}
+        {/* LEFT */}
         <div className="nav-left">
           {!isHome && (
             <button className="back-btn" onClick={() => navigate(-1)}>
@@ -92,42 +114,48 @@ export default function Navbar() {
               <span>Back</span>
             </button>
           )}
-
           <div className="nav-logo" onClick={() => navigate("/")}>
-            🍀 <span>Emerald Visa & Tours</span>
+            🍀 <span>Emerald Visa &amp; Tours</span>
           </div>
         </div>
 
         {/* MENU */}
         <ul className={`nav-menu ${menuOpen ? "open" : ""}`}>
-          <li
-  className="nav-item"
-  onClick={() => {
-    navigate("/");
-    setTimeout(() => {
-      document
-        .querySelector(".about-section")
-        ?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
-    setMenuOpen(false);
-  }}
->
-  Company
-</li>
 
+          {/* Company */}
+          <li
+            className="nav-item"
+            onClick={() => {
+              navigate("/");
+              setTimeout(() => {
+                document
+                  .querySelector(".about-section")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }, 100);
+              setMenuOpen(false);
+            }}
+          >
+            Company
+          </li>
 
           {/* INFORMATION DROPDOWN */}
           <li
-            className="nav-item info"
-            ref={infoRef}
-            onClick={() => {
-              // Desktop: hover controls visibility; avoid "sticky open" on click.
-              if (!isMobileNav()) return;
-              setInfoOpen((v) => !v);
-            }}
+            className={`nav-item info${infoOpen ? " open" : ""}`}
+            onMouseEnter={handleInfoEnter}
+            onMouseLeave={handleInfoLeave}
+            onClick={handleInfoClick}
           >
             Information ▾
-            <div className={`info-menu ${infoOpen ? "open" : ""}`}>
+
+            {/* The dropdown menu itself — hover over it cancels the close timer */}
+            <div
+              className={`info-menu${infoOpen ? " open" : ""}`}
+              onMouseEnter={() => {
+                if (isMobile()) return;
+                clearTimeout(infoCloseTimer.current);
+              }}
+              onMouseLeave={handleInfoLeave}
+            >
               {infoItems.map((it) => (
                 <NavLink
                   key={it.to}
@@ -135,7 +163,8 @@ export default function Navbar() {
                   className={({ isActive }) =>
                     isActive ? "info-link active" : "info-link"
                   }
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     setMenuOpen(false);
                     setInfoOpen(false);
                   }}
@@ -148,22 +177,27 @@ export default function Navbar() {
 
           {/* SERVICES */}
           <li
-            className="nav-item services"
-            onMouseEnter={() => setServicesOpen(true)}
-            onMouseLeave={() => setServicesOpen(false)}
-            onClick={() => setServicesOpen(!servicesOpen)}
+            className={`nav-item services${servicesOpen ? " open" : ""}`}
+            onMouseEnter={handleServicesEnter}
+            onMouseLeave={handleServicesLeave}
+            onClick={handleServicesClick}
           >
             Services ▾
-            {servicesOpen && (
-              <div className="mega-menu">
-                <div className="mega-item">Visa Consultancy</div>
-                <div className="mega-item">Cross-Border Visa Processing</div>
-                <div className="mega-item">Visa Processing in Bangladesh</div>
-                <div className="mega-item">E-Visa Processing</div>
-                <div className="mega-item">Express Consultation</div>
-                <div className="mega-item">Document Legalization</div>
-              </div>
-            )}
+            <div
+              className={`mega-menu${servicesOpen ? " open" : ""}`}
+              onMouseEnter={() => {
+                if (isMobile()) return;
+                clearTimeout(servicesCloseTimer.current);
+              }}
+              onMouseLeave={handleServicesLeave}
+            >
+              <div className="mega-item">Visa Consultancy</div>
+              <div className="mega-item">Cross-Border Visa Processing</div>
+              <div className="mega-item">Visa Processing in Bangladesh</div>
+              <div className="mega-item">E-Visa Processing</div>
+              <div className="mega-item">Express Consultation</div>
+              <div className="mega-item">Document Legalization</div>
+            </div>
           </li>
 
           {/* TRACKING */}

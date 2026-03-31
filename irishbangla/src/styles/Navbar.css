@@ -142,23 +142,26 @@
   cursor: pointer;
 }
 
-/* Services */
-.services {
-  position: relative;
-}
-
+/* ── Info dropdown ───────────────────────────────────────────────────── */
 .info {
   position: relative;
 }
 
 .info-menu {
   position: absolute;
-  top: 130%;
+  /*
+    top: 100% puts the menu flush against the nav item with NO gap.
+    The padding-top: 8px inside creates visual breathing room
+    while keeping the hover zone connected.
+  */
+  top: 100%;
   left: 0;
   min-width: 360px;
   background: #ffffff;
-  padding: 12px;
+  padding: 8px 12px 12px;
   border-radius: 14px;
+  /* REMOVED: .info:hover .info-menu — that was causing the disappearing bug.
+     The dropdown is now controlled ONLY by the .open class via React state. */
   display: none;
   gap: 8px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
@@ -166,10 +169,7 @@
   z-index: 1000;
 }
 
-.info:hover .info-menu {
-  display: grid;
-}
-
+/* Only .open controls visibility — no :hover rule here */
 .info-menu.open {
   display: grid;
 }
@@ -184,11 +184,13 @@
   border: 1px solid transparent;
   font-size: 14px;
   line-height: 1.35;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .info-link:hover {
   background: #eef7f4;
   border-color: rgba(10, 92, 77, 0.22);
+  color: #0a5c4d;
 }
 
 .info-link.active {
@@ -198,18 +200,30 @@
   font-weight: 600;
 }
 
+/* ── Services mega-menu ──────────────────────────────────────────────── */
+.services {
+  position: relative;
+}
+
 .mega-menu {
   position: absolute;
-  top: 130%;
+  top: 100%;       /* flush, no gap */
   left: -150px;
   width: 420px;
   background: #fff;
   padding: 18px;
   border-radius: 14px;
-  display: grid;
+  /* Controlled by .open class only */
+  display: none;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(2, 6, 23, 0.06);
+  z-index: 1000;
+}
+
+.mega-menu.open {
+  display: grid;
 }
 
 .mega-item {
@@ -218,13 +232,14 @@
   border-radius: 10px;
   font-size: 14px;
   cursor: pointer;
+  transition: background 0.15s ease;
 }
 
 .mega-item:hover {
   background: #e9efff;
 }
 
-/* Mobile */
+/* ── Mobile ──────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .burger {
     display: flex;
@@ -240,6 +255,8 @@
     padding: 20px;
     gap: 18px;
     display: none;
+    z-index: 998;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
   }
 
   .nav-menu.open {
@@ -262,5 +279,18 @@
 
   .info-menu.open {
     display: grid;
+  }
+
+  .mega-menu {
+    position: static;
+    width: 100%;
+    left: auto;
+    box-shadow: none;
+    display: none;
+  }
+
+  .mega-menu.open {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 }
