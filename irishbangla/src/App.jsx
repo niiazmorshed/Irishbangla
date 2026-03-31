@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useRef } from "react";
 
-import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import ThinkingTrip from "./components/thinkingtrip";
 import Inspiration from "./components/Inspiration";
@@ -12,11 +11,11 @@ import TrackerPage from "./pages/TrackerPage";
 import ContactSection from "./components/contact";
 import AboutUs from "./components/aboutus";
 import IrelandTravelProcess from "./components/IrelandTravelProcess";
-import Footer from "./components/Footer";
 import SustainableIreland from "./pages/SustainableIreland";
 import IrelandWeather from "./pages/irelandweather";
 import BookTrip from "./pages/BookTrip";
 import InformationTopic from "./pages/InformationTopic";
+import Layout from "./components/Layout";
 
 // ✅ Home component
 function Home() {
@@ -52,8 +51,6 @@ function Home() {
 
       {/* ✅ CONTACT TARGET */}
       <ContactSection ref={contactRef} />
-
-      <Footer />
     </>
   );
 }
@@ -62,17 +59,17 @@ function Home() {
 function App() {
   return (
     <Router>
-      <Navbar />
-
       <Routes>
-        <Route path="/" element={<Home />} /> {/* only one / route */}
-        <Route path="/book-trip" element={<BookTrip />} />
-        <Route path="/visa-details" element={<VisaDetails />} />
-        <Route path="/information/:topic" element={<InformationTopic />} />
-        <Route path="/track/:trackingId" element={<TrackerPage />} />
-        <Route path="/ireland-travel-process" element={<IrelandTravelProcess />} />
-        <Route path="/ireland-weather" element={<IrelandWeather />} />
-        <Route path="/sustainable-ireland" element={<SustainableIreland />} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} /> {/* only one / route */}
+          <Route path="/book-trip" element={<BookTrip />} />
+          <Route path="/visa-details" element={<VisaDetails />} />
+          <Route path="/information/:topic" element={<InformationTopic />} />
+          <Route path="/track/:trackingId" element={<TrackerPage />} />
+          <Route path="/ireland-travel-process" element={<IrelandTravelProcess />} />
+          <Route path="/ireland-weather" element={<IrelandWeather />} />
+          <Route path="/sustainable-ireland" element={<SustainableIreland />} />
+        </Route>
       </Routes>
     </Router>
   );

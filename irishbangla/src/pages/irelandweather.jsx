@@ -1,6 +1,4 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import "../styles/irelandWeather.css";
 
 import imgRain from "../assets/hero/rainy.jpg";
@@ -12,8 +10,6 @@ import imgMood3 from "../assets/hero/mood3.jpg";
 export default function IrelandWeather() {
   return (
     <>
-      <Navbar />
-
       {/* SECTION 1 – RAINY MODE (IMAGE RIGHT) */}
       <section className="editorial-section full-screen fade-in">
         <div className="editorial-grid image-right">
@@ -90,8 +86,6 @@ export default function IrelandWeather() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </>
   );
 }

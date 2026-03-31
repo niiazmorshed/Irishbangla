@@ -1,6 +1,4 @@
 import { useEffect } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import "../styles/sustainableIreland.css";
 
 import imgLocal from "../assets/hero/cliffs.jpg";
@@ -27,14 +25,11 @@ export default function SustainableIreland() {
   }, []);
 
   return (
-    <>
-      <Navbar />
-
-      <main className="page-offset">
-        {/* SECTION 1 */}
-        <section className="editorial-section full">
-          <div className="editorial-grid">
-            <div className="editorial-text reveal left">
+    <main className="page-offset">
+      {/* SECTION 1 */}
+      <section className="editorial-section full">
+        <div className="editorial-grid">
+          <div className="editorial-text reveal left">
   <span className="section-eyebrow">SUSTAINABLE IRELAND</span>
 
   <h2>Live like a local</h2>
@@ -69,21 +64,21 @@ export default function SustainableIreland() {
   <a href="#" className="editorial-link">
     Explore local experiences →
   </a>
-</div>
-
-
-            <div className="editorial-image reveal right">
-              <img src={imgLocal} alt="Live like a local" />
-            </div>
           </div>
-        </section>
 
-        {/* SECTION 2 */}
-        <section className="editorial-section full alt">
-          <div className="editorial-grid reverse">
-            <div className="editorial-text reveal right">
-              <h2>Travel mindfully</h2>
-             <p className="dropcap">
+
+          <div className="editorial-image reveal right">
+            <img src={imgLocal} alt="Live like a local" />
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 2 */}
+      <section className="editorial-section full alt">
+        <div className="editorial-grid reverse">
+          <div className="editorial-text reveal right">
+            <h2>Travel mindfully</h2>
+            <p className="dropcap">
                 Sustainable travel in Ireland is easier than ever thanks to
                 excellent public transport and compact cities.
               </p>
@@ -115,21 +110,20 @@ export default function SustainableIreland() {
                   <span>Greenways</span>
                 </div>
               </div>
-          
-            </div>
-
-            <div className="editorial-image reveal left">
-              <img src={imgTravel} alt="Travel mindfully" />
-            </div>
           </div>
-        </section>
 
-        {/* SECTION 3 */}
-        <section className="editorial-section full">
-          <div className="editorial-grid">
-            <div className="editorial-text reveal left">
-              <h2>Protect what you love</h2>
-               <p className="dropcap">
+          <div className="editorial-image reveal left">
+            <img src={imgTravel} alt="Travel mindfully" />
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 3 */}
+      <section className="editorial-section full">
+        <div className="editorial-grid">
+          <div className="editorial-text reveal left">
+            <h2>Protect what you love</h2>
+            <p className="dropcap">
                 Ireland’s landscapes are breathtaking — from rugged coastlines
                 to endless green fields.
               </p>
@@ -161,16 +155,13 @@ export default function SustainableIreland() {
                   <span>Protected habitats</span>
                 </div>
               </div>
-            </div>
-
-            <div className="editorial-image reveal right">
-              <img src={imgNature} alt="Protect nature" />
-            </div>
           </div>
-        </section>
 
-        <Footer />
-      </main>
-    </>
+          <div className="editorial-image reveal right">
+            <img src={imgNature} alt="Protect nature" />
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
