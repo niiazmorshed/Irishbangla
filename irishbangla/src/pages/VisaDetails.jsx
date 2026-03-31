@@ -1,23 +1,33 @@
 import { useLocation } from "react-router-dom";
 import "../styles/VisaDetails.css";
+import {
+  getVisaCategory,
+  getVisaCountry,
+  visaCategories,
+  visaCountries,
+} from "../data/irelandVisaGuide";
 
 export default function VisaDetails() {
   const { state } = useLocation();
+  const fromCountryCode = state?.fromCountryCode;
+  const categoryKey = state?.categoryKey;
+
+  const country = fromCountryCode ? getVisaCountry(fromCountryCode) : null;
+  const category = categoryKey ? getVisaCategory(categoryKey) : null;
+
+  const hasSelection = Boolean(country && category);
 
   return (
     <div className="visa-details-page">
       {/* Header */}
       <div className="visa-header">
-        <h1>
-          Apply online for Ireland Family member of EU-EEA-Swiss citizen
-          (de facto partner) Visa from Bangladesh
-        </h1>
+        <h1>{hasSelection ? `${category.label} for Ireland — from ${country.name}` : "Ireland Visa Guide"}</h1>
 
         <div className="visa-steps">
-          <span className="step">Basic Information</span>
-          <span className="step active">Check Required Documents</span>
+          <span className={`step ${hasSelection ? "" : "active"}`}>Basic Information</span>
+          <span className={`step ${hasSelection ? "active" : ""}`}>Requirements</span>
           <span className="step">Embassy Details</span>
-          <span className="step highlight">Book an Appointment</span>
+          <span className="step highlight">Book a Consultation</span>
         </div>
       </div>
 
@@ -25,85 +35,145 @@ export default function VisaDetails() {
       <div className="visa-content">
         {/* LEFT */}
         <div className="visa-main">
-          <h2>Document Requirement</h2>
+          <h2>{hasSelection ? "Required Documents (Checklist)" : "Quick Reference"}</h2>
           <p className="subtitle">
-            Ireland is offering an online visa application process. Applicants
-            must submit the following documents in support of their application.
+            {hasSelection
+              ? category.purpose
+              : "Select your country and visa category from the home page search to view a tailored checklist."}
           </p>
 
           <div className="doc-accordion">
+            {hasSelection ? (
+              <>
+                <InfoBlock title="Type" value={category.type} />
+                <InfoBlock title="Duration" value={category.duration} />
+                <InfoBlock title="Who can apply" value={category.whoCanApply} />
 
-            <DocumentItem
-              number="1"
-              title="Current Passport"
-              text="Original passport issued within the last 10 years. The passport must be valid for at least six months beyond the intended date of departure and contain at least two blank pages."
-            />
+                <div className="visa-divider" />
 
-            <DocumentItem
-              number="2"
-              title="Previous Passport(s)"
-              text="Copies of all previous passports, including expired passports, showing travel history and previous visas, if applicable."
-            />
+                {category.documents.map((d, idx) => (
+                  <DocumentItem
+                    key={d}
+                    number={String(idx + 1)}
+                    title={d}
+                    text=""
+                    compact
+                  />
+                ))}
 
-            <DocumentItem
-              number="3"
-              title="Visa Application Form"
-              text="Completed and signed Ireland visa application form generated online. All information provided must be accurate and consistent with supporting documents."
-            />
+                {category.notes?.length ? (
+                  <>
+                    <div className="visa-divider" />
+                    <h3 className="visa-subhead">Important Notes</h3>
+                    <ul className="visa-bullets">
+                      {category.notes.map((n) => (
+                        <li key={n}>{n}</li>
+                      ))}
+                    </ul>
+                  </>
+                ) : null}
 
-            <DocumentItem
-              number="4"
-              title="Cover Letter"
-              text="A signed cover letter explaining the purpose of travel, relationship with the EU/EEA/Swiss citizen, intended duration of stay, and details of accommodation."
-            />
+                <div className="visa-divider" />
+                <Disclaimer />
+              </>
+            ) : (
+              <>
+                <h3 className="visa-subhead">Visa Requirements by Country</h3>
+                <div className="visa-table-wrap" role="region" aria-label="Visa requirements table">
+                  <table className="visa-table">
+                    <thead>
+                      <tr>
+                        <th>Country</th>
+                        <th>Visa Required?</th>
+                        <th>Waiver Available?</th>
+                        <th>Embassy Handling</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {visaCountries.map((c) => (
+                        <tr key={c.code}>
+                          <td>{c.name}</td>
+                          <td>{c.visaRequired}</td>
+                          <td>{c.waiver}</td>
+                          <td>{c.embassyHandling}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
 
-            <DocumentItem
-              number="5"
-              title="Supplementary Application Form"
-              text="Completed supplementary form for Family Member of EU-EEA-Swiss citizen, as required by the Irish Naturalisation and Immigration Service."
-            />
+                <div className="visa-divider" />
+                <h3 className="visa-subhead">Visa Categories</h3>
+                <ul className="visa-bullets">
+                  {visaCategories.map((v) => (
+                    <li key={v.key}>
+                      <strong>{v.label}:</strong> {v.type} — Fee: {v.fee} — Processing: {v.processing}
+                    </li>
+                  ))}
+                </ul>
 
-            <DocumentItem
-              number="6"
-              title="Invitation Letter"
-              text="Invitation letter from the EU/EEA/Swiss citizen residing in Ireland, including contact details, address, and proof of legal residence."
-            />
-
-            <DocumentItem
-              number="7"
-              title="Personal Identification Document"
-              text="Copy of National ID Card or Birth Certificate of the applicant as proof of identity."
-            />
-
-            <DocumentItem
-              number="8"
-              title="Bank Statement"
-              text="Personal bank statements for the last six months showing sufficient funds to support the stay. Statements must be stamped and signed by the bank."
-            />
-
+                <div className="visa-divider" />
+                <Disclaimer />
+              </>
+            )}
           </div>
         </div>
 
         {/* RIGHT */}
         <aside className="visa-sidebar">
-          <h4>Ireland Short- & Long-Stay Visa Services</h4>
+          <h4>{hasSelection ? "Your Selection" : "Ireland Visa Guide"}</h4>
 
-          <div className="price-box">
-            <span className="currency">৳</span>
-            <span className="amount">54,500</span>
-          </div>
+          {hasSelection ? (
+            <>
+              <div className="visa-kv">
+                <span>From</span>
+                <strong>{country.name}</strong>
+              </div>
+              <div className="visa-kv">
+                <span>Destination</span>
+                <strong>Ireland</strong>
+              </div>
+              <div className="visa-kv">
+                <span>Category</span>
+                <strong>{category.label}</strong>
+              </div>
 
-          <div className="fee-row">
-            <span>Service Fee</span>
-            <span>৳ 54,500</span>
-          </div>
+              <div className="visa-divider sidebar" />
 
-          <div className="fee-row total">
-            <span>Grand Total</span>
-            <span>৳ 54,500</span>
-          </div>
+              <div className="visa-kv">
+                <span>Visa Required?</span>
+                <strong>{country.visaRequired}</strong>
+              </div>
+              <div className="visa-kv">
+                <span>Waiver</span>
+                <strong>{country.waiver}</strong>
+              </div>
+              <div className="visa-kv">
+                <span>Embassy Handling</span>
+                <strong>{country.embassyHandling}</strong>
+              </div>
 
-          <button className="primary-btn">Start Application</button>
+              <div className="visa-divider sidebar" />
+
+              <div className="visa-kv">
+                <span>Processing</span>
+                <strong>{category.processing}</strong>
+              </div>
+              <div className="visa-kv">
+                <span>Fee</span>
+                <strong>{category.fee}</strong>
+              </div>
+
+              <button className="primary-btn">Start Application</button>
+            </>
+          ) : (
+            <>
+              <p className="visa-side-note">
+                Use the visa search on the home page to see country-specific and category-specific requirements.
+              </p>
+              <button className="primary-btn">Book a Consultation</button>
+            </>
+          )}
         </aside>
       </div>
     </div>
@@ -111,14 +181,32 @@ export default function VisaDetails() {
 }
 
 /* Reusable document item */
-function DocumentItem({ number, title, text }) {
+function DocumentItem({ number, title, text, compact = false }) {
   return (
-    <div className="doc-item">
+    <div className={`doc-item ${compact ? "compact" : ""}`}>
       <div className="doc-title">
         <span>{number}</span>
         <h3>{title}</h3>
       </div>
-      <p>{text}</p>
+      {text ? <p>{text}</p> : null}
+    </div>
+  );
+}
+
+function InfoBlock({ title, value }) {
+  return (
+    <div className="visa-info-block">
+      <div className="visa-info-title">{title}</div>
+      <div className="visa-info-value">{value}</div>
+    </div>
+  );
+}
+
+function Disclaimer() {
+  return (
+    <div className="visa-disclaimer" role="note" aria-label="Disclaimer">
+      <strong>Disclaimer:</strong> Requirements, fees, processing times, waivers and policies may change at any time
+      according to Irish government rules and official sources. Always verify via official websites before applying.
     </div>
   );
 }

@@ -2,14 +2,19 @@ import { useState } from "react";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import "../styles/VisaSearchCard.css";
+import { flagUrl, visaCategories, visaCountries } from "../data/irelandVisaGuide";
 
-// Country options
-const countries = [
-  { value: "BD", label: "Bangladesh", flag: "https://flagcdn.com/w20/bd.png" },
-  { value: "IN", label: "India", flag: "https://flagcdn.com/w20/in.png" },
-  { value: "PK", label: "Pakistan", flag: "https://flagcdn.com/w20/pk.png" },
-  { value: "IE", label: "Ireland", flag: "https://flagcdn.com/w20/ie.png" },
-];
+const countryOptions = visaCountries.map((c) => ({
+  value: c.code,
+  label: c.name,
+  flag: flagUrl(c.code),
+}));
+
+const destinationOption = {
+  value: "IE",
+  label: "Ireland",
+  flag: "https://flagcdn.com/w20/ie.png",
+};
 
 // Format react-select options with flag
 const formatOptionLabel = ({ label, flag }) => (
@@ -40,18 +45,21 @@ const selectStyles = {
 
 export default function VisaSearchCard() {
   const [citizen, setCitizen] = useState(null);
-  const [destination, setDestination] = useState(null);
-  const [visaType, setVisaType] = useState("");
+  const [category, setCategory] = useState("");
 
   const navigate = useNavigate();
 
-  const isFormValid = citizen && destination && visaType;
+  const isFormValid = citizen && category;
 
   const handleSubmit = () => {
     if (!isFormValid) return;
 
     navigate("/visa-details", {
-      state: { citizen, destination, visaType },
+      state: {
+        fromCountryCode: citizen.value,
+        destination: "Ireland",
+        categoryKey: category,
+      },
     });
   };
 
@@ -59,9 +67,9 @@ export default function VisaSearchCard() {
     <div className="visa-wrapper">
       <div className="visa-card">
         <div className="visa-input">
-          <label>I am a citizen of</label>
+          <label>I am from</label>
           <Select
-            options={countries}
+            options={countryOptions}
             styles={selectStyles}
             formatOptionLabel={formatOptionLabel}
             placeholder="Select country"
@@ -72,27 +80,26 @@ export default function VisaSearchCard() {
         <div className="visa-input">
           <label>Travelling to</label>
           <Select
-            options={countries}
+            options={[destinationOption]}
             styles={selectStyles}
             formatOptionLabel={formatOptionLabel}
-            placeholder="Select destination"
-            onChange={setDestination}
+            value={destinationOption}
+            isDisabled
           />
         </div>
 
         <div className="visa-input">
           <label>Visa category</label>
           <select
-            value={visaType}
-            onChange={(e) => setVisaType(e.target.value)}
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
           >
             <option value="">Select visa type</option>
-            <option>Tourist Visa</option>
-            <option>Study Visa</option>
-            <option>Work/Employment Visa</option>
-            <option>Training Visa</option>
-            <option>Family Visit Visa</option>
-            <option>Join Family Visa</option>
+            {visaCategories.map((c) => (
+              <option key={c.key} value={c.key}>
+                {c.label}
+              </option>
+            ))}
           </select>
         </div>
 
