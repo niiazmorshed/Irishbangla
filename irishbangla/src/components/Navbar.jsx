@@ -1,17 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FaSearch, FaArrowLeft } from "react-icons/fa";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import "../styles/Navbar.css";
 import Breadcrumbs from "./Breadcrumbs";
+import { informationTopics } from "../data/informationTopics";
 
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const infoRef = useRef(null);
+
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [infoOpen, setInfoOpen] = useState(false);
   const [trackingId, setTrackingId] = useState("");
 
   const isHome = location.pathname === "/";
@@ -34,6 +38,47 @@ export default function Navbar() {
     setTrackingId("");
     setMenuOpen(false);
   };
+
+  const infoItems = useMemo(
+    () =>
+      informationTopics.map((t) => ({
+        to: `/information/${t.slug}`,
+        label: t.title,
+      })),
+    []
+  );
+
+  const isMobileNav = () =>
+    typeof window !== "undefined" &&
+    window.matchMedia &&
+    window.matchMedia("(max-width: 900px)").matches;
+
+  useEffect(() => {
+    // Close dropdown after navigation
+    setInfoOpen(false);
+    setServicesOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!infoOpen) return;
+
+    const handlePointerDown = (e) => {
+      if (!infoRef.current) return;
+      if (infoRef.current.contains(e.target)) return;
+      setInfoOpen(false);
+    };
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") setInfoOpen(false);
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [infoOpen]);
 
   return (
     <header className={`navbar ${show ? "show" : "hide"}`}>
@@ -71,16 +116,34 @@ export default function Navbar() {
 </li>
 
 
-          <li className="nav-item">
-            <NavLink
-              to="/ireland-travel-process"
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
-              onClick={() => setMenuOpen(false)}
-            >
-              Information
-            </NavLink>
+          {/* INFORMATION DROPDOWN */}
+          <li
+            className="nav-item info"
+            ref={infoRef}
+            onClick={() => {
+              // Desktop: hover controls visibility; avoid "sticky open" on click.
+              if (!isMobileNav()) return;
+              setInfoOpen((v) => !v);
+            }}
+          >
+            Information ▾
+            <div className={`info-menu ${infoOpen ? "open" : ""}`}>
+              {infoItems.map((it) => (
+                <NavLink
+                  key={it.to}
+                  to={it.to}
+                  className={({ isActive }) =>
+                    isActive ? "info-link active" : "info-link"
+                  }
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setInfoOpen(false);
+                  }}
+                >
+                  {it.label}
+                </NavLink>
+              ))}
+            </div>
           </li>
 
           {/* SERVICES */}

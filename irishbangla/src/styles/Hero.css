@@ -1,6 +1,6 @@
 .hero {
   position: relative;
-  height: calc(100vh - 80px);
+  height: calc(100vh - var(--app-header-offset));
   width: 100%;
   overflow: hidden;
   background: #000;

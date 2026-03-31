@@ -6,6 +6,14 @@ const ROUTES = [
   { path: "/book-trip", label: "Book Trip" },
   { path: "/visa-details", label: "Visa Details" },
   {
+    path: "/information/:topic",
+    label: "Information",
+    getCrumbs: ({ topic }) => [
+      { to: "/information/moving-to-ireland", label: "Information" },
+      { label: topic ? titleCaseFromSlug(topic) : "Topic" },
+    ],
+  },
+  {
     path: "/track/:trackingId",
     label: "Track Application",
     getCrumbs: ({ trackingId }) => [

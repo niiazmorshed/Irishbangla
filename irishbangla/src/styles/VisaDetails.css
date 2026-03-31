@@ -2,7 +2,7 @@
   font-family: "Mulish", sans-serif;
   background: #f5f7fb;
   min-height: 100vh;
-  padding-top: 40px; /* ✅ pushes everything downward */
+  padding-top: var(--app-header-offset);
 }
 
 
