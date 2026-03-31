@@ -1,16 +1,116 @@
-# React + Vite
+# IrishBangla — Emerald Visa & Tours (Vite + React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Marketing + information website for **Emerald Visa & Tours**, with formal navigation, breadcrumbs, country-based Ireland visa guidance, and dedicated information pages.
 
-Currently, two official plugins are available:
+## Tech stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React** (Vite)
+- **React Router**
+- **Firebase Firestore** (tracking page)
+- **Framer Motion / GSAP** (animations)
+- **react-select / react-icons**
 
-## React Compiler
+## Key features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Formal navigation**: fixed navbar + breadcrumb bar across the site.
+- **Information dropdown**: topic pages under `/information/:topic` with a formal layout (hero, sidebar, cards, tables, disclaimer).
+- **Global footer**: footer is rendered on every page via a shared layout component.
+- **Visa Search (Ireland)**:
+  - “I am from” supports a curated country list
+  - destination is fixed to **Ireland**
+  - results page shows **country + category** requirements (fee, processing time, documents, waivers, embassy handling, notes + disclaimer)
 
-## Expanding the ESLint configuration
+## Routes
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `/` Home (Hero + Visa Search + sections)
+- `/information/:topic` Information topic pages
+- `/visa-details` Visa guide results page (reads selection from navigation state)
+- `/track/:trackingId` Visa tracking (Firestore-backed)
+- `/book-trip` Booking form
+- `/ireland-travel-process` Travel/Visa info page
+- `/ireland-weather` Weather editorial page
+- `/sustainable-ireland` Sustainability editorial page
+
+## Project structure (important files)
+
+- `src/App.jsx`: route definitions
+- `src/components/Layout.jsx`: global `Navbar` + `Outlet` + `Footer`
+- `src/components/Breadcrumbs.jsx`: breadcrumb navbar (formal navigation)
+- `src/components/VisaSearchCard.jsx`: country + category selection
+- `src/pages/VisaDetails.jsx`: renders visa requirements based on selection
+- `src/data/irelandVisaGuide.js`: visa country table + category requirements
+- `src/data/informationTopics.js`: Information pages content (topics)
+- `src/firebase.js`: Firestore initialization used by tracking page
+
+## Getting started (Windows / PowerShell)
+
+### Prerequisites
+
+- **Node.js 18+** (recommended: Node 20+)
+- npm (comes with Node)
+
+### Install
+
+```bash
+cd irishbangla
+npm install
+```
+
+### Run (development)
+
+```bash
+cd irishbangla
+npm run dev
+```
+
+Vite will print the local dev URL in the terminal.
+
+### Build (production)
+
+```bash
+cd irishbangla
+npm run build
+```
+
+### Preview production build
+
+```bash
+cd irishbangla
+npm run preview
+```
+
+### Lint
+
+```bash
+cd irishbangla
+npm run lint
+```
+
+## Content updates
+
+### Update “Information” pages
+
+Edit:
+- `src/data/informationTopics.js`
+
+Each topic has:
+- `slug`, `title`, `lead`, `sections`, `sources`
+
+### Update visa guide data (countries & categories)
+
+Edit:
+- `src/data/irelandVisaGuide.js`
+
+This controls:
+- **country table** (visa required, waiver, embassy handling)
+- **visa categories** (type, duration, processing time, fees, documents, notes)
+
+## Notes / disclaimers
+
+- The information shown is **general guidance** and may change according to Irish government policy and official sources. Each guide page includes a disclaimer.
+
+## Firebase (Tracker page)
+
+The tracking route `/track/:trackingId` reads from Firestore.
+
+Configuration is currently in `src/firebase.js`. If you need to use a different Firebase project, update the config values there.
