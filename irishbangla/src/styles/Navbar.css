@@ -94,6 +94,27 @@
   color: #0a5c4d;
 }
 
+.nav-item-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+
+.dropdown-arrow {
+  font-size: 12px;
+  color: #0a5c4d;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+  transform: rotate(0deg);
+  opacity: 0.8;
+}
+
+.nav-item.open .dropdown-arrow,
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
 /* CTA */
 .nav-cta {
   background: #0a5c4d;
@@ -160,18 +181,25 @@
   background: #ffffff;
   padding: 8px 12px 12px;
   border-radius: 14px;
-  /* REMOVED: .info:hover .info-menu — that was causing the disappearing bug.
-     The dropdown is now controlled ONLY by the .open class via React state. */
-  display: none;
+  display: grid;
   gap: 8px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
   border: 1px solid rgba(2, 6, 23, 0.06);
   z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(6px);
+  transform-origin: top left;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
 }
 
 /* Only .open controls visibility — no :hover rule here */
 .info-menu.open {
-  display: grid;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(10px);
 }
 
 .info-link {
@@ -214,16 +242,25 @@
   padding: 18px;
   border-radius: 14px;
   /* Controlled by .open class only */
-  display: none;
+  display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
   border: 1px solid rgba(2, 6, 23, 0.06);
   z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(6px);
+  transform-origin: top;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
 }
 
 .mega-menu.open {
-  display: grid;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(10px);
 }
 
 .mega-item {
@@ -275,6 +312,10 @@
     border-radius: 12px;
     padding: 10px;
     display: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
   }
 
   .info-menu.open {
@@ -287,6 +328,10 @@
     left: auto;
     box-shadow: none;
     display: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
   }
 
   .mega-menu.open {

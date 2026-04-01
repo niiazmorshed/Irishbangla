@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
-import { FaSearch, FaArrowLeft } from "react-icons/fa";
+import { FaSearch, FaArrowLeft, FaChevronDown } from "react-icons/fa";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import "../styles/Navbar.css";
 import Breadcrumbs from "./Breadcrumbs";
@@ -145,7 +145,10 @@ export default function Navbar() {
             onMouseLeave={handleInfoLeave}
             onClick={handleInfoClick}
           >
-            Information ▾
+            <span className="nav-item-toggle" role="button" aria-haspopup="menu" aria-expanded={infoOpen}>
+              <span>Information</span>
+              <FaChevronDown className={`dropdown-arrow ${infoOpen ? "open" : ""}`} />
+            </span>
 
             {/* The dropdown menu itself — hover over it cancels the close timer */}
             <div
@@ -182,7 +185,10 @@ export default function Navbar() {
             onMouseLeave={handleServicesLeave}
             onClick={handleServicesClick}
           >
-            Services ▾
+            <span className="nav-item-toggle" role="button" aria-haspopup="menu" aria-expanded={servicesOpen}>
+              <span>Services</span>
+              <FaChevronDown className={`dropdown-arrow ${servicesOpen ? "open" : ""}`} />
+            </span>
             <div
               className={`mega-menu${servicesOpen ? " open" : ""}`}
               onMouseEnter={() => {
