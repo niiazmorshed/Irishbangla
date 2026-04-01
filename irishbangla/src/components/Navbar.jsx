@@ -135,7 +135,7 @@ export default function Navbar() {
               setMenuOpen(false);
             }}
           >
-            Company
+            About us
           </li>
 
           {/* INFORMATION DROPDOWN */}
