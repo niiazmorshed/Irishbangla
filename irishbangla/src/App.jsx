@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Hero from "./components/Hero";
 import ThinkingTrip from "./components/thinkingtrip";
 import Inspiration from "./components/Inspiration";
+import IrelandStays from "./components/IrelandStays";
 import VisaSearchCard from "./components/VisaSearchCard";
 import VisaDetails from "./pages/VisaDetails";
 import Services from "./components/Service";
@@ -47,6 +48,7 @@ function Home() {
       </div>
 
       <Inspiration />
+      <IrelandStays />
       <AboutUs />
 
       {/* ✅ CONTACT TARGET */}
