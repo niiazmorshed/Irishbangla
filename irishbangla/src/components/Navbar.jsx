@@ -122,6 +122,24 @@ export default function Navbar() {
         {/* MENU */}
         <ul className={`nav-menu ${menuOpen ? "open" : ""}`}>
 
+          {/* Home */}
+          <li className="nav-item">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
+              onClick={(e) => {
+                e.stopPropagation();
+                setMenuOpen(false);
+                setInfoOpen(false);
+                setServicesOpen(false);
+              }}
+            >
+              Home
+            </NavLink>
+          </li>
+
           {/* Company */}
           <li
             className="nav-item"
