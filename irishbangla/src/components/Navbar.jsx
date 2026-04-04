@@ -253,9 +253,9 @@ export default function Navbar() {
               onChange={(e) => setTrackingId(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleTrackingSearch()}
             />
-            <button onClick={handleTrackingSearch}>
-              <FaSearch />
-            </button>
+            <button className="tracking-btn" onClick={handleTrackingSearch}>
+    <FaSearch />
+  </button>
           </li>
 
           {/* CTA */}

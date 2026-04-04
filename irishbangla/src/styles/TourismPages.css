@@ -1,0 +1,791 @@
+/* Tourism in Ireland — triadic palette: teal (brand), coral accent, violet accent */
+.tourism-page {
+  --til-teal: #0a5c4d;
+  --til-teal-dark: #064a3e;
+  --til-teal-soft: #e9f6f1;
+  --til-coral: #d94a3d;
+  --til-coral-soft: #fff0ed;
+  --til-violet: #5b4b9a;
+  --til-violet-soft: #f3f0ff;
+  --til-text: #0f172a;
+  --til-muted: #475569;
+  --til-bg: #ffffff;
+  --til-bg-alt: #f8fafc;
+  --til-radius: 16px;
+  --til-radius-lg: 22px;
+  --til-font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --til-font-sans: "Mulish", system-ui, -apple-system, sans-serif;
+
+  padding-top: var(--app-header-offset, 110px);
+  padding-bottom: 4rem;
+  background: var(--til-bg);
+  color: var(--til-text);
+  font-family: var(--til-font-sans);
+  min-height: 100vh;
+}
+
+/* Embedded on home (below the fold) — no duplicate header offset */
+.tourism-home.tourism-page {
+  padding-top: 0;
+  min-height: 0;
+  padding-bottom: 0;
+}
+
+.til-hero--home {
+  padding: 2.5rem 1.5rem 3rem;
+}
+
+.til-kicker {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--til-teal);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.til-title,
+.til-h2,
+.tig-h2,
+.tig-page-title {
+  font-family: var(--til-font-serif);
+  font-weight: 700;
+  line-height: 1.12;
+  color: var(--til-text);
+}
+
+.til-title {
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  margin-bottom: 1rem;
+}
+
+.til-h2 {
+  font-size: clamp(1.85rem, 3vw, 2.5rem);
+  margin-bottom: 1rem;
+}
+
+.til-h3,
+.tig-h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--til-teal);
+  margin: 1.25rem 0 0.5rem;
+}
+
+.til-body,
+.tig-p {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--til-muted);
+  max-width: 52ch;
+}
+
+.til-lead {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--til-muted);
+  margin-bottom: 1.75rem;
+  max-width: 48ch;
+}
+
+.til-subtil {
+  color: var(--til-muted);
+  margin-bottom: 2rem;
+}
+
+.til-center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.til-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Buttons */
+.til-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--til-font-sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    box-shadow 0.25s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.til-btn-primary {
+  background: linear-gradient(135deg, var(--til-teal) 0%, #0d6b5a 100%);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(10, 92, 77, 0.28);
+}
+
+.til-btn-primary:hover {
+  box-shadow: 0 10px 28px rgba(10, 92, 77, 0.35);
+}
+
+.til-btn-outline {
+  background: transparent;
+  color: var(--til-teal);
+  border: 2px solid var(--til-teal);
+}
+
+.til-btn-outline:hover {
+  background: var(--til-teal-soft);
+}
+
+.til-btn-lg {
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+}
+
+/* Hero */
+.til-hero {
+  padding: 2.5rem 1.5rem 3.5rem;
+}
+
+.til-hero-grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.til-hero-copy {
+  min-width: 0;
+}
+
+.til-hero-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.til-hero-deco {
+  position: relative;
+  flex-shrink: 0;
+  width: 130px;
+  height: 72px;
+  overflow: visible;
+  color: var(--til-text);
+}
+
+.til-pin {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 14px;
+  height: 14px;
+  background: var(--til-coral);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 2px 8px rgba(217, 74, 61, 0.35);
+}
+
+.til-path {
+  position: absolute;
+  left: 8px;
+  bottom: 0;
+  width: 118px;
+  height: 76px;
+  color: var(--til-violet);
+  opacity: 0.9;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* Collage */
+.til-collage {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 0.75rem;
+  align-items: stretch;
+  min-height: 320px;
+  position: relative;
+}
+
+.til-collage-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.til-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--til-radius);
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.12);
+  transition: transform 0.35s ease;
+}
+
+.til-img-sm {
+  min-height: 140px;
+  flex: 1;
+}
+
+.til-collage-tall {
+  position: relative;
+  border-radius: var(--til-radius-lg);
+  overflow: hidden;
+  min-height: 100%;
+}
+
+.til-img-tall {
+  min-height: 320px;
+  border-radius: var(--til-radius-lg);
+}
+
+.til-collage .til-img:hover {
+  transform: scale(1.02);
+}
+
+.til-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.til-play:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+  box-shadow: 0 12px 32px rgba(10, 92, 77, 0.2);
+}
+
+.til-play-icon {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 0 8px 14px;
+  border-color: transparent transparent transparent var(--til-teal);
+  margin-left: 4px;
+}
+
+/* Sections */
+.til-section {
+  padding: 3.5rem 1.5rem;
+}
+
+.til-section-alt {
+  background: var(--til-bg-alt);
+}
+
+.til-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.til-checklist {
+  list-style: none;
+  margin: 1.5rem 0;
+  padding: 0;
+}
+
+.til-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin-bottom: 0.65rem;
+  color: var(--til-muted);
+  font-size: 0.98rem;
+}
+
+.til-check-ico {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--til-violet-soft);
+  color: var(--til-violet);
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+/* Tilt photos — dashed frame is a sibling layer (negative z-index on ::after was clipping) */
+.til-tilt-stack {
+  position: relative;
+  height: 380px;
+  max-width: 440px;
+  margin: 0 auto;
+  overflow: visible;
+  isolation: isolate;
+}
+
+.til-tilt-frame {
+  position: absolute;
+  left: -8px;
+  right: 18px;
+  top: -10px;
+  bottom: 12px;
+  border: 2px dashed rgba(91, 75, 154, 0.45);
+  border-radius: calc(var(--til-radius) + 12px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.til-tilt {
+  position: absolute;
+  border-radius: var(--til-radius);
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.14);
+  border: 6px solid #fff;
+  transition: transform 0.4s ease;
+  z-index: 1;
+}
+
+.til-tilt img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.til-tilt-back {
+  width: 72%;
+  height: 62%;
+  min-height: 180px;
+  top: 0;
+  right: 0;
+  transform: rotate(4deg);
+  z-index: 1;
+}
+
+.til-tilt-front {
+  width: 72%;
+  height: 62%;
+  min-height: 180px;
+  bottom: 0;
+  left: 0;
+  transform: rotate(-5deg);
+  z-index: 2;
+}
+
+.til-tilt-stack:hover .til-tilt-back {
+  transform: rotate(6deg) translateY(-4px);
+}
+
+.til-tilt-stack:hover .til-tilt-front {
+  transform: rotate(-7deg) translateY(4px);
+}
+
+/* Card grid */
+.til-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.til-card {
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: var(--til-radius);
+  padding: 1.5rem 1.25rem;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.til-card:hover {
+  box-shadow: 0 12px 36px rgba(10, 92, 77, 0.1);
+  border-color: rgba(10, 92, 77, 0.12);
+}
+
+.til-card-icon {
+  font-size: 1.75rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.til-card-text {
+  font-size: 0.92rem;
+  color: var(--til-muted);
+  line-height: 1.55;
+  margin-top: 0.35rem;
+}
+
+/* CTA band */
+.til-cta-band {
+  background: linear-gradient(120deg, var(--til-teal-soft) 0%, var(--til-violet-soft) 50%, var(--til-coral-soft) 100%);
+  margin: 2rem 1.5rem 0;
+  border-radius: var(--til-radius-lg);
+  padding: 2.5rem 2rem;
+}
+
+.til-cta-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.til-cta-title {
+  margin-bottom: 0.35rem;
+}
+
+.til-cta-sub {
+  max-width: 40ch;
+  margin: 0;
+}
+
+/* ——— Guide page ——— */
+.tig-guide .tig-hero-mini {
+  background: linear-gradient(180deg, var(--til-bg-alt) 0%, var(--til-bg) 100%);
+  padding: 2rem 1.5rem 1.5rem;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.tig-hero-mini-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.tig-page-title {
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  margin-bottom: 0.75rem;
+}
+
+.tig-hero-lead {
+  max-width: 50ch;
+  margin-bottom: 1rem;
+}
+
+.tig-back {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--til-teal);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.tig-back:hover {
+  color: var(--til-teal-dark);
+}
+
+.tig-hero-mini-img {
+  border-radius: var(--til-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.12);
+  max-height: 220px;
+}
+
+.tig-hero-mini-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tig-toc {
+  position: sticky;
+  top: var(--app-header-offset, 110px);
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  padding: 0.65rem 0;
+}
+
+.tig-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.tig-toc .tig-container {
+  max-width: 1120px;
+}
+
+.tig-toc-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--til-muted);
+  margin-bottom: 0.35rem;
+}
+
+.tig-toc-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+.tig-toc-links a {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--til-teal);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.tig-toc-links a:hover {
+  border-bottom-color: var(--til-coral);
+}
+
+.tig-main {
+  padding-top: 2.5rem;
+  padding-bottom: 3rem;
+}
+
+.tig-section {
+  margin-bottom: 3rem;
+  scroll-margin-top: calc(var(--app-header-offset, 110px) + 52px);
+}
+
+.tig-h2 {
+  font-size: clamp(1.65rem, 2.5vw, 2rem);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid var(--til-teal);
+  display: inline-block;
+}
+
+.tig-p {
+  max-width: none;
+  margin-bottom: 0.75rem;
+}
+
+.tig-p-tight {
+  margin-bottom: 0;
+  margin-top: 0.35rem;
+}
+
+.tig-list {
+  margin: 0.5rem 0 1rem 1.25rem;
+  color: var(--til-muted);
+  line-height: 1.65;
+}
+
+.tig-list li {
+  margin-bottom: 0.4rem;
+}
+
+.tig-table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0 1.5rem;
+  border-radius: var(--til-radius);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+}
+
+.tig-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  background: #fff;
+}
+
+.tig-table th,
+.tig-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  vertical-align: top;
+}
+
+.tig-table thead th {
+  background: var(--til-teal-soft);
+  color: var(--til-teal-dark);
+  font-weight: 700;
+}
+
+.tig-table tbody tr:hover {
+  background: rgba(91, 75, 154, 0.04);
+}
+
+.tig-table a {
+  color: var(--til-violet);
+  font-weight: 600;
+}
+
+.tig-table a:hover {
+  text-decoration: underline;
+}
+
+.tig-callout {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin: 1.5rem 0;
+  padding: 1.25rem 1.25rem 1.25rem 1rem;
+  background: var(--til-coral-soft);
+  border-left: 4px solid var(--til-coral);
+  border-radius: 0 var(--til-radius) var(--til-radius) 0;
+}
+
+.tig-callout-soft {
+  background: var(--til-violet-soft);
+  border-left-color: var(--til-violet);
+}
+
+.tig-callout-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.tig-inline-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 0 0 2.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tig-inline-photos img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--til-radius);
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.1);
+  transition: transform 0.35s ease;
+}
+
+.tig-inline-photos img:hover {
+  transform: scale(1.02);
+}
+
+.tig-section-row {
+  display: grid;
+  grid-template-columns: 1fr minmax(200px, 280px);
+  gap: 2rem;
+  align-items: start;
+}
+
+.tig-side-img {
+  border-radius: var(--til-radius);
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.12);
+  border: 5px solid #fff;
+  outline: 2px dashed rgba(10, 92, 77, 0.2);
+  outline-offset: 6px;
+}
+
+.tig-side-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.tig-closing {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  margin-top: 2rem;
+  background: var(--til-bg-alt);
+  border-radius: var(--til-radius-lg);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.tig-closing-line {
+  font-family: var(--til-font-serif);
+  font-size: 1.5rem;
+  color: var(--til-teal);
+  margin-bottom: 0.75rem;
+}
+
+.tig-closing .tig-p {
+  margin: 0 auto 1.25rem;
+  max-width: 48ch;
+}
+
+.tig-closing-btn {
+  margin-top: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .til-hero-grid,
+  .til-split,
+  .tig-hero-mini-inner,
+  .tig-section-row {
+    grid-template-columns: 1fr;
+  }
+
+  .til-collage {
+    min-height: 280px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .til-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .til-tilt-stack {
+    height: 300px;
+    margin-top: 1rem;
+  }
+
+  .tig-inline-photos {
+    grid-template-columns: 1fr;
+  }
+
+  .tig-side-img {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .til-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .til-cta-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .til-btn-lg {
+    width: 100%;
+  }
+
+  .tig-toc-links {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}

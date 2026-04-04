@@ -16,6 +16,8 @@ import SustainableIreland from "./pages/SustainableIreland";
 import IrelandWeather from "./pages/irelandweather";
 import BookTrip from "./pages/BookTrip";
 import InformationTopic from "./pages/InformationTopic";
+import IrelandTourismGuide from "./pages/IrelandTourismGuide";
+import TourismIrelandHomeSection from "./components/TourismIrelandHomeSection";
 import Layout from "./components/Layout";
 import AdminLayout from "./components/AdminLayout";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -54,6 +56,7 @@ function Home() {
       <Inspiration />
       <IrelandStays />
       <AboutUs />
+      <TourismIrelandHomeSection />
 
       {/* ✅ CONTACT TARGET */}
       <ContactSection ref={contactRef} />
@@ -79,6 +82,7 @@ function App() {
           <Route path="/ireland-travel-process" element={<IrelandTravelProcess />} />
           <Route path="/ireland-weather" element={<IrelandWeather />} />
           <Route path="/sustainable-ireland" element={<SustainableIreland />} />
+          <Route path="/tourism-ireland/guide" element={<IrelandTourismGuide />} />
         </Route>
       </Routes>
       </AuthProvider>

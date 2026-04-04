@@ -24,6 +24,14 @@ const ROUTES = [
   { path: "/ireland-travel-process", label: "Travel Process" },
   { path: "/ireland-weather", label: "Ireland Weather" },
   { path: "/sustainable-ireland", label: "Sustainable Ireland" },
+  {
+    path: "/tourism-ireland/guide",
+    label: "Travel Guide",
+    getCrumbs: () => [
+      { to: "/#tourism-ireland", label: "Tourism in Ireland" },
+      { label: "Travel Guide" },
+    ],
+  },
 ];
 
 function titleCaseFromSlug(slug) {
