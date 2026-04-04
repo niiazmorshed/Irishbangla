@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDMUV7lpAEGOFzSBd06dsHqKGMwUo0pyjI",
@@ -15,3 +16,6 @@ const app = initializeApp(firebaseConfig);
 
 // Firestore DB
 export const db = getFirestore(app);
+
+// Auth (admin console only — enable Email/Password in Firebase Console)
+export const auth = getAuth(app);

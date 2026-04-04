@@ -1,0 +1,21 @@
+rules_version = '2';
+// IMPORTANT: Publishing happens in Firebase Console (Firestore → Rules) or: firebase deploy --only firestore:rules
+// Add every admin email here (must match the account you use to sign in).
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Public read keeps /track/:id working for clients.
+    // Writes only for signed-in admins — match emails to accounts you create in Firebase Auth.
+    match /visaTrackers/{trackerId} {
+      allow read: if true;
+      allow create, update, delete: if request.auth != null
+        && request.auth.token.email != null
+        && request.auth.token.email in [
+          "fineanswer2025@gmail.com"
+        ];
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

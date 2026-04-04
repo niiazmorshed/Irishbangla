@@ -17,6 +17,10 @@ import IrelandWeather from "./pages/irelandweather";
 import BookTrip from "./pages/BookTrip";
 import InformationTopic from "./pages/InformationTopic";
 import Layout from "./components/Layout";
+import AdminLayout from "./components/AdminLayout";
+import { AuthProvider } from "./contexts/AuthContext";
+import AdminTrackerConsole from "./pages/AdminTrackerConsole";
+import { ADMIN_CONSOLE_PATH } from "./constants/adminRoute";
 
 // ✅ Home component
 function Home() {
@@ -61,7 +65,11 @@ function Home() {
 function App() {
   return (
     <Router>
+      <AuthProvider>
       <Routes>
+        <Route path={ADMIN_CONSOLE_PATH} element={<AdminLayout />}>
+          <Route index element={<AdminTrackerConsole />} />
+        </Route>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} /> {/* only one / route */}
           <Route path="/book-trip" element={<BookTrip />} />
@@ -73,6 +81,7 @@ function App() {
           <Route path="/sustainable-ireland" element={<SustainableIreland />} />
         </Route>
       </Routes>
+      </AuthProvider>
     </Router>
   );
 }

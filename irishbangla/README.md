@@ -31,6 +31,13 @@ Marketing + information website for **Emerald Visa & Tours**, with formal naviga
 - `/ireland-weather` Weather editorial page
 - `/sustainable-ireland` Sustainability editorial page
 
+### Internal admin (not linked publicly)
+
+- **Visa tracker admin console** URL is defined in `src/constants/adminRoute.js` (default path: `/ops/evt7-visa-track-console`). It is **not** linked from the navbar or footer.
+- **No public signup**: create user accounts only in [Firebase Authentication](https://console.firebase.google.com/) (Email/Password). The app only exposes **sign-in**.
+- After sign-in, the app checks **allowlisted emails** (`VITE_ADMIN_ALLOWED_EMAILS` in `.env`, see `.env.example`). Default includes `fineanswer2025@gmail.com`.
+- **Server-side protection**: deploy Firestore rules so only those accounts can write `visaTrackers`. A starter file is `firestore.rules` — update the email list there to match your admins, then publish rules in the Firebase console (or Firebase CLI).
+
 ## Project structure (important files)
 
 - `src/App.jsx`: route definitions
@@ -40,7 +47,11 @@ Marketing + information website for **Emerald Visa & Tours**, with formal naviga
 - `src/pages/VisaDetails.jsx`: renders visa requirements based on selection
 - `src/data/irelandVisaGuide.js`: visa country table + category requirements
 - `src/data/informationTopics.js`: Information pages content (topics)
-- `src/firebase.js`: Firestore initialization used by tracking page
+- `src/firebase.js`: Firebase App + Firestore + Auth
+- `src/constants/adminRoute.js`: hidden admin console path
+- `src/contexts/AuthContext.jsx`: auth state + sign-in (allowlist enforced after Firebase auth)
+- `src/pages/AdminTrackerConsole.jsx`: load/save `visaTrackers` documents
+- `firestore.rules`: example rules (public read for trackers, restricted writes)
 
 ## Getting started (Windows / PowerShell)
 
@@ -114,3 +125,16 @@ This controls:
 The tracking route `/track/:trackingId` reads from Firestore.
 
 Configuration is currently in `src/firebase.js`. If you need to use a different Firebase project, update the config values there.
+
+### Enable Email/Password sign-in
+
+In Firebase Console → **Authentication** → **Sign-in method**, enable **Email/Password**. Add each admin user manually (Users tab).
+
+### Firestore rules
+
+1. Edit `firestore.rules` so the `request.auth.token.email in [ ... ]` list matches every admin email you create.
+2. In Firebase Console → **Firestore** → **Rules**, paste and **Publish** (or use `firebase deploy --only firestore:rules` if you use the Firebase CLI).
+
+Keep the client env `VITE_ADMIN_ALLOWED_EMAILS` in sync with the rules list so unauthorised Firebase users get signed out immediately after login.
+
+**If admin “Save” fails with `permission-denied`:** the rules in your **Firebase project** are still the old ones (often “deny all writes”). The `firestore.rules` file in Git does nothing until you **Publish** those rules in the console, or run `firebase deploy --only firestore:rules` from the `irishbangla` folder (requires Firebase CLI login and selecting project `irishbangla-e9edd`). Also confirm the email you sign in with is **exactly** listed in the rules array.
