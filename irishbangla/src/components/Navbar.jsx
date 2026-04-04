@@ -46,6 +46,18 @@ export default function Navbar() {
     };
   }, []);
 
+  // Lock scroll when mobile drawer is open
+  useEffect(() => {
+    if (!menuOpen) return;
+    const mq = window.matchMedia("(max-width: 900px)");
+    if (!mq.matches) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [menuOpen]);
+
   const handleTrackingSearch = () => {
     if (!trackingId.trim()) return;
     navigate(`/track/${trackingId.trim()}`);
@@ -104,6 +116,14 @@ export default function Navbar() {
 
   return (
     <header className={`navbar ${show ? "show" : "hide"}`}>
+      <button
+        type="button"
+        className={`nav-drawer-backdrop ${menuOpen ? "open" : ""}`}
+        aria-label="Close menu"
+        tabIndex={menuOpen ? 0 : -1}
+        onClick={() => setMenuOpen(false)}
+      />
+
       <div className="nav-container">
 
         {/* LEFT */}
@@ -253,7 +273,17 @@ export default function Navbar() {
         {/* BURGER */}
         <div
           className={`burger ${menuOpen ? "active" : ""}`}
+          role="button"
+          tabIndex={0}
+          aria-expanded={menuOpen}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
           onClick={() => setMenuOpen(!menuOpen)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setMenuOpen(!menuOpen);
+            }
+          }}
         >
           <span></span>
           <span></span>

@@ -5,7 +5,7 @@
   width: 100%;
   background: #ffffff;
   transition: transform 0.35s ease;
-  z-index: 999;
+  z-index: 1000;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -24,6 +24,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  z-index: 1002;
 }
 
 /* LEFT */
@@ -117,11 +119,39 @@
 
 /* CTA */
 .nav-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   background: #0a5c4d;
   color: #fff !important;
-  padding: 8px 18px;
+  padding: 10px 18px;
   border-radius: 20px;
   font-size: 14px;
+  font-weight: 600;
+}
+
+/* Mobile drawer backdrop (below navbar, above page) */
+.nav-drawer-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 997;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: rgba(15, 23, 42, 0.45);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+
+.nav-drawer-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 /* Burger */
@@ -130,6 +160,8 @@
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
+  position: relative;
+  z-index: 1002;
 }
 
 .burger span {
@@ -138,29 +170,62 @@
   background: #0a5c4d;
 }
 
-/* Tracking */
+/* Tracking — outer bar height matches the green search control (no extra vertical slack) */
 .tracking-box {
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 6px;
+  height: 40px;
+  padding: 0 3px 0 10px;
   background: #f4f6fb;
-  border-radius: 8px;
-  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid rgba(2, 6, 23, 0.08);
+  box-sizing: border-box;
 }
 
 .tracking-box input {
   border: none;
-  padding: 8px 12px;
+  padding: 0 4px 0 0;
+  margin: 0;
   outline: none;
   background: transparent;
-  width: 140px;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+  order: 1;
+  font-size: 14px;
+  line-height: 1.2;
+  align-self: center;
+  box-sizing: border-box;
+}
+
+.tracking-box input::placeholder {
+  color: #94a3b8;
 }
 
 .tracking-box button {
+  order: 2;
+  flex: 0 0 auto;
+  align-self: stretch;
+  height: 100%;
+  width: auto;
+  aspect-ratio: 1;
+  max-height: 100%;
   border: none;
   background: #00875a;
   color: white;
-  padding: 8px 12px;
+  padding: 0;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.tracking-box button svg {
+  font-size: 14px;
 }
 
 /* ── Info dropdown ───────────────────────────────────────────────────── */
@@ -278,31 +343,67 @@
 
 /* ── Mobile ──────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
+  .nav-drawer-backdrop {
+    display: block;
+  }
+
   .burger {
     display: flex;
   }
 
   .nav-menu {
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     right: 0;
-    background: white;
+    left: auto;
+    width: min(320px, 88vw);
+    max-width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    margin: 0;
+    padding: 72px 20px 28px;
+    background: #ffffff;
     flex-direction: column;
-    width: 100%;
-    padding: 20px;
-    gap: 18px;
-    display: none;
+    align-items: stretch;
+    gap: 6px;
+    display: flex;
     z-index: 998;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    box-shadow: -12px 0 40px rgba(2, 6, 23, 0.12);
+    border-left: 1px solid rgba(2, 6, 23, 0.08);
+    transform: translateX(100%);
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.32s;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .nav-menu.open {
-    display: flex;
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .nav-menu li {
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(2, 6, 23, 0.06);
+  }
+
+  .nav-menu li:last-child {
+    border-bottom: none;
+  }
+
+  .nav-link {
+    display: block;
+    width: 100%;
+    padding: 4px 0;
   }
 
   .nav-cta,
   .tracking-box {
     width: 100%;
+    max-width: 100%;
   }
 
   .info-menu {
@@ -316,6 +417,9 @@
     visibility: visible;
     pointer-events: auto;
     transform: none;
+    margin-top: 8px;
+    border: 1px solid rgba(2, 6, 23, 0.08);
+    background: #f8fafc;
   }
 
   .info-menu.open {
@@ -332,10 +436,13 @@
     visibility: visible;
     pointer-events: auto;
     transform: none;
+    margin-top: 8px;
+    border: 1px solid rgba(2, 6, 23, 0.08);
+    background: #f8fafc;
   }
 
   .mega-menu.open {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 }
