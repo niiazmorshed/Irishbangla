@@ -28,27 +28,164 @@
   color: #475569;
 }
 
+.ireland-stays-flip-hint {
+  margin: 18px auto 0;
+  font-size: 12px;
+  color: #94a3b8;
+  letter-spacing: 0.02em;
+}
+
+.ireland-stays-flip-hint--tap {
+  display: none;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .ireland-stays-flip-hint--hover {
+    display: none;
+  }
+
+  .ireland-stays-flip-hint--tap {
+    display: inline;
+  }
+}
+
+/* —— Flip card shell —— */
 .ireland-stays-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 24px;
 }
 
-.ireland-stay-card {
-  background: #ffffff;
+.ireland-stay-flip-wrap {
+  perspective: 1100px;
+  border-radius: 18px;
+  min-height: 400px;
+  outline: none;
+}
+
+.ireland-stay-flip-wrap:focus-visible {
+  box-shadow: 0 0 0 3px #fff, 0 0 0 6px rgba(10, 92, 77, 0.45);
+  border-radius: 18px;
+}
+
+.ireland-stay-flip-inner {
+  position: relative;
+  width: 100%;
+  min-height: 400px;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ireland-stay-flip-wrap:hover .ireland-stay-flip-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+/* Keyboard / focus: fine pointers only — avoids fighting tap-to-flip on touch */
+@media (pointer: fine) {
+  .ireland-stay-flip-wrap:focus-within .ireland-stay-flip-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+.ireland-stay-flip-wrap.is-flipped .ireland-stay-flip-inner {
+  transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ireland-stay-flip-inner {
+    transition-duration: 0.2s;
+  }
+}
+
+.ireland-stay-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.08);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
-.ireland-stay-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 28px 60px rgba(2, 6, 23, 0.12);
+.ireland-stay-face--front {
+  z-index: 2;
+}
+
+.ireland-stay-face--back {
+  transform: rotateY(180deg);
+  background: linear-gradient(155deg, #0a5c4d 0%, #064a3e 48%, #0d4f42 100%);
+  color: #ecfdf5;
+  display: flex;
+  align-items: stretch;
+  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.12);
+}
+
+.ireland-stay-back-inner {
+  padding: 28px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.ireland-stay-face--back h3 {
+  font-size: 16px;
+  line-height: 1.35;
+  margin: 0 0 10px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.ireland-stay-back-intro {
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(236, 253, 245, 0.88);
+  margin: 0 0 16px;
+}
+
+.ireland-stay-back-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.ireland-stay-back-list li {
+  margin-bottom: 8px;
+}
+
+.ireland-stay-back-list li::marker {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.ireland-stay-back-foot {
+  margin: 18px 0 0;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(236, 253, 245, 0.55);
+}
+
+/* Front card (existing look, inside flip face) */
+.ireland-stay-card {
+  background: #ffffff;
+  height: 100%;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.08);
+  transition: box-shadow 0.35s ease;
+}
+
+.ireland-stay-flip-wrap:hover .ireland-stay-card {
+  box-shadow: 0 24px 50px rgba(2, 6, 23, 0.1);
 }
 
 .ireland-stay-image {
-  height: 260px;
+  flex: 1;
+  min-height: 220px;
   overflow: hidden;
 }
 
@@ -57,11 +194,11 @@
   height: 100%;
   object-fit: cover;
   transform: scale(1.02);
-  transition: transform 0.6s ease;
+  transition: transform 0.65s ease;
 }
 
-.ireland-stay-card:hover .ireland-stay-image img {
-  transform: scale(1.08);
+.ireland-stay-flip-wrap:hover .ireland-stay-image img {
+  transform: scale(1.06);
 }
 
 .ireland-stay-meta {
@@ -75,6 +212,7 @@
   justify-content: space-between;
   gap: 14px;
   backdrop-filter: blur(10px);
+  flex-shrink: 0;
 }
 
 .ireland-stay-left h3 {
@@ -152,8 +290,13 @@
     grid-template-columns: 1fr;
   }
 
+  .ireland-stay-flip-wrap,
+  .ireland-stay-flip-inner,
+  .ireland-stay-card {
+    min-height: 380px;
+  }
+
   .ireland-stay-image {
-    height: 240px;
+    min-height: 200px;
   }
 }
-
