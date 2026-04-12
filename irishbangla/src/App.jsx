@@ -47,6 +47,7 @@ function Home() {
         <VisaSearchCard />
       </div>
       <ThinkingTrip />
+      <AboutUs onEnquiryClick={scrollToContact} />
 
       {/* ✅ WRAP SERVICES WITH REF */}
       <div ref={servicesRef}>
@@ -55,7 +56,6 @@ function Home() {
 
       <Inspiration />
       <IrelandStays />
-      <AboutUs />
       <TourismIrelandHomeSection />
 
       {/* ✅ CONTACT TARGET */}

@@ -1,75 +1,167 @@
-// AboutUs.jsx
-import '../styles/AboutUs.css';
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FaLeaf, FaComments, FaBalanceScale } from "react-icons/fa";
+import "../styles/AboutUs.css";
 
-export default function AboutUs() {
+import imgCliffs from "../assets/hero/cliffs.jpg";
+import imgCity from "../assets/hero/other.jpg";
+import imgWild from "../assets/hero/wild.jpg";
+
+function useCountUp(target, { duration = 1600, enabled }) {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    if (!enabled) return;
+    let raf = 0;
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - (1 - t) ** 3;
+      setValue(Math.round(eased * target));
+      if (t < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [target, duration, enabled]);
+
+  return value;
+}
+
+const pillars = [
+  {
+    icon: <FaLeaf aria-hidden />,
+    title: "Ireland expertise",
+    text: "On-the-ground knowledge of routes, visas, and stays across Ireland and Europe.",
+  },
+  {
+    icon: <FaComments aria-hidden />,
+    title: "Bangla-speaking team",
+    text: "Clear guidance in Bangla and English—from first call to departure and return.",
+  },
+  {
+    icon: <FaBalanceScale aria-hidden />,
+    title: "Transparency",
+    text: "Straightforward pricing and honest timelines. No hidden fees, no vague promises.",
+  },
+];
+
+export default function AboutUs({ onEnquiryClick }) {
+  const navigate = useNavigate();
+  const sectionRef = useRef(null);
+  const statsStarted = useRef(false);
+  const [statsActive, setStatsActive] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting && !statsStarted.current) {
+          statsStarted.current = true;
+          setStatsActive(true);
+        }
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  const travellers = useCountUp(2500, { enabled: statsActive });
+  const destinations = useCountUp(40, { enabled: statsActive });
+  const visaRate = useCountUp(98, { enabled: statsActive });
+
+  const handleEnquiry = useCallback(() => {
+    onEnquiryClick?.();
+  }, [onEnquiryClick]);
+
   return (
-    <section className="about-section">
-      <div className="about-bg-blob blob-1" />
-      <div className="about-bg-blob blob-2" />
+    <section className="about-section" ref={sectionRef} aria-labelledby="about-heading">
+      <div className="about-shell">
+        <div className="about-collage">
+          <div className="about-collage-rings" aria-hidden />
+          <div className="about-collage-stack">
+            <div className="about-photo about-photo--a">
+              <img src={imgCliffs} alt="Cliffs of Moher, Ireland" loading="lazy" />
+            </div>
+            <div className="about-photo about-photo--b">
+              <img src={imgCity} alt="Urban skyline — our Dhaka hub" loading="lazy" />
+            </div>
+            <div className="about-photo about-photo--c">
+              <img src={imgWild} alt="Irish coastline" loading="lazy" />
+            </div>
+          </div>
 
-      <div className="about-container">
-        {/* Header */}
-        <div className="about-header">
-          <span className="about-badge">About Irish Bangla</span>
-          <h2>
-            Travel Without Borders,
-            <span> Experience Without Limits</span>
+          <div className="about-fusion-card">
+            <span className="about-fusion-shamrock" aria-hidden>
+              ☘
+            </span>
+            <span className="about-fusion-flags" aria-hidden>
+              <span className="about-fusion-flag">🇧🇩</span>
+              <span className="about-fusion-plus">+</span>
+              <span className="about-fusion-flag">🇮🇪</span>
+            </span>
+            <span className="about-fusion-label">Two homes, one team</span>
+          </div>
+
+          <div className="about-trust-badge">
+            <span className="about-trust-badge-inner">10+ years of trust</span>
+          </div>
+
+          <div className="about-bridge-pill" role="img" aria-label="Bangladesh to Ireland bridge">
+            <span>🇧🇩</span>
+            <span className="about-bridge-arrow">→</span>
+            <span>🇮🇪</span>
+          </div>
+        </div>
+
+        <div className="about-content">
+          <p className="about-kicker">About Irish Bangla</p>
+
+          <h2 id="about-heading" className="about-editorial">
+            Your bridge between Dhaka and the <em className="about-emerald">Emerald Isle</em> — and the journeys in between.
           </h2>
-          <p>
-            Connecting Bangladesh and the world with trusted, affordable and unforgettable travel experiences.
+
+          <p className="about-lead">
+            Irish Bangla Tours &amp; Travels is headquartered in <strong>Dhaka</strong> with an international presence in <strong>Dublin</strong>. We design
+            travel and visa journeys with the same care we&apos;d plan for our own family.
           </p>
-        </div>
 
-        {/* Content */}
-        <div className="about-grid">
-          <div className="about-card about-story">
-            <h3>Who We Are</h3>
-            <p>
-              <strong>Irish Bangla Tours & Travels</strong> is a leading travel brand headquartered in Dhaka with an international office in Dublin. We offer complete inbound and outbound travel solutions including air ticketing, visa processing, hotel bookings, curated tour packages and Umrah services.
-            </p>
-            <p>
-              Through strong domestic and global partnerships, we ensure seamless support for our travelers at every step — at home and abroad.
-            </p>
-          </div>
-
-          <div className="about-features">
-            <div className="feature-card">
-              <h4>Global Presence</h4>
-              <p>Operations in Bangladesh and Ireland serving international travelers.</p>
+          <div className="about-stats" aria-live="polite">
+            <div className="about-stat">
+              <span className="about-stat-value">{travellers.toLocaleString()}+</span>
+              <span className="about-stat-label">Travellers served</span>
             </div>
-            <div className="feature-card">
-              <h4>All‑in‑One Service</h4>
-              <p>Flights, hotels, visas, tours and Umrah under one roof.</p>
+            <div className="about-stat">
+              <span className="about-stat-value">{destinations}+</span>
+              <span className="about-stat-label">Destinations</span>
             </div>
-            <div className="feature-card">
-              <h4>Trusted Network</h4>
-              <p>Strong domestic and international travel partners.</p>
-            </div>
-            <div className="feature-card">
-              <h4>Value Focused</h4>
-              <p>Premium experiences at transparent and reasonable pricing.</p>
+            <div className="about-stat">
+              <span className="about-stat-value">{visaRate}%</span>
+              <span className="about-stat-label">Visa approval rate</span>
             </div>
           </div>
-        </div>
 
-
-        {/* Vision & Mission */}
-        <div className="about-vm">
-          <div className="vm-card">
-            <h3>Our Vision</h3>
-            <p>
-              To become a trusted global travel leader through quality, commitment and diversified services.
-            </p>
+          <div className="about-pillars">
+            {pillars.map((p) => (
+              <div className="about-pillar" key={p.title}>
+                <div className="about-pillar-icon">{p.icon}</div>
+                <h3 className="about-pillar-title">{p.title}</h3>
+                <p className="about-pillar-text">{p.text}</p>
+              </div>
+            ))}
           </div>
-          <div className="vm-card">
-            <h3>Our Mission</h3>
-            <p>
-              To deliver honest, customer‑centric travel solutions by understanding each traveler’s needs and providing the best service at a reasonable price.
-            </p>
+
+          <div className="about-ctas">
+            <button type="button" className="about-btn about-btn--primary" onClick={() => navigate("/book-trip")}>
+              Plan your trip
+            </button>
+            <button type="button" className="about-btn about-btn--ghost" onClick={handleEnquiry}>
+              Talk to us
+            </button>
           </div>
         </div>
       </div>
     </section>
   );
 }
-
