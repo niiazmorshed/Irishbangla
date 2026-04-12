@@ -1,13 +1,31 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import { motion, useReducedMotion } from "framer-motion";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { ScrollReveal } from "./ScrollReveal";
 
 export default function Layout() {
+  const { pathname } = useLocation();
+  const reduceMotion = useReducedMotion();
+
   return (
     <>
       <Navbar />
-      <Outlet />
-      <Footer />
+      <motion.div
+        key={pathname}
+        className="layout-outlet"
+        initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: reduceMotion ? 0.15 : 0.4,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+      >
+        <Outlet />
+      </motion.div>
+      <ScrollReveal as="div" className="layout-footer-reveal" y={20} amount={0.08}>
+        <Footer />
+      </ScrollReveal>
     </>
   );
 }

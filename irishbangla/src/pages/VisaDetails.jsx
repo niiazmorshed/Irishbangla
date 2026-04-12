@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import "../styles/VisaDetails.css";
+import { ScrollReveal } from "../components/ScrollReveal";
 import {
   getVisaCategory,
   getVisaCountry,
@@ -18,7 +19,7 @@ export default function VisaDetails() {
   const hasSelection = Boolean(country && category);
 
   return (
-    <div className="visa-details-page">
+    <ScrollReveal as="div" className="visa-details-page" y={22}>
       {/* Header */}
       <div className="visa-header">
         <h1>{hasSelection ? `${category.label} for Ireland — from ${country.name}` : "Ireland Visa Guide"}</h1>
@@ -176,7 +177,7 @@ export default function VisaDetails() {
           )}
         </aside>
       </div>
-    </div>
+    </ScrollReveal>
   );
 }
 

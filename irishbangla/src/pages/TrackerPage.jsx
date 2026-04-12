@@ -4,6 +4,7 @@ import { db } from "../firebase";
 import { useEffect, useState } from "react";
 import { touristVisaTimeline } from "../data/touristVisaTimeline";
 import "../styles/tracker.css";
+import { ScrollReveal } from "../components/ScrollReveal";
 
 export default function TrackerPage() {
   const { trackingId } = useParams();
@@ -32,8 +33,20 @@ export default function TrackerPage() {
     fetchTracker();
   }, [trackingId]);
 
-  if (loading) return <h2 className="center">Loading...</h2>;
-  if (error) return <h2 className="center">{error}</h2>;
+  if (loading) {
+    return (
+      <ScrollReveal as="div" className="center" y={12}>
+        <h2 className="center">Loading...</h2>
+      </ScrollReveal>
+    );
+  }
+  if (error) {
+    return (
+      <ScrollReveal as="div" className="center" y={12}>
+        <h2 className="center">{error}</h2>
+      </ScrollReveal>
+    );
+  }
 
   /* ================= LOGIC ================= */
 
@@ -46,7 +59,7 @@ export default function TrackerPage() {
     ts?.toDate ? ts.toDate().toLocaleDateString() : "";
 
   return (
-    <div className="page-with-navbar">
+    <ScrollReveal as="div" className="page-with-navbar" y={22}>
       <div className="tracker-container">
 
         {/* ================= LEFT PANEL ================= */}
@@ -156,6 +169,6 @@ export default function TrackerPage() {
 
         </section>
       </div>
-    </div>
+    </ScrollReveal>
   );
 }

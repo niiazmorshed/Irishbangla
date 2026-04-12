@@ -18,6 +18,7 @@ import BookTrip from "./pages/BookTrip";
 import InformationTopic from "./pages/InformationTopic";
 import IrelandTourismGuide from "./pages/IrelandTourismGuide";
 import TourismIrelandHomeSection from "./components/TourismIrelandHomeSection";
+import { ScrollReveal } from "./components/ScrollReveal";
 import Layout from "./components/Layout";
 import AdminLayout from "./components/AdminLayout";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -39,27 +40,35 @@ function Home() {
 
   return (
     <>
-      <div className="home-hero-stack">
-        <Hero
-          onConsultClick={scrollToContact}
-          onServiceClick={scrollToServices}
-        />
+      <ScrollReveal as="div" className="home-hero-stack" y={18} amount={0.08}>
+        <Hero onConsultClick={scrollToContact} onServiceClick={scrollToServices} />
         <VisaSearchCard />
-      </div>
-      <ThinkingTrip />
-      <AboutUs onEnquiryClick={scrollToContact} />
+      </ScrollReveal>
 
-      {/* ✅ WRAP SERVICES WITH REF */}
-      <div ref={servicesRef}>
+      <ScrollReveal y={24}>
+        <ThinkingTrip />
+      </ScrollReveal>
+      <ScrollReveal y={24} delay={0.03}>
+        <AboutUs onEnquiryClick={scrollToContact} />
+      </ScrollReveal>
+
+      <ScrollReveal ref={servicesRef} y={24} delay={0.04}>
         <Services onEnquiryClick={scrollToContact} />
-      </div>
+      </ScrollReveal>
 
-      <Inspiration />
-      <IrelandStays />
-      <TourismIrelandHomeSection />
+      <ScrollReveal y={26} delay={0.02}>
+        <Inspiration />
+      </ScrollReveal>
+      <ScrollReveal y={26} delay={0.04}>
+        <IrelandStays />
+      </ScrollReveal>
+      <ScrollReveal y={26} delay={0.05}>
+        <TourismIrelandHomeSection />
+      </ScrollReveal>
 
-      {/* ✅ CONTACT TARGET */}
-      <ContactSection ref={contactRef} />
+      <ScrollReveal ref={contactRef} y={22} delay={0.02}>
+        <ContactSection />
+      </ScrollReveal>
     </>
   );
 }

@@ -1,5 +1,6 @@
 import "../styles/irelandTravel.css";
 import { motion } from "framer-motion";
+import { ScrollReveal } from "./ScrollReveal";
 import {
   FaPassport,
   FaFileAlt,
@@ -16,7 +17,7 @@ const fadeUp = {
 
 export default function IrelandTravelProcess() {
   return (
-    <main className="ireland-visa-page">
+    <ScrollReveal as="main" className="ireland-visa-page" y={20}>
 
       {/* HERO */}
       <section className="visa-hero">
@@ -264,6 +265,6 @@ export default function IrelandTravelProcess() {
         </motion.button>
       </section>
 
-    </main>
+    </ScrollReveal>
   );
 }

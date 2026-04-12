@@ -2,6 +2,7 @@ import { useMemo, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getInformationTopic, informationTopics } from "../data/informationTopics";
 import "../styles/InformationTopic.css";
+import { ScrollReveal } from "../components/ScrollReveal";
 
 function Disclaimer() {
   return (
@@ -97,7 +98,7 @@ export default function InformationTopic() {
 
   if (!current) {
     return (
-      <main className="info-page">
+      <ScrollReveal as="main" className="info-page" y={18}>
         <section className="info-hero info-hero--fallback">
           <div className="info-hero-inner">
             <p className="info-eyebrow">INFORMATION</p>
@@ -134,7 +135,7 @@ export default function InformationTopic() {
             <Disclaimer />
           </section>
         </section>
-      </main>
+      </ScrollReveal>
     );
   }
 
@@ -146,7 +147,7 @@ export default function InformationTopic() {
       : null;
 
   return (
-    <main className="info-page">
+    <ScrollReveal as="main" className="info-page" y={18}>
       <section
         className="info-hero"
         style={{
@@ -246,6 +247,6 @@ export default function InformationTopic() {
           <Disclaimer />
         </section>
       </section>
-    </main>
+    </ScrollReveal>
   );
 }

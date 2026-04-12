@@ -89,3 +89,8 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Route outlet wrapper (page enter animation in Layout) */
+.layout-outlet {
+  width: 100%;
+}
