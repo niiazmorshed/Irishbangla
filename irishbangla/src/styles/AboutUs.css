@@ -214,7 +214,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #0a5c4d;
+  color: #08a171;
   margin-bottom: 14px;
 }
 
@@ -317,9 +317,9 @@
   align-items: center;
   justify-content: center;
   font-size: 1rem;
-  color: #8a7018;
-  background: linear-gradient(145deg, rgba(232, 212, 138, 0.35), rgba(201, 162, 39, 0.12));
-  border: 1px solid rgba(201, 162, 39, 0.35);
+  color: #ffffff;
+  background: linear-gradient(135deg, #08a171 0%, #ffda32 100%);
+  border: 1px solid rgba(8, 161, 113, 0.35);
   margin-bottom: 12px;
 }
 
@@ -375,9 +375,9 @@
 }
 
 .about-btn--ghost:hover {
-  border-color: #0a5c4d;
-  color: #0a5c4d;
-  background: rgba(10, 92, 77, 0.04);
+  border-color: #08a171;
+  color: #08a171;
+  background: rgba(8, 161, 113, 0.06);
 }
 
 @media (max-width: 960px) {

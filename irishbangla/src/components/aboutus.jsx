@@ -35,8 +35,8 @@ const pillars = [
   },
   {
     icon: <FaComments aria-hidden />,
-    title: "Bangla-speaking team",
-    text: "Clear guidance in Bangla and English—from first call to departure and return.",
+    title: "Global support, clear communication",
+    text: "Clear guidance in Bangla and English—whether you’re travelling from Bangladesh or any other country, from first call to return.",
   },
   {
     icon: <FaBalanceScale aria-hidden />,
@@ -108,7 +108,7 @@ export default function AboutUs({ onEnquiryClick }) {
             <span className="about-trust-badge-inner">10+ years of trust</span>
           </div>
 
-          <div className="about-bridge-pill" role="img" aria-label="Bangladesh to Ireland bridge">
+          <div className="about-bridge-pill" role="img" aria-label="Global to Ireland bridge">
             <span>🇧🇩</span>
             <span className="about-bridge-arrow">→</span>
             <span>🇮🇪</span>
@@ -119,12 +119,13 @@ export default function AboutUs({ onEnquiryClick }) {
           <p className="about-kicker">About Irish Bangla</p>
 
           <h2 id="about-heading" className="about-editorial">
-            Your bridge between Dhaka and the <em className="about-emerald">Emerald Isle</em> — and the journeys in between.
+            One-stop travel solution to the <em className="about-emerald">Emerald Isle</em> — for travellers from any country.
           </h2>
 
           <p className="about-lead">
-            Irish Bangla Tours &amp; Travels is headquartered in <strong>Dhaka</strong> with an international presence in <strong>Dublin</strong>. We design
-            travel and visa journeys with the same care we&apos;d plan for our own family.
+            Irish Bangla Tours &amp; Travels is headquartered in <strong>Dhaka</strong> with an international presence in <strong>Dublin</strong>. We help
+            travellers from <strong>multiple countries</strong> plan smooth journeys to <strong>Ireland</strong> (and Europe) — tours, stays, and visa guidance
+            in one place.
           </p>
 
           <div className="about-stats" aria-live="polite">

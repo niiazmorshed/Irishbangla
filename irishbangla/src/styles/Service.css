@@ -141,9 +141,9 @@
 
 /* ICON */
 .icon {
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
+  width: 76px;
+  height: 76px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -151,6 +151,15 @@
   margin-bottom: 14px;
   z-index: 1;
   position: relative;
+  background: rgba(0, 135, 90, 0.08);
+  border: 1px solid rgba(0, 135, 90, 0.18);
+  box-shadow: 0 8px 18px rgba(0, 135, 90, 0.08);
+}
+
+.service-icon-img {
+  width: 64px;
+  height: 64px;
+  display: block;
 }
 
 /* TEXT */

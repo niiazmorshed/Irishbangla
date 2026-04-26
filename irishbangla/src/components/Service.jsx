@@ -1,12 +1,5 @@
 import { useMemo, useState } from "react";
 import "../styles/Service.css";
-import {
-  FaPlane,
-  FaPassport,
-  FaGlobeEurope,
-  FaHotel,
-  FaSuitcaseRolling,
-} from "react-icons/fa";
 import ServiceDetailModal from "./ServiceDetailModal";
 import { ToursBody, VisaBody, IrelandBody, HotelBody, ConsultancyBody } from "./ServiceDetailBodies";
 
@@ -25,7 +18,7 @@ const Services = ({ onEnquiryClick }) => {
     () => [
       {
         id: "tours",
-        icon: <FaPlane />,
+        iconUrl: "https://img.icons8.com/?size=100&id=113535&format=png&color=000000",
         title: "Tours & Travel Packages",
         benefit: "All-inclusive, stress-free travel",
         ideal: "Families & groups",
@@ -34,7 +27,7 @@ const Services = ({ onEnquiryClick }) => {
       },
       {
         id: "visa",
-        icon: <FaPassport />,
+        iconUrl: "https://img.icons8.com/?size=100&id=64656&format=png&color=000000",
         title: "Visa Processing Services",
         benefit: "High approval rate, expert documentation",
         ideal: "First-time travellers",
@@ -43,16 +36,16 @@ const Services = ({ onEnquiryClick }) => {
       },
       {
         id: "ireland",
-        icon: <FaGlobeEurope />,
+        iconUrl: "https://img.icons8.com/?size=100&id=Oma9tSIHTMlv&format=png&color=000000",
         title: "Ireland & Europe Travel",
         benefit: "Specialist Irish / EU destination plans",
         ideal: "Dream-trip planners",
-        text: "Specialized travel services for Ireland and European destinations, ensuring smooth planning and hassle-free journeys.",
+        text: "Ireland-focused trip planning from anywhere in the world — routes, stays, must-see experiences, and a smooth end-to-end journey.",
         color: "#00875A",
       },
       {
         id: "hotel",
-        icon: <FaHotel />,
+        iconUrl: "https://img.icons8.com/?size=100&id=64714&format=png&color=000000",
         title: "Hotel & Accommodation",
         benefit: "Budget-fit comfort bookings",
         ideal: "Solo & couple travellers",
@@ -61,7 +54,7 @@ const Services = ({ onEnquiryClick }) => {
       },
       {
         id: "consultancy",
-        icon: <FaSuitcaseRolling />,
+        iconUrl: "https://img.icons8.com/?size=100&id=37hLtlsVfB4v&format=png&color=000000",
         title: "Travel Consultancy",
         benefit: "360° pre-departure support",
         ideal: "First-timers & corporates",
@@ -81,8 +74,8 @@ const Services = ({ onEnquiryClick }) => {
         <p className="services-guide-kicker">Comprehensive services guide</p>
         <h2>Our Services</h2>
         <p className="services-guide-lead">
-          IrishBangla is your trusted bridge between <strong>Bangladesh &amp; Ireland</strong> — from packaged tours and visa support to hotels and
-          full travel consultancy. Every step is handled with care, accuracy, and transparency.
+          IrishBangla helps travellers from <strong>any country</strong> plan a smooth trip to <strong>Ireland</strong> — from tours and visa guidance to
+          stays and full travel consultancy. Every step is handled with care, accuracy, and transparency.
         </p>
 
        
@@ -98,11 +91,18 @@ const Services = ({ onEnquiryClick }) => {
             <div
               className="icon"
               style={{
-                backgroundColor: `${card.color}20`,
-                color: card.color,
+                backgroundColor: "transparent",
               }}
             >
-              {card.icon}
+              <img
+                className="service-icon-img"
+                src={card.iconUrl}
+                alt=""
+                width={64}
+                height={64}
+                loading="lazy"
+                decoding="async"
+              />
             </div>
             <h4>{card.title}</h4>
             <p>{card.text}</p>

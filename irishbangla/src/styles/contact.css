@@ -40,9 +40,28 @@
   margin-bottom: 25px;
 }
 
-.contact-info p {
-  margin-bottom: 8px;
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
   color: #666;
+}
+
+.contact-info-row p {
+  margin: 0;
+  color: inherit;
+  line-height: 1.55;
+}
+
+.contact-info-row lord-icon {
+  flex: 0 0 auto;
+  margin-top: 1px;
 }
 
 .social-icons {
