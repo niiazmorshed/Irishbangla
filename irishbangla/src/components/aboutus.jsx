@@ -92,26 +92,14 @@ export default function AboutUs({ onEnquiryClick }) {
             </div>
           </div>
 
-          <div className="about-fusion-card">
-            <span className="about-fusion-shamrock" aria-hidden>
-              ☘
-            </span>
-            <span className="about-fusion-flags" aria-hidden>
-              <span className="about-fusion-flag">🇧🇩</span>
-              <span className="about-fusion-plus">+</span>
-              <span className="about-fusion-flag">🇮🇪</span>
-            </span>
-            <span className="about-fusion-label">Two homes, one team</span>
+          <div className="about-hub-card" aria-label="Dhaka and Dublin hubs">
+            <span className="about-hub-kicker">Hubs</span>
+            <span className="about-hub-title">Dhaka ↔ Dublin</span>
+            <span className="about-hub-label">One team, global travellers</span>
           </div>
 
           <div className="about-trust-badge">
             <span className="about-trust-badge-inner">10+ years of trust</span>
-          </div>
-
-          <div className="about-bridge-pill" role="img" aria-label="Global to Ireland bridge">
-            <span>🇧🇩</span>
-            <span className="about-bridge-arrow">→</span>
-            <span>🇮🇪</span>
           </div>
         </div>
 
@@ -123,9 +111,9 @@ export default function AboutUs({ onEnquiryClick }) {
           </h2>
 
           <p className="about-lead">
-            Irish Bangla Tours &amp; Travels is headquartered in <strong>Dhaka</strong> with an international presence in <strong>Dublin</strong>. We help
-            travellers from <strong>multiple countries</strong> plan smooth journeys to <strong>Ireland</strong> (and Europe) — tours, stays, and visa guidance
-            in one place.
+            Irish Bangla Tours &amp; Travels is headquartered in <strong>Dhaka</strong> with an international presence in <strong>Dublin</strong>. We support
+            travellers from <strong>multiple countries</strong> with trip planning for <strong>Ireland</strong> (and Europe) — tours, stays, and practical visa
+            guidance in one place.
           </p>
 
           <div className="about-stats" aria-live="polite">

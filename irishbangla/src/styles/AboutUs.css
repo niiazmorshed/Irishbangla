@@ -2,7 +2,7 @@
 .about-section {
   position: relative;
   padding: clamp(64px, 8vw, 100px) clamp(20px, 5vw, 48px);
-  background: linear-gradient(165deg, #faf8f4 0%, #f5f9f7 42%, #f8fafc 100%);
+  background: linear-gradient(180deg, #f6faf8, #ffffff);
   overflow: hidden;
 }
 
@@ -10,8 +10,8 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 12% 20%, rgba(201, 162, 39, 0.07) 0%, transparent 45%),
-    radial-gradient(circle at 88% 78%, rgba(10, 92, 77, 0.06) 0%, transparent 42%);
+  background-image: radial-gradient(circle at 12% 20%, rgba(255, 218, 50, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 88% 78%, rgba(8, 161, 113, 0.10) 0%, transparent 42%);
   pointer-events: none;
 }
 
@@ -106,55 +106,51 @@
 }
 
 /* Fusion accent */
-.about-fusion-card {
+.about-hub-card {
   position: absolute;
   left: 6%;
   bottom: 18%;
   z-index: 5;
-  width: 118px;
-  padding: 14px 12px;
+  width: 172px;
+  padding: 14px 14px;
   border-radius: 14px;
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(250, 248, 244, 0.98));
   border: 2px solid #c9a227;
   box-shadow: 0 14px 36px rgba(15, 23, 42, 0.12);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 6px;
+  align-items: flex-start;
+  gap: 4px;
   transform: rotate(-4deg);
   transition: transform 0.35s ease;
 }
 
-.about-collage:hover .about-fusion-card {
+.about-collage:hover .about-hub-card {
   transform: rotate(-2deg) translateY(-3px);
 }
 
-.about-fusion-shamrock {
-  font-size: 1.65rem;
-  line-height: 1;
-}
-
-.about-fusion-flags {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 1.1rem;
-}
-
-.about-fusion-plus {
-  font-size: 0.75rem;
-  color: #c9a227;
-  font-weight: 700;
-}
-
-.about-fusion-label {
+.about-hub-kicker {
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #64748b;
-  text-align: center;
+  text-align: left;
   line-height: 1.25;
+}
+
+.about-hub-title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.about-hub-label {
+  font-size: 0.72rem;
+  line-height: 1.25;
+  color: #475569;
 }
 
 /* Trust badge */
@@ -178,30 +174,6 @@
   background: linear-gradient(135deg, #f0e6c8, #e8d48a 45%, #d4b44a);
   border: 1px solid rgba(255, 255, 255, 0.65);
   white-space: nowrap;
-}
-
-/* Bridge pill */
-.about-bridge-pill {
-  position: absolute;
-  left: 50%;
-  bottom: -6px;
-  transform: translateX(-50%);
-  z-index: 6;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 20px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(201, 162, 39, 0.45);
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
-  font-size: 1.15rem;
-}
-
-.about-bridge-arrow {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #c9a227;
 }
 
 /* —— Right: editorial content —— */
@@ -426,15 +398,10 @@
     right: 0;
   }
 
-  .about-fusion-card {
+  .about-hub-card {
     left: 2%;
     bottom: 22%;
-    width: 104px;
-    padding: 10px 8px;
-  }
-
-  .about-bridge-pill {
-    font-size: 1rem;
-    padding: 8px 16px;
+    width: 156px;
+    padding: 10px 10px;
   }
 }
