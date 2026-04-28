@@ -1,135 +1,422 @@
 .ireland-visa-page {
-  font-family: system-ui, sans-serif;
-  color: #222;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: #0f172a;
+  background: #ffffff;
 }
 
 /* HERO */
 .visa-hero {
-  background: linear-gradient(135deg, #00875a, #dbfb8e);
-  padding: 120px 16px 60px;
+  position: relative;
+  isolation: isolate;
+  background: radial-gradient(1200px 500px at 20% 15%, rgba(8, 161, 113, 0.25), transparent 55%),
+    radial-gradient(1100px 520px at 80% 35%, rgba(201, 162, 39, 0.18), transparent 55%),
+    linear-gradient(135deg, #0b5a44, #0b2f23);
+  padding: clamp(96px, 10vw, 130px) 16px clamp(64px, 8vw, 86px);
   text-align: center;
   color: white;
+  overflow: hidden;
 }
 
 .visa-hero h1 {
-  font-size: 2.8rem;
+  font-size: clamp(2.1rem, 4vw, 3.15rem);
+  letter-spacing: -0.02em;
+  margin: 10px 0 10px;
 }
 
-.visa-hero p {
-  margin-top: 12px;
-  opacity: 0.95;
+.visa-hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0;
+}
+
+.visa-hero-sub {
+  max-width: 72ch;
+  margin: 0 auto;
+  opacity: 0.92;
+  line-height: 1.7;
+  font-size: 1.02rem;
+}
+
+.visa-hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.22;
+  transform: scale(1.02);
+}
+
+.visa-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.9) contrast(1.05);
 }
 
 /* SECTION */
 .visa-section {
   max-width: 1100px;
   margin: auto;
-  padding: 70px 16px;
+  padding: clamp(56px, 7vw, 84px) 16px;
 }
 
 .soft-bg {
-  background: #f5fff8;
+  background: linear-gradient(180deg, rgba(8, 161, 113, 0.06), rgba(201, 162, 39, 0.06));
 }
 
-.visa-section h2 span {
-  color: #00875a;
+.visa-section h2 {
+  font-size: clamp(1.45rem, 2.2vw, 1.9rem);
+  letter-spacing: -0.01em;
+  margin: 0 0 12px;
 }
 
-/* HIGHLIGHT */
-.highlight-box {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  background: #ffce55;
-  padding: 20px;
-  border-radius: 14px;
-  margin-top: 20px;
+.visa-section p {
+  color: #334155;
+  line-height: 1.75;
+  margin: 0;
 }
 
-.highlight-box svg {
-  font-size: 1.8rem;
-  color: #00875a;
-}
-
-/* PROCESS */
-.process-grid {
+/* BENTO */
+.bento-grid {
+  margin-top: 22px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
 }
 
-.process-card {
-  background: white;
-  padding: 26px;
+.bento-grid--compact {
+  margin-top: 18px;
+}
+
+.bento-card {
+  grid-column: span 12;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  padding: 18px 18px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(8px);
 }
 
-.process-card .icon {
-  font-size: 2rem;
-  color: #00875a;
+.bento-card--wide {
+  grid-column: span 12;
+}
+
+.bento-card--accent {
+  border-color: rgba(201, 162, 39, 0.35);
+  box-shadow: 0 18px 45px rgba(201, 162, 39, 0.18);
+}
+
+.bento-head {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
   margin-bottom: 10px;
+}
+
+.bento-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  background: linear-gradient(135deg, #08a171 0%, #c9a227 100%);
+  border: 1px solid rgba(8, 161, 113, 0.35);
+  flex: 0 0 auto;
+}
+
+.bento-title {
+  font-size: 1rem;
+  font-weight: 800;
+  margin: 0;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.bento-subtitle {
+  margin-top: 2px;
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.bento-list {
+  margin: 0;
+  padding-left: 18px;
+  color: #334155;
+  display: grid;
+  gap: 10px;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.bento-list strong {
+  color: #0f172a;
+}
+
+/* STEPS */
+.steps-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}
+
+.step-card {
+  grid-column: span 12;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.07);
+}
+
+.step-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  background: linear-gradient(135deg, #08a171 0%, #0b5a44 100%);
+  border: 1px solid rgba(8, 161, 113, 0.35);
+  margin-bottom: 10px;
+}
+
+.step-title {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.step-text {
+  margin: 0;
+  color: #475569;
+  line-height: 1.7;
 }
 
 /* CATEGORIES */
 .category-grid {
+  margin-top: 20px;
   display: grid;
-  gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  grid-template-columns: repeat(12, 1fr);
 }
 
 .category-card {
-  background: white;
-  padding: 28px;
+  grid-column: span 12;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 18px;
   border-radius: 18px;
-  border-left: 5px solid #00875a;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.07);
+  position: relative;
+  overflow: hidden;
+}
+
+.category-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(400px 200px at 20% 10%, rgba(8, 161, 113, 0.10), transparent 60%),
+    radial-gradient(400px 240px at 85% 60%, rgba(201, 162, 39, 0.10), transparent 62%);
+  pointer-events: none;
 }
 
 .category-card svg {
-  font-size: 2rem;
-  color: #00875a;
-  margin-bottom: 10px;
+  position: relative;
+  font-size: 1.85rem;
+  color: #08a171;
+  margin-bottom: 8px;
+}
+
+.category-card h3,
+.category-card p {
+  position: relative;
+}
+
+.category-card h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.category-card p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.7;
 }
 
 .highlight-card {
-  border-left-color: #fb6e52;
+  border-color: rgba(251, 110, 82, 0.35);
 }
 
-/* DOCS */
-.doc-list {
+/* FEES */
+.fees-grid {
+  margin-top: 18px;
   display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}
+
+.fee-card {
+  grid-column: span 12;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 18px;
+  padding: 16px 16px;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.07);
+}
+
+.fee-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
   gap: 10px;
-  padding-left: 18px;
 }
 
-/* TIMELINE */
-.timeline-grid {
+.fee-label {
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.fee-fee {
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: #0b5a44;
+}
+
+.fee-time {
+  margin-top: 8px;
+  color: #475569;
+}
+
+/* REFUSAL */
+.refusal-grid {
+  margin-top: 18px;
   display: grid;
-  gap: 18px;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
 }
 
-.timeline-grid div {
-  background: white;
-  padding: 16px;
-  border-radius: 12px;
-  text-align: center;
+.refusal-card {
+  grid-column: span 12;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.07);
 }
 
-/* CTA */
-.visa-cta {
-  text-align: center;
-  padding: 90px 16px;
-  background: #00875a;
-  color: white;
+.refusal-card h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.refusal-card p {
+  margin: 0;
+  color: #475569;
+}
+
+.visa-cta-bar {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(201, 162, 39, 0.28);
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.12), rgba(8, 161, 113, 0.08));
+}
+
+.visa-cta-title {
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: #0f172a;
+}
+
+.visa-cta-sub {
+  margin-top: 4px;
+  color: #475569;
+  line-height: 1.6;
 }
 
 .primary-btn {
-  margin-top: 20px;
-  padding: 14px 30px;
+  padding: 12px 18px;
   border: none;
-  border-radius: 30px;
-  background: #ffce55;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f0e6c8, #e8d48a 40%, #c9a227);
   font-size: 1rem;
   cursor: pointer;
+  font-weight: 900;
+  color: #1a1508;
+  box-shadow: 0 10px 28px rgba(201, 162, 39, 0.25);
+}
+
+.primary-btn:hover {
+  box-shadow: 0 14px 34px rgba(201, 162, 39, 0.32);
+  transform: translateY(-1px);
+}
+
+.primary-btn:active {
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (min-width: 720px) {
+  .bento-card--wide {
+    grid-column: span 12;
+  }
+
+  .bento-card {
+    grid-column: span 6;
+  }
+
+  .step-card {
+    grid-column: span 4;
+  }
+
+  .category-card {
+    grid-column: span 4;
+  }
+
+  .fee-card {
+    grid-column: span 6;
+  }
+
+  .refusal-card {
+    grid-column: span 6;
+  }
+
+  .visa-cta-bar {
+    grid-template-columns: 1fr auto;
+    justify-content: space-between;
+  }
+
+}
+
+@media (min-width: 980px) {
+  .bento-card--wide {
+    grid-column: span 7;
+  }
+
+  .bento-card {
+    grid-column: span 5;
+  }
+
+  .fee-card {
+    grid-column: span 3;
+  }
+
 }

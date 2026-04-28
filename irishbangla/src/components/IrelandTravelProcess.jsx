@@ -14,6 +14,8 @@ import {
   FaExclamationTriangle,
 } from "react-icons/fa";
 
+import heroPhoto from "../assets/irelandpic/mark-de-jong-NELRuCfHxxU-unsplash.jpg";
+
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0 },
@@ -36,6 +38,9 @@ export default function IrelandTravelProcess() {
             Region-specific submission hubs, documentation standards, and refusal-proof essentials — designed for clarity and professionalism.
           </p>
         </motion.div>
+        <div className="visa-hero-media" aria-hidden>
+          <img src={heroPhoto} alt="" />
+        </div>
       </section>
 
       {/* INTRO */}
