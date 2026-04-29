@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import Navbar from "./Navbar";
@@ -7,6 +8,10 @@ import { ScrollReveal } from "./ScrollReveal";
 export default function Layout() {
   const { pathname } = useLocation();
   const reduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname]);
 
   return (
     <>
