@@ -36,7 +36,7 @@ const pillars = [
   {
     icon: <FaComments aria-hidden />,
     title: "Global support, clear communication",
-    text: "Clear guidance in Bangla and English—whether you’re travelling from Bangladesh or any other country, from first call to return.",
+    text: "Clear guidance in Bangla and English—whether you’re travelling from the Gulf (UAE/Qatar), South Asia (India/Pakistan/Sri Lanka), China, or beyond.",
   },
   {
     icon: <FaBalanceScale aria-hidden />,
@@ -85,17 +85,17 @@ export default function AboutUs({ onEnquiryClick }) {
               <img src={imgCliffs} alt="Cliffs of Moher, Ireland" loading="lazy" />
             </div>
             <div className="about-photo about-photo--b">
-              <img src={imgCity} alt="Urban skyline — our Dhaka hub" loading="lazy" />
+              <img src={imgCity} alt="City skyline — our international support" loading="lazy" />
             </div>
             <div className="about-photo about-photo--c">
               <img src={imgWild} alt="Irish coastline" loading="lazy" />
             </div>
           </div>
 
-          <div className="about-hub-card" aria-label="Dhaka and Dublin hubs">
-            <span className="about-hub-kicker">Hubs</span>
-            <span className="about-hub-title">Dhaka ↔ Dublin</span>
-            <span className="about-hub-label">One team, global travellers</span>
+          <div className="about-hub-card" aria-label="Ireland headquarters and global presence">
+            <span className="about-hub-kicker">Global support</span>
+            <span className="about-hub-title">Dublin • Global</span>
+            <span className="about-hub-label">Ireland HQ, worldwide reach</span>
           </div>
 
           <div className="about-trust-badge">
@@ -111,9 +111,9 @@ export default function AboutUs({ onEnquiryClick }) {
           </h2>
 
           <p className="about-lead">
-            Irish Bangla Tours &amp; Travels is headquartered in <strong>Dhaka</strong> with an international presence in <strong>Dublin</strong>. We support
-            travellers from <strong>multiple countries</strong> with trip planning for <strong>Ireland</strong> (and Europe) — tours, stays, and practical visa
-            guidance in one place.
+            Irish Bangla Tours &amp; Travels is headquartered in <strong>Ireland</strong> (Dublin) with an international presence across{" "}
+            <strong>multiple countries</strong>. We support travellers worldwide with trip planning for <strong>Ireland</strong> (and Europe) — tours, stays, and
+            practical visa guidance in one place.
           </p>
 
           <div className="about-stats" aria-live="polite">
