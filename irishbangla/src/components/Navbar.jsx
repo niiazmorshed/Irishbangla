@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
-import { FaSearch, FaArrowLeft, FaChevronDown } from "react-icons/fa";
+import { FaSearch, FaChevronDown } from "react-icons/fa";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import "../styles/Navbar.css";
 import Breadcrumbs from "./Breadcrumbs";
@@ -128,12 +128,6 @@ export default function Navbar() {
 
         {/* LEFT */}
         <div className="nav-left">
-          {!isHome && (
-            <button className="back-btn" onClick={() => navigate(-1)}>
-              <FaArrowLeft />
-              <span>Back</span>
-            </button>
-          )}
           <div className="nav-logo" onClick={() => navigate("/")}>
             🍀 <span>Emerald Visa &amp; Tours</span>
           </div>

@@ -1,476 +1,369 @@
 import "../styles/irelandTravel.css";
 import { motion } from "framer-motion";
-import { ScrollReveal } from "./ScrollReveal";
-import {
-  FaPassport,
-  FaFileAlt,
-  FaUniversity,
-  FaClock,
-  FaUserCheck,
-  FaGraduationCap,
-  FaShieldAlt,
-  FaGlobeAsia,
-  FaMapMarkedAlt,
-  FaExclamationTriangle,
-} from "react-icons/fa";
+import { useMemo } from "react";
+import { FaCheckCircle, FaExclamationTriangle } from "react-icons/fa";
 
-import heroPhoto from "../assets/irelandpic/mark-de-jong-NELRuCfHxxU-unsplash.jpg";
+import galleryA from "../assets/irelandpic/mark-de-jong-NELRuCfHxxU-unsplash.jpg";
+import galleryB from "../assets/irelandpic/zihao-chen-m5PzbFyN2-U-unsplash.jpg";
+import galleryC from "../assets/irelandpic/wynand-van-poortvliet-dQXXN0cvZnI-unsplash.jpg";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0 },
-};
+const toc = [
+  { id: "intro", title: "Introduction" },
+  { id: "key-facts", title: "Key Facts" },
+  { id: "visa-needed", title: "Visa vs Visa-Free" },
+  { id: "regions", title: "Regions" },
+  { id: "visa-types", title: "Visa Types" },
+  { id: "process", title: "Application Process" },
+  { id: "checklist", title: "Document Checklist" },
+  { id: "fees", title: "Fees & Time" },
+  { id: "arrival", title: "After Arrival (IRP)" },
+  { id: "refusals", title: "Refusals & Appeals" },
+  { id: "resources", title: "Resources" },
+];
+
+const regionCards = [
+  {
+    title: "South Asia (India, Pakistan, Sri Lanka)",
+    lines: [
+      "Primary processing hub: Embassy of Ireland in New Delhi",
+      "Submission via VFS Global",
+      "Biometrics mandatory in India and Pakistan",
+      "Students generally expected to show €10,000/year (plus tuition)",
+      "2026 update: attend VAC within 30 days of AVATS completion",
+    ],
+  },
+  {
+    title: "China",
+    lines: [
+      "BIVS may apply for eligible UK visa holders endorsed with BIVS",
+      "Hukou required with certified English translation",
+      "All non-English/Irish documents require certified translation",
+    ],
+  },
+  {
+    title: "Gulf (UAE, Qatar, Kuwait, Bahrain)",
+    lines: [
+      "UAE and Qatar citizens are visa-exempt for short stays up to 90 days",
+      "Expat residents must apply based on passport nationality",
+      "Many files route via Embassy of Ireland, Abu Dhabi",
+      "2026 update: clear return-plan proof advised in UAE",
+    ],
+  },
+  {
+    title: "Mexico",
+    lines: [
+      "Short-stay visits up to 90 days are visa-exempt",
+      "Border checks still require funds, valid passport, and return ticket",
+      "Long stay over 90 days still requires D visa",
+    ],
+  },
+];
+
+const processSteps = [
+  "Determine visa type and check if SSVWP/BIVS applies.",
+  "Complete AVATS form, pay fees, print and sign summary form.",
+  "Prepare original supporting documents and certified translations.",
+  "Submit via embassy/consulate/VFS as instructed in your jurisdiction.",
+  "Attend biometrics appointment if required.",
+  "Track decision; respond quickly to additional document requests.",
+  "If approved, travel with full supporting file for port-of-entry checks.",
+];
+
+const feeRows = [
+  ["Short Stay C (Single)", "EUR 60", "Typically 4-8 weeks"],
+  ["Short Stay C (Multiple)", "EUR 100", "Typically 4-8 weeks"],
+  ["Long Stay D (Single)", "EUR 60", "Typically 4-12 weeks"],
+  ["Long Stay D (Multiple)", "EUR 100", "Typically 4-12 weeks"],
+  ["Transit", "EUR 60", "Typically 2-4 weeks"],
+  ["IRP registration (arrival)", "EUR 300", "Within 90 days after arrival"],
+];
+
+const resources = [
+  ["Immigration Service Delivery (ISD)", "https://www.irishimmigration.ie"],
+  ["AVATS", "https://www.visas.inis.gov.ie"],
+  ["Department of Foreign Affairs", "https://www.ireland.ie"],
+  ["VFS Global Ireland", "https://www.vfsglobal.com/ireland"],
+  ["Citizens Information", "https://www.citizensinformation.ie"],
+];
+
+const quickFacts = [
+  ["System", "ISD + DFA"],
+  ["Visa Portal", "AVATS"],
+  ["Schengen", "Not included"],
+  ["Short Stay", "Up to 90 days"],
+  ["IRP Fee", "EUR 300"],
+  ["Appeal Window", "Usually 2 months"],
+];
 
 export default function IrelandTravelProcess() {
+  const summary = useMemo(
+    () => [
+      { label: "Edition", value: "2026 Complete" },
+      { label: "Prepared For", value: "International applicants worldwide" },
+      { label: "Policy Basis", value: "ISD + DFA official policy" },
+      { label: "Version", value: "April 2026" },
+    ],
+    []
+  );
+
   return (
-    <ScrollReveal as="main" className="ireland-visa-page" y={20}>
-      {/* HERO */}
-      <section className="visa-hero">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          transition={{ duration: 0.7 }}
-        >
-          <p className="visa-hero-kicker">Travel to Ireland</p>
-          <h1>Ireland Visa Guidance (2026)</h1>
-          <p className="visa-hero-sub">
-            Region-specific submission hubs, documentation standards, and refusal-proof essentials — designed for clarity and professionalism.
+    <main className="guide-page">
+      <section className="guide-gallery">
+        <img src={galleryA} alt="Historic architecture in Ireland" />
+        <img src={galleryB} alt="Irish cultural interior" />
+        <img src={galleryC} alt="Modern educational venue in Ireland" />
+      </section>
+
+      <section className="guide-header shell">
+        <nav className="guide-breadcrumb" aria-label="Breadcrumb">
+          <span>Home</span>
+          <span className="crumb-divider">/</span>
+          <span>Travel to Ireland</span>
+          <span className="crumb-divider">/</span>
+          <span aria-current="page">Ireland Visa Guide 2026</span>
+        </nav>
+
+        <div className="guide-title-wrap">
+          <p className="guide-kicker">Ireland Visa Guide</p>
+          <h1>Ireland Visa Guide 2026 - Complete Edition</h1>
+          <p className="guide-subtitle">
+            A comprehensive reference for travellers, students, workers and families. Covering all nationalities, all visa categories, and step-by-step
+            process requirements.
           </p>
-        </motion.div>
-        <div className="visa-hero-media" aria-hidden>
-          <img src={heroPhoto} alt="" />
+        </div>
+
+        <div className="guide-summary-grid">
+          {summary.map((item) => (
+            <article key={item.label} className="guide-summary-card">
+              <p>{item.label}</p>
+              <h3>{item.value}</h3>
+            </article>
+          ))}
+        </div>
+
+        <div className="guide-alert">
+          <FaExclamationTriangle aria-hidden />
+          <p>
+            This guide is informational only. Always verify latest requirements at{" "}
+            <a href="https://www.irishimmigration.ie" target="_blank" rel="noreferrer">
+              irishimmigration.ie
+            </a>{" "}
+            and{" "}
+            <a href="https://www.ireland.ie" target="_blank" rel="noreferrer">
+              ireland.ie
+            </a>
+            . A visa does not guarantee entry; final decision is made at port of entry.
+          </p>
         </div>
       </section>
 
-      {/* INTRO */}
-      <section className="visa-section">
-        <motion.h2
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          Regional submission hubs (where your case is decided)
-        </motion.h2>
-
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          Irish visa processing depends on where you apply from and your passport nationality. Use the guidance below to prepare the correct pathway before you
-          book an appointment or submit biometrics.
-        </motion.p>
-
-        <div className="bento-grid">
-          <motion.article
-            className="bento-card bento-card--wide"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <header className="bento-head">
-              <div className="bento-icon" aria-hidden>
-                <FaGlobeAsia />
-              </div>
-              <div>
-                <h3 className="bento-title">India, Pakistan &amp; Sri Lanka (South Asia hub)</h3>
-                <p className="bento-subtitle">Decisions typically handled via the Embassy of Ireland in New Delhi.</p>
-              </div>
-            </header>
-
-            <ul className="bento-list">
-              <li>
-                <strong>Submission centre</strong>: Applications must be submitted through <strong>VFS Global</strong>.
-              </li>
-              <li>
-                <strong>Biometrics</strong>: Mandatory for all applicants in India and Pakistan (fingerprints + digital photo).
-              </li>
-              <li>
-                <strong>Financial proof</strong>: Show consistent financial history. For students, this often requires showing at least{" "}
-                <strong>€10,000 available for each year of study</strong>, in addition to tuition fees.
-              </li>
-              <li>
-                <strong>VFS “30‑day rule” (2026)</strong>: Complete your appointment at the Visa Application Centre (VAC) within{" "}
-                <strong>30 days</strong> of completing your online AVATS form, or the application may expire.
-              </li>
-            </ul>
-          </motion.article>
-
-          <motion.article
-            className="bento-card"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ delay: 0.05 }}
-          >
-            <header className="bento-head">
-              <div className="bento-icon" aria-hidden>
-                <FaMapMarkedAlt />
-              </div>
-              <div>
-                <h3 className="bento-title">China (BIVS + Hukou)</h3>
-                <p className="bento-subtitle">Translation standards are strict.</p>
-              </div>
-            </header>
-
-            <ul className="bento-list">
-              <li>
-                <strong>British‑Irish Visa Scheme (BIVS)</strong>: If you have a UK visitor visa endorsed with “BIVS,” you may be able to travel to Ireland
-                without a separate visa.
-              </li>
-              <li>
-                <strong>Hukou</strong>: Provide your Household Registration with a certified English translation.
-              </li>
-              <li>
-                <strong>Translations</strong>: Every document not in English or Irish (including employment letters and bank remarks) must be translated by a
-                certified professional.
-              </li>
-            </ul>
-          </motion.article>
-
-          <motion.article
-            className="bento-card"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            <header className="bento-head">
-              <div className="bento-icon" aria-hidden>
-                <FaPassport />
-              </div>
-              <div>
-                <h3 className="bento-title">Gulf countries (UAE, Qatar, Kuwait, Bahrain)</h3>
-                <p className="bento-subtitle">Passport nationality determines visa need.</p>
-              </div>
-            </header>
-
-            <ul className="bento-list">
-              <li>
-                <strong>Visa‑exempt status</strong>: Citizens of the UAE and Qatar are currently visa‑exempt for short stays (up to 90 days).
-              </li>
-              <li>
-                <strong>Non‑citizen residents</strong>: Expats must apply based on their passport nationality.
-              </li>
-              <li>
-                <strong>Processing hub</strong>: Most applications from this region are routed through the Embassy of Ireland in Abu Dhabi.
-              </li>
-              <li>
-                <strong>UAE update (2026)</strong>: Ensure return travel plans are clearly documented due to stricter scrutiny on overstays.
-              </li>
-            </ul>
-          </motion.article>
-
-          <motion.article
-            className="bento-card bento-card--accent"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ delay: 0.15 }}
-          >
-            <header className="bento-head">
-              <div className="bento-icon" aria-hidden>
-                <FaClock />
-              </div>
-              <div>
-                <h3 className="bento-title">Mexico (major 2026 policy change)</h3>
-                <p className="bento-subtitle">Short stays waived; long stays still need a visa.</p>
-              </div>
-            </header>
-
-            <ul className="bento-list">
-              <li>
-                <strong>Visa waiver</strong>: As of <strong>April 6, 2026</strong>, Mexico is visa‑exempt for tourism/business visits up to 90 days.
-              </li>
-              <li>
-                <strong>Entry requirements</strong>: Passport valid for 6 months, proof of sufficient funds, and a return ticket at the border.
-              </li>
-              <li>
-                <strong>Long stay</strong>: For work or study exceeding 90 days, a <strong>D visa</strong> is still required through the Embassy in Mexico City.
-              </li>
-            </ul>
-          </motion.article>
-        </div>
-      </section>
-
-      {/* PROCESS */}
-      <section className="visa-section soft-bg">
-        <motion.h2
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          Core application flow (high level)
-        </motion.h2>
-
-        <div className="steps-grid">
-          {[
-            {
-              icon: <FaFileAlt />,
-              title: "Online application (AVATS)",
-              text: "Complete the online application and print the summary sheet. Keep names, dates, and addresses consistent across documents.",
-            },
-            {
-              icon: <FaUserCheck />,
-              title: "Appointment + biometrics (where required)",
-              text: "Book the correct VAC, attend within required timeframes, and submit biometrics if your region requires it.",
-            },
-            {
-              icon: <FaUniversity />,
-              title: "Processing and decision",
-              text: "Your file is assessed by the relevant embassy/processing hub based on your submission location and nationality.",
-            },
-          ].map((item, i) => (
-            <motion.div
-              className="step-card"
-              key={item.title}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.12 }}
-            >
-              <div className="step-icon" aria-hidden>
-                {item.icon}
-              </div>
-              <h3 className="step-title">{item.title}</h3>
-              <p className="step-text">{item.text}</p>
-            </motion.div>
+      <section className="guide-tabs-shell">
+        <div className="shell guide-tabs" role="tablist" aria-label="Guide sections">
+          {toc.map((item) => (
+            <a key={item.id} href={`#${item.id}`} className="guide-tab">
+              {item.title}
+            </a>
           ))}
         </div>
       </section>
 
-      {/* VISA CATEGORIES */}
-      <section className="visa-section">
-        <motion.h2
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          Visa Categories of Ireland
-        </motion.h2>
-
-        <div className="category-grid">
-          <motion.div
-            className="category-card"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <FaClock />
-            <h3>Short stay (C)</h3>
+      <section className="shell guide-content-layout">
+        <article className="guide-main-content">
+          <motion.section id="intro" className="guide-section" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <h2>1. Introduction to Ireland and immigration system</h2>
             <p>
-              Business, Tourist, Conference, Visit Family/Friends, Exam,
-              Medical, Training and more (≤ 90 days).
+              Ireland is an EU member state with a separate immigration regime. Ireland is not in Schengen, so a Schengen visa does not grant entry to Ireland.
+              The visa system is administered primarily by Immigration Service Delivery (ISD) and the Department of Foreign Affairs (DFA), with AVATS as the
+              official visa application platform.
             </p>
-          </motion.div>
-
-          <motion.div
-            className="category-card"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <FaUniversity />
-            <h3>Long stay (D)</h3>
-            <p>
-              Employment, Scientific Researcher, Join Family and other long-term
-              categories.
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="category-card highlight-card"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <FaGraduationCap />
-            <h3>Study</h3>
-            <p>
-              Document readiness and admissions support for Irish study pathways.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* DOCUMENTS */}
-      <section className="visa-section soft-bg">
-        <motion.h2
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          Critical documentation checklist
-        </motion.h2>
-
-        <div className="bento-grid bento-grid--compact">
-          <motion.article
-            className="bento-card"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            <header className="bento-head">
-              <div className="bento-icon" aria-hidden>
-                <FaFileAlt />
-              </div>
-              <div>
-                <h3 className="bento-title">Cover letter</h3>
-                <p className="bento-subtitle">Make it watertight.</p>
-              </div>
-            </header>
-            <ul className="bento-list">
-              <li>
-                State why you are going, where you are staying, who is paying, and your day-by-day plan (if applicable).
-              </li>
-              <li>
-                Prove why you will return home (job, family, property, ongoing study/business).
-              </li>
+            <ul>
+              <li>CTA exists for Irish and British citizens only; it does not provide automatic rights to third-country nationals.</li>
+              <li>EU/EEA/Swiss citizens generally do not require a visa to live, work, or study in Ireland.</li>
+              <li>Non-CTA nationals entering from UK to Ireland remain subject to Irish immigration control.</li>
             </ul>
-          </motion.article>
+          </motion.section>
 
-          <motion.article
-            className="bento-card"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ delay: 0.05 }}
-          >
-            <header className="bento-head">
-              <div className="bento-icon" aria-hidden>
-                <FaExclamationTriangle />
-              </div>
-              <div>
-                <h3 className="bento-title">Financial discipline</h3>
-                <p className="bento-subtitle">Avoid red flags.</p>
-              </div>
-            </header>
-            <ul className="bento-list">
-              <li>Show a 6-month history of regular income.</li>
-              <li>Avoid large, unexplained last-minute deposits.</li>
-            </ul>
-          </motion.article>
+          <section id="key-facts" className="guide-section">
+            <h2>2. Key facts about Ireland (2026)</h2>
+            <div className="simple-table">
+              <div><strong>Capital</strong><span>Dublin</span></div>
+              <div><strong>Currency</strong><span>Euro (EUR)</span></div>
+              <div><strong>Schengen</strong><span>No</span></div>
+              <div><strong>Common Travel Area</strong><span>Yes (with UK)</span></div>
+              <div><strong>Visa Portal</strong><span>AVATS - visas.inis.gov.ie</span></div>
+              <div><strong>IRP Registration Fee</strong><span>EUR 300</span></div>
+            </div>
+          </section>
+        </article>
 
-          <motion.article
-            className="bento-card"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            <header className="bento-head">
-              <div className="bento-icon" aria-hidden>
-                <FaShieldAlt />
-              </div>
-              <div>
-                <h3 className="bento-title">Medical insurance</h3>
-                <p className="bento-subtitle">Required evidence.</p>
-              </div>
-            </header>
-            <ul className="bento-list">
-              <li>Private medical insurance with minimum coverage of €30,000 for the duration of your stay.</li>
-            </ul>
-          </motion.article>
-        </div>
-      </section>
-
-      {/* FEES & TIME */}
-      <section className="visa-section">
-        <motion.h2
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          Fees & processing time (typical)
-        </motion.h2>
-
-        <div className="fees-grid">
-          {[
-            { label: "Single entry", fee: "€60", time: "15–20 working days" },
-            { label: "Multiple entry", fee: "€100", time: "15–20 working days" },
-            { label: "Transit", fee: "€25", time: "10–15 working days" },
-            { label: "Study / long stay", fee: "€60", time: "6–8 weeks" },
-          ].map((row, i) => (
-            <motion.div
-              className="fee-card"
-              key={row.label}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-            >
-              <div className="fee-row">
-                <div className="fee-label">{row.label}</div>
-                <div className="fee-fee">{row.fee}</div>
-              </div>
-              <div className="fee-time">{row.time}</div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="visa-section soft-bg">
-        <motion.h2 variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          Dealing with refusals
-        </motion.h2>
-
-        <div className="refusal-grid">
-          <motion.div className="refusal-card" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <h3>Use the refusal reason codes</h3>
-            <p>
-              If you receive a refusal letter, focus on the stated reasons (for example, finances or contradictions) and fix the exact weakness with documents
-              and explanations.
-            </p>
-          </motion.div>
-          <motion.div
-            className="refusal-card"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ delay: 0.06 }}
-          >
-            <h3>Appeal window</h3>
-            <p>
-              In most cases, you have around <strong>2 months</strong> to submit an appeal (generally free of charge) to the Appeals Officer in Dublin or the
-              relevant embassy channel.
-            </p>
-          </motion.div>
-        </div>
-
-        <div className="visa-cta-bar">
-          <div className="visa-cta-text">
-            <div className="visa-cta-title">Want a document review?</div>
-            <div className="visa-cta-sub">
-              We can help structure your cover letter, finances, and supporting evidence to match your region’s processing expectations.
+        <aside className="guide-sidebar">
+          <div className="sidebar-card">
+            <h3>Guide Facts</h3>
+            <div className="fact-grid">
+              {quickFacts.map(([label, value]) => (
+                <article key={label} className="fact-tile">
+                  <span>{label}</span>
+                  <strong>{value}</strong>
+                </article>
+              ))}
             </div>
           </div>
-          <motion.button className="primary-btn" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-            Talk to a Visa Expert
-          </motion.button>
-        </div>
+          <div className="sidebar-card review-card">
+            <h3>Need document review?</h3>
+            <p>We can help organise your cover letter, funds narrative, and supporting documents for stronger clarity.</p>
+            <ul>
+              <li>Checklist cleanup</li>
+              <li>Finance narrative alignment</li>
+              <li>Refusal-risk reduction</li>
+            </ul>
+            <button type="button" className="cta-btn">
+              Talk to a Visa Expert
+            </button>
+          </div>
+        </aside>
       </section>
 
-    </ScrollReveal>
+      <section className="shell guide-main-full">
+        <section id="visa-needed" className="guide-section">
+          <h2>3. Visa vs visa-free: do you need a visa?</h2>
+          <div className="split-card-grid">
+            <article className="split-card">
+              <h3>Who may not need a visa</h3>
+              <ul>
+                <li>EU/EEA and Swiss nationals</li>
+                <li>UK nationals under CTA rules</li>
+                <li>Selected visa-exempt nationalities under Irish regulations</li>
+                <li>Eligible SSVWP and BIVS holders (subject to scheme rules)</li>
+              </ul>
+            </article>
+            <article className="split-card">
+              <h3>Who needs a visa</h3>
+              <ul>
+                <li>Nationals of visa-required countries for entry or transit</li>
+                <li>Applicants not covered by exemptions/waiver schemes</li>
+                <li>Most long-stay applicants for study, work, or join family</li>
+              </ul>
+            </article>
+          </div>
+          <p className="note-line">Critical note: a Schengen visa is not valid for entry to Ireland.</p>
+        </section>
+
+        <section id="regions" className="guide-section">
+          <h2>4. Country categories and regional processing</h2>
+          <div className="bento-region-grid">
+            {regionCards.map((card) => (
+              <article key={card.title} className="region-card">
+                <h3>{card.title}</h3>
+                <ul>
+                  {card.lines.map((line) => (
+                    <li key={line}>{line}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="visa-types" className="guide-section">
+          <h2>5-12. Visa types, SSVWP, BIVS and eligibility</h2>
+          <div className="simple-table">
+            <div><strong>Short Stay C</strong><span>Up to 90 days (tourism/business/family/short study)</span></div>
+            <div><strong>Long Stay D</strong><span>More than 90 days (study/work/join family)</span></div>
+            <div><strong>Transit</strong><span>Airport transit only, no entry permission</span></div>
+            <div><strong>SSVWP</strong><span>UK short-stay visa-based waiver for eligible countries</span></div>
+            <div><strong>BIVS</strong><span>Applies to Indian and Chinese nationals with eligible BIVS endorsement</span></div>
+          </div>
+        </section>
+
+        <section id="process" className="guide-section">
+          <h2>13. Step-by-step application process</h2>
+          <ol className="step-list">
+            {processSteps.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
+          </ol>
+        </section>
+
+        <section id="checklist" className="guide-section">
+          <h2>14. Required documents - master checklist</h2>
+          <div className="checklist-grid">
+            {[
+              "Printed and signed AVATS summary form",
+              "Valid original passport",
+              "Recent passport-size photos as per Irish standards",
+              "Fee payment proof",
+              "Funds evidence (6-month statements)",
+              "Accommodation and itinerary proof",
+              "Certified translations (if needed)",
+              "Purpose-specific supporting documents",
+            ].map((item) => (
+              <div key={item} className="check-item">
+                <FaCheckCircle aria-hidden />
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="fees" className="guide-section">
+          <h2>15-16. Visa fees and processing times</h2>
+          <div className="simple-table">
+            {feeRows.map((row) => (
+              <div key={row[0]}>
+                <strong>{row[0]}</strong>
+                <span>
+                  {row[1]} | {row[2]}
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="arrival" className="guide-section">
+          <h2>17. After arrival - IRP registration</h2>
+          <ul>
+            <li>Non-EEA nationals staying over 90 days must register for IRP.</li>
+            <li>Dublin: Burgh Quay registration office (appointment required).</li>
+            <li>Outside Dublin: local Garda immigration registration.</li>
+            <li>Standard IRP registration fee: EUR 300.</li>
+          </ul>
+        </section>
+
+        <section id="refusals" className="guide-section">
+          <h2>18-20. Refusals, appeals, preclearance and success tips</h2>
+          <div className="split-card-grid">
+            <article className="split-card">
+              <h3>Common refusal reasons</h3>
+              <ul>
+                <li>Weak or unclear financial evidence</li>
+                <li>Insufficient ties to home country</li>
+                <li>Incomplete or inconsistent documentation</li>
+                <li>Misrepresentation or false submissions</li>
+              </ul>
+            </article>
+            <article className="split-card">
+              <h3>Appeal and re-apply</h3>
+              <ul>
+                <li>Typical appeal window: within 2 months</li>
+                <li>Address every refusal point with fresh evidence</li>
+                <li>No misleading documents - high long-term risk</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section id="resources" className="guide-section">
+          <h2>21. Useful contacts and official resources</h2>
+          <div className="resource-list">
+            {resources.map(([name, url]) => (
+              <a key={url} href={url} target="_blank" rel="noreferrer">
+                <span>{name}</span>
+                <span>{url.replace("https://", "")}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      </section>
+    </main>
   );
 }
