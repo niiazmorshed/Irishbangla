@@ -35,7 +35,7 @@ export function ToursBody() {
               <th>Package</th>
               <th>Duration</th>
               <th>Highlights</th>
-              <th>From (BDT)</th>
+              <th>From (EUR)</th>
             </tr>
           </thead>
           <tbody>
@@ -43,43 +43,43 @@ export function ToursBody() {
               <td>Ireland Discovery</td>
               <td>7N / 8D</td>
               <td>Dublin, Galway, Cliffs of Moher, Ring of Kerry</td>
-              <td>2,10,000</td>
+              <td>EUR 1,615</td>
             </tr>
             <tr>
               <td>Europe Grand Tour</td>
               <td>12N / 13D</td>
               <td>London, Paris, Amsterdam, Rome, Dublin</td>
-              <td>3,80,000</td>
+              <td>EUR 2,923</td>
             </tr>
             <tr>
               <td>Cox&apos;s Bazar Escape</td>
               <td>3N / 4D</td>
               <td>Laboni Beach, Inani, Himchhari National Park</td>
-              <td>18,000</td>
+              <td>EUR 138</td>
             </tr>
             <tr>
               <td>Sundarban Adventure</td>
               <td>2N / 3D</td>
               <td>Mangrove forest, wildlife, boat safari</td>
-              <td>14,000</td>
+              <td>EUR 108</td>
             </tr>
             <tr>
               <td>Dubai City &amp; Desert</td>
               <td>5N / 6D</td>
               <td>Burj Khalifa, safari, Gold Souk, Miracle Garden</td>
-              <td>90,000</td>
+              <td>EUR 692</td>
             </tr>
             <tr>
               <td>Thailand Delight</td>
               <td>5N / 6D</td>
               <td>Bangkok, Pattaya, Phuket, Tiger Zoo</td>
-              <td>85,000</td>
+              <td>EUR 654</td>
             </tr>
             <tr>
               <td>Maldives Honeymoon</td>
               <td>4N / 5D</td>
               <td>Overwater bungalow, snorkelling, sunset cruise</td>
-              <td>1,35,000</td>
+              <td>EUR 1,038</td>
             </tr>
           </tbody>
         </table>
@@ -173,7 +173,7 @@ export function VisaBody() {
           <strong>Application preparation</strong> — Forms completed and reviewed (e.g. Ireland AVATS), cover letter, documents ordered as required by each embassy.
         </li>
         <li>
-          <strong>Submission &amp; payment</strong> — Guidance on fees (e.g. Ireland typically BDT 3,338–13,500 range context), submission pack, and tracking references.
+          <strong>Submission &amp; payment</strong> — Guidance on fees (e.g. Ireland typically EUR 26–104 range context), submission pack, and tracking references.
         </li>
         <li>
           <strong>Tracking &amp; follow-up</strong> — Active monitoring and prompt response to requests for additional documents.
@@ -424,7 +424,7 @@ export function ConsultancyBody() {
           <strong>Pre-departure documentation</strong> — Visa, passport validity, insurance, health declarations, yellow fever where needed, hotel confirmations, emergency contacts.
         </li>
         <li>
-          <strong>Budget planning</strong> — Breakdowns in BDT and destination currency: flights, stay, visa, daily spend, transport passes, discretionary.
+          <strong>Budget planning</strong> — Breakdowns in EUR and destination currency: flights, stay, visa, daily spend, transport passes, discretionary.
         </li>
         <li>
           <strong>Destination briefing</strong> — Culture, dress, tipping, safety, Halal food, prayer facilities, SIM, FX, healthcare access.
@@ -462,19 +462,19 @@ export function ConsultancyBody() {
               <td>Standard</td>
               <td>Families &amp; groups</td>
               <td>Full itinerary + insurance guidance + pre-dep briefing</td>
-              <td>BDT 2,000–5,000</td>
+              <td>EUR 15–38</td>
             </tr>
             <tr>
               <td>Premium</td>
               <td>Corporate / complex trips</td>
               <td>All services + 24/7 in-trip hotline + post-trip review</td>
-              <td>BDT 8,000–15,000</td>
+              <td>EUR 62–115</td>
             </tr>
             <tr>
               <td>Ireland specialist</td>
               <td>Ireland-bound travellers</td>
               <td>Irish visa routing + Dublin hotel map + Bangla guide</td>
-              <td>BDT 5,000–10,000</td>
+              <td>EUR 38–77</td>
             </tr>
           </tbody>
         </table>
