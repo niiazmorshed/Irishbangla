@@ -7,6 +7,9 @@ import {
   FaTwitter,
   FaWhatsapp,
   FaMapMarkerAlt,
+  FaCcVisa,
+  FaCcMastercard,
+  FaCcAmex,
 } from "react-icons/fa";
 
 import "../styles/footer.css";
@@ -44,7 +47,13 @@ export default function Footer() {
             3rd Floor, Road: 11, House: 76/A <br />
             Banani, Dhaka
           </p>
-          <a className="location-link" href="#">
+          <a
+            className="location-link"
+            href="https://www.google.com/maps/search/?api=1&query=House%2076%2FA%2C%20Road%2011%2C%20Banani%2C%20Dhaka"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Irish Bangla Dhaka on Google Maps"
+          >
             <FaMapMarkerAlt /> View Location
           </a>
         </div>
@@ -56,7 +65,13 @@ export default function Footer() {
             North Wall Quay, <br />
             Dublin 1, Ireland
           </p>
-          <a className="location-link" href="#">
+          <a
+            className="location-link"
+            href="https://www.google.com/maps/search/?api=1&query=North%20Wall%20Quay%2C%20Dublin%201%2C%20Ireland"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Irish Bangla Dublin on Google Maps"
+          >
             <FaMapMarkerAlt /> View Location
           </a>
         </div>
@@ -64,12 +79,21 @@ export default function Footer() {
         {/* Payments */}
         <div className="footer-col">
           <h4>We Accept</h4>
-          <div className="payment-box">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/BKash_Logo.png" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Nagad_Logo.png" />
+          <div className="payment-box" aria-label="Accepted payment methods">
+            <span className="payment-mark payment-mark--visa" title="Visa">
+              <FaCcVisa aria-hidden="true" />
+              <span className="sr-only">Visa</span>
+            </span>
+            <span className="payment-mark payment-mark--mastercard" title="Mastercard">
+              <FaCcMastercard aria-hidden="true" />
+              <span className="sr-only">Mastercard</span>
+            </span>
+            <span className="payment-mark payment-mark--amex" title="American Express">
+              <FaCcAmex aria-hidden="true" />
+              <span className="sr-only">American Express</span>
+            </span>
+            <span className="payment-badge payment-badge--bkash" title="bKash">bKash</span>
+            <span className="payment-badge payment-badge--nagad" title="Nagad">Nagad</span>
           </div>
         </div>
       </div>

@@ -1,31 +1,75 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useRef } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { FaArrowUp } from "react-icons/fa";
 
 import Hero from "./components/Hero";
-import ThinkingTrip from "./components/thinkingtrip";
-import Inspiration from "./components/Inspiration";
-import IrelandStays from "./components/IrelandStays";
 import VisaSearchCard from "./components/VisaSearchCard";
-import VisaDetails from "./pages/VisaDetails";
-import Services from "./components/Service";
-import TrackerPage from "./pages/TrackerPage";
-import ContactSection from "./components/contact";
-import AboutUs from "./components/aboutus";
-import IrelandTravelProcess from "./components/IrelandTravelProcess";
-import SustainableIreland from "./pages/SustainableIreland";
-import IrelandWeather from "./pages/irelandweather";
-import BookTrip from "./pages/BookTrip";
-import InformationTopic from "./pages/InformationTopic";
-import IrelandTourismGuide from "./pages/IrelandTourismGuide";
-import TourismIrelandHomeSection from "./components/TourismIrelandHomeSection";
 import { ScrollReveal } from "./components/ScrollReveal";
 import Layout from "./components/Layout";
-import AdminLayout from "./components/AdminLayout";
-import { AuthProvider } from "./contexts/AuthContext";
-import AdminTrackerConsole from "./pages/AdminTrackerConsole";
 import { ADMIN_CONSOLE_PATH } from "./constants/adminRoute";
 
+const ThinkingTrip = lazy(() => import("./components/thinkingtrip"));
+const Inspiration = lazy(() => import("./components/Inspiration"));
+const IrelandStays = lazy(() => import("./components/IrelandStays"));
+const Services = lazy(() => import("./components/Service"));
+const ContactSection = lazy(() => import("./components/contact"));
+const AboutUs = lazy(() => import("./components/aboutus"));
+const TourismIrelandHomeSection = lazy(() => import("./components/TourismIrelandHomeSection"));
+
+const VisaDetails = lazy(() => import("./pages/VisaDetails"));
+const TrackerPage = lazy(() => import("./pages/TrackerPage"));
+const IrelandTravelProcess = lazy(() => import("./components/IrelandTravelProcess"));
+const SustainableIreland = lazy(() => import("./pages/SustainableIreland"));
+const IrelandWeather = lazy(() => import("./pages/irelandweather"));
+const BookTrip = lazy(() => import("./pages/BookTrip"));
+const InformationTopic = lazy(() => import("./pages/InformationTopic"));
+const IrelandTourismGuide = lazy(() => import("./pages/IrelandTourismGuide"));
+const AdminRouteShell = lazy(() => import("./components/AdminRouteShell"));
+const AdminTrackerConsole = lazy(() => import("./pages/AdminTrackerConsole"));
+
+function PageLoader() {
+  return (
+    <div className="center page-with-navbar" aria-live="polite">
+      Loading...
+    </div>
+  );
+}
+
+function PageSuspense({ children }) {
+  return <Suspense fallback={<PageLoader />}>{children}</Suspense>;
+}
+
+function SectionSuspense({ children }) {
+  return <Suspense fallback={null}>{children}</Suspense>;
+}
+
 // ✅ Home component
+function HomeScrollTopButton() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setVisible(window.scrollY > 620);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <button
+      type="button"
+      className={`home-scroll-top${visible ? " visible" : ""}`}
+      aria-label="Scroll to top"
+      title="Scroll to top"
+      onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
+    >
+      <FaArrowUp aria-hidden="true" />
+    </button>
+  );
+}
+
 function Home() {
   const contactRef = useRef(null);
   const servicesRef = useRef(null);
@@ -46,29 +90,45 @@ function Home() {
       </ScrollReveal>
 
       <ScrollReveal y={24}>
-        <ThinkingTrip />
+        <SectionSuspense>
+          <ThinkingTrip />
+        </SectionSuspense>
       </ScrollReveal>
       <ScrollReveal y={24} delay={0.03}>
-        <AboutUs onEnquiryClick={scrollToContact} />
+        <SectionSuspense>
+          <AboutUs onEnquiryClick={scrollToContact} />
+        </SectionSuspense>
       </ScrollReveal>
 
       <ScrollReveal ref={servicesRef} y={24} delay={0.04}>
-        <Services onEnquiryClick={scrollToContact} />
+        <SectionSuspense>
+          <Services onEnquiryClick={scrollToContact} />
+        </SectionSuspense>
       </ScrollReveal>
 
       <ScrollReveal y={26} delay={0.02}>
-        <Inspiration />
+        <SectionSuspense>
+          <Inspiration />
+        </SectionSuspense>
       </ScrollReveal>
       <ScrollReveal y={26} delay={0.04}>
-        <IrelandStays />
+        <SectionSuspense>
+          <IrelandStays />
+        </SectionSuspense>
       </ScrollReveal>
       <ScrollReveal y={26} delay={0.05}>
-        <TourismIrelandHomeSection />
+        <SectionSuspense>
+          <TourismIrelandHomeSection />
+        </SectionSuspense>
       </ScrollReveal>
 
       <ScrollReveal ref={contactRef} y={22} delay={0.02}>
-        <ContactSection />
+        <SectionSuspense>
+          <ContactSection />
+        </SectionSuspense>
       </ScrollReveal>
+
+      <HomeScrollTopButton />
     </>
   );
 }
@@ -77,24 +137,23 @@ function Home() {
 function App() {
   return (
     <Router>
-      <AuthProvider>
       <Routes>
-        <Route path={ADMIN_CONSOLE_PATH} element={<AdminLayout />}>
-          <Route index element={<AdminTrackerConsole />} />
+        <Route path={ADMIN_CONSOLE_PATH} element={<PageSuspense><AdminRouteShell /></PageSuspense>}>
+          <Route index element={<PageSuspense><AdminTrackerConsole /></PageSuspense>} />
         </Route>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} /> {/* only one / route */}
-          <Route path="/book-trip" element={<BookTrip />} />
-          <Route path="/visa-details" element={<VisaDetails />} />
-          <Route path="/information/:topic" element={<InformationTopic />} />
-          <Route path="/track/:trackingId" element={<TrackerPage />} />
-          <Route path="/ireland-travel-process" element={<IrelandTravelProcess />} />
-          <Route path="/ireland-weather" element={<IrelandWeather />} />
-          <Route path="/sustainable-ireland" element={<SustainableIreland />} />
-          <Route path="/tourism-ireland/guide" element={<IrelandTourismGuide />} />
+          <Route path="/book-trip" element={<PageSuspense><BookTrip /></PageSuspense>} />
+          <Route path="/visa-details" element={<PageSuspense><VisaDetails /></PageSuspense>} />
+          <Route path="/information" element={<Navigate to="/information/moving-to-ireland" replace />} />
+          <Route path="/information/:topic" element={<PageSuspense><InformationTopic /></PageSuspense>} />
+          <Route path="/track/:trackingId" element={<PageSuspense><TrackerPage /></PageSuspense>} />
+          <Route path="/ireland-travel-process" element={<PageSuspense><IrelandTravelProcess /></PageSuspense>} />
+          <Route path="/ireland-weather" element={<PageSuspense><IrelandWeather /></PageSuspense>} />
+          <Route path="/sustainable-ireland" element={<PageSuspense><SustainableIreland /></PageSuspense>} />
+          <Route path="/tourism-ireland/guide" element={<PageSuspense><IrelandTourismGuide /></PageSuspense>} />
         </Route>
       </Routes>
-      </AuthProvider>
     </Router>
   );
 }

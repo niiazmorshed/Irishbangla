@@ -1,5 +1,5 @@
 import "../styles/irelandTravel.css";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import { useMemo } from "react";
 import { FaCheckCircle, FaExclamationTriangle } from "react-icons/fa";
 
@@ -169,7 +169,7 @@ export default function IrelandTravelProcess() {
 
       <section className="shell guide-content-layout">
         <article className="guide-main-content">
-          <motion.section id="intro" className="guide-section" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <Motion.section id="intro" className="guide-section" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2>1. Introduction to Ireland and immigration system</h2>
             <p>
               Ireland is an EU member state with a separate immigration regime. Ireland is not in Schengen, so a Schengen visa does not grant entry to Ireland.
@@ -181,7 +181,7 @@ export default function IrelandTravelProcess() {
               <li>EU/EEA/Swiss citizens generally do not require a visa to live, work, or study in Ireland.</li>
               <li>Non-CTA nationals entering from UK to Ireland remain subject to Irish immigration control.</li>
             </ul>
-          </motion.section>
+          </Motion.section>
 
           <section id="key-facts" className="guide-section">
             <h2>2. Key facts about Ireland (2026)</h2>

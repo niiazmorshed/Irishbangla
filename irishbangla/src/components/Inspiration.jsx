@@ -51,9 +51,8 @@ export default function Inspiration() {
   const place = places[activePlace];
 
   return (
-    <>
-      {/* INSPIRATION SECTION */}
-      <section className="inspiration">
+    <section className="inspiration-section">
+      <div className="inspiration-intro">
         <h2>Looking for inspiration?</h2>
         <p>
           Ireland is a city break, adventure holiday and detoxing retreat all
@@ -61,44 +60,43 @@ export default function Inspiration() {
           holiday.
         </p>
 
-        <div className="tabs">
+        <div className="inspiration-tabs" role="tablist" aria-label="Ireland inspiration destinations">
           {Object.keys(places).map((name) => (
             <button
               key={name}
-              className={`tab ${activePlace === name ? "active" : ""}`}
+              type="button"
+              role="tab"
+              aria-selected={activePlace === name}
+              className={`inspiration-tab ${activePlace === name ? "active" : ""}`}
               onClick={() => setActivePlace(name)}
             >
               {name}
             </button>
           ))}
         </div>
-      </section>
+      </div>
 
-      {/* HERO SECTION */}
-      {/* HERO / PLACE SHOWCASE */}
-<section className="place-showcase">
-  {/* Big Image */}
-  <div className="place-image">
-    <img src={place.image} alt={place.title} />
-  </div>
+      <div className="inspiration-showcase">
+        <div className="inspiration-image">
+          <img src={place.image} alt={place.title} loading="lazy" />
+        </div>
 
-  {/* Overlapping Card */}
-  <div className="place-card">
-    <h3>{place.title}</h3>
+        <article className="inspiration-card">
+          <h3>{place.title}</h3>
+          <p>{place.description}</p>
 
-    <p>{place.description}</p>
+          <div className="inspiration-tags">
+            <span className="inspiration-tag green">Nature &amp; Adventure</span>
+            <span className="inspiration-tag">Local Tours</span>
+            <span className="inspiration-tag">Cultural Sites</span>
+            <span className="inspiration-tag">City Visits</span>
+          </div>
 
-    <div className="place-tags">
-      <span className="tag green">Nature & Adventure</span>
-      <span className="tag">Local Tours</span>
-      <span className="tag">Cultural Sites</span>
-      <span className="tag">City Visits</span>
-    </div>
-
-    <button className="hero-btn">{place.button}</button>
-  </div>
-</section>
-
-    </>
+          <button type="button" className="inspiration-btn">
+            {place.button}
+          </button>
+        </article>
+      </div>
+    </section>
   );
 }

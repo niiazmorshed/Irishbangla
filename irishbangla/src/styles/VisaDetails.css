@@ -1,6 +1,8 @@
 .visa-details-page {
   font-family: "Mulish", sans-serif;
   background: #f5f7fb;
+  color: #0f172a;
+  color-scheme: light;
   min-height: 100vh;
   padding-top: var(--app-header-offset);
 }
@@ -63,6 +65,7 @@
 /* MAIN */
 .visa-main {
   background: #fff;
+  color: #0f172a;
   border-radius: 16px;
   padding: 28px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
@@ -71,6 +74,7 @@
 .visa-main h2 {
   font-size: 22px;
   margin-bottom: 6px;
+  color: #0f172a;
 }
 
 .subtitle {
@@ -82,6 +86,7 @@
 /* DOCUMENT ACCORDION */
 .doc-accordion {
   border-top: 1px solid #e5e7eb;
+  color: #0f172a;
 }
 
 .doc-item {
@@ -93,6 +98,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  color: #0f172a;
 }
 
 .doc-title span {
@@ -120,6 +126,7 @@
 .doc-item.compact .doc-title h3 {
   font-size: 14px;
   font-weight: 600;
+  color: #0f172a;
 }
 
 .visa-subhead {
@@ -136,6 +143,11 @@
   font-size: 14px;
   display: grid;
   gap: 8px;
+}
+
+.visa-bullets li,
+.visa-bullets strong {
+  color: #334155;
 }
 
 .visa-info-block {
@@ -188,6 +200,7 @@
   padding: 12px 12px;
   border-bottom: 1px solid #e5e7eb;
   font-size: 14px;
+  color: #334155;
 }
 
 .visa-table th {
@@ -249,6 +262,120 @@
 @media (max-width: 980px) {
   .visa-content {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .visa-details-page {
+    padding-top: calc(var(--app-header-offset) + 66px);
+  }
+
+  .visa-header {
+    padding: 32px 18px 40px;
+  }
+
+  .visa-header h1 {
+    font-size: 22px;
+    line-height: 1.25;
+  }
+
+  .visa-steps {
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .step {
+    padding: 8px 10px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  .visa-content {
+    margin: 28px auto 32px;
+    padding: 0 14px;
+    gap: 18px;
+  }
+
+  .visa-main {
+    padding: 20px 18px;
+    border-radius: 14px;
+  }
+
+  .visa-main h2 {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .doc-item {
+    padding: 14px 0;
+  }
+
+  .doc-item.compact {
+    padding: 11px 0;
+  }
+
+  .doc-title {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .doc-title span {
+    width: 24px;
+    height: 24px;
+    flex: 0 0 24px;
+    margin-top: 1px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .doc-item.compact .doc-title h3 {
+    font-size: 13px;
+    line-height: 1.45;
+    font-weight: 600;
+  }
+
+  .visa-info-block {
+    padding: 12px 0;
+  }
+
+  .visa-info-value,
+  .visa-bullets {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .visa-sidebar {
+    padding: 20px 18px;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .visa-content {
+    padding: 0 10px;
+  }
+
+  .visa-main {
+    padding: 18px 16px;
+  }
+
+  .doc-title {
+    gap: 9px;
+  }
+
+  .doc-title span {
+    width: 22px;
+    height: 22px;
+    flex-basis: 22px;
+    font-size: 11px;
+  }
+
+  .doc-item.compact .doc-title h3 {
+    font-size: 12.5px;
   }
 }
 

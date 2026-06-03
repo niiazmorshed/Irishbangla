@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/useAuth";
 import { ADMIN_CONSOLE_PATH } from "../constants/adminRoute";
 import "../styles/AdminConsole.css";
 

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "../styles/TourismPages.css";
 import cliffs from "../assets/hero/cliffs.jpg";
@@ -51,7 +51,7 @@ export default function TourismIrelandHomeSection() {
     <section id="tourism-ireland" className="tourism-home tourism-page til-landing" aria-labelledby="tourism-ireland-heading">
       <div className="til-hero til-hero--home">
         <div className="til-hero-grid">
-          <motion.div
+          <Motion.div
             className="til-hero-copy"
             initial="hidden"
             whileInView="visible"
@@ -67,7 +67,7 @@ export default function TourismIrelandHomeSection() {
               From the Cliffs of Moher to the streets of Dublin — everything you need to explore the Emerald Isle.
             </p>
             <div className="til-hero-cta-row">
-              <motion.button
+              <Motion.button
                 type="button"
                 className="til-btn til-btn-primary"
                 onClick={goGuide}
@@ -75,7 +75,7 @@ export default function TourismIrelandHomeSection() {
                 whileTap={{ scale: 0.98 }}
               >
                 Check details
-              </motion.button>
+              </Motion.button>
               <span className="til-hero-deco" aria-hidden="true">
                 <span className="til-pin" />
                 <svg className="til-path" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
@@ -90,9 +90,9 @@ export default function TourismIrelandHomeSection() {
                 </svg>
               </span>
             </div>
-          </motion.div>
+          </Motion.div>
 
-          <motion.div
+          <Motion.div
             className="til-collage"
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -114,7 +114,7 @@ export default function TourismIrelandHomeSection() {
                 <span className="til-play-icon" />
               </button>
             </div>
-          </motion.div>
+          </Motion.div>
         </div>
       </div>
 
@@ -124,7 +124,7 @@ export default function TourismIrelandHomeSection() {
           <p className="til-subtil til-center">Four pillars of planning — expanded on the full guide page.</p>
           <div className="til-card-grid">
             {highlights.map((h, i) => (
-              <motion.article
+              <Motion.article
                 key={h.title}
                 className="til-card"
                 initial="hidden"
@@ -139,7 +139,7 @@ export default function TourismIrelandHomeSection() {
                 </span>
                 <h4 className="til-h3">{h.title}</h4>
                 <p className="til-card-text">{h.text}</p>
-              </motion.article>
+              </Motion.article>
             ))}
           </div>
         </div>
@@ -151,7 +151,7 @@ export default function TourismIrelandHomeSection() {
             <h3 className="til-h2 til-cta-title">Céad míle fáilte</h3>
             <p className="til-body til-cta-sub">Open the full guide for tables, visa checklists, and official links.</p>
           </div>
-          <motion.button
+          <Motion.button
             type="button"
             className="til-btn til-btn-primary til-btn-lg"
             onClick={goGuide}
@@ -159,7 +159,7 @@ export default function TourismIrelandHomeSection() {
             whileTap={{ scale: 0.97 }}
           >
             Open full guide
-          </motion.button>
+          </Motion.button>
         </div>
       </section>
     </section>

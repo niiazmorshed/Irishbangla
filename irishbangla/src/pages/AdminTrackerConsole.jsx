@@ -7,7 +7,7 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import { db } from "../firebase";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/useAuth";
 import { touristVisaTimeline } from "../data/touristVisaTimeline";
 import "../styles/AdminConsole.css";
 

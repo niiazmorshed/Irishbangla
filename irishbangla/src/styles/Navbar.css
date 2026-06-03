@@ -192,19 +192,32 @@
   margin: 0;
   outline: none;
   background: transparent;
+  color: #0f172a;
+  caret-color: #00875a;
   flex: 1 1 auto;
-  
   min-width: 0;
   width: auto;
   order: 1;
   font-size: 14px;
+  font-weight: 600;
   line-height: 1.2;
   align-self: center;
   box-sizing: border-box;
 }
 
+.tracking-box input:focus {
+  color: #0f172a;
+}
+
 .tracking-box input::placeholder {
-  color: #94a3b8;
+  color: #64748b;
+  font-weight: 500;
+  opacity: 1;
+}
+
+.tracking-box input::selection {
+  background: rgba(0, 135, 90, 0.18);
+  color: #0f172a;
 }
 
 .tracking-box button {
