@@ -75,6 +75,32 @@ export default function Navbar() {
     closeNavigation();
   };
 
+  const scrollToPageTop = useCallback(() => {
+    const scroll = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    };
+
+    if (typeof window.requestAnimationFrame === "function") {
+      window.requestAnimationFrame(() => window.requestAnimationFrame(scroll));
+      return;
+    }
+
+    window.setTimeout(scroll, 0);
+  }, []);
+
+  const handleHomeNavigation = useCallback(
+    (event) => {
+      event?.preventDefault();
+      event?.stopPropagation();
+      closeNavigation();
+      if (pathname !== "/") {
+        navigate("/");
+      }
+      scrollToPageTop();
+    },
+    [closeNavigation, navigate, pathname, scrollToPageTop]
+  );
+
   const infoItems = useMemo(
     () =>
       informationTopics.map((t) => ({
@@ -140,10 +166,7 @@ export default function Navbar() {
         <div className="nav-left">
           <div
             className="nav-logo"
-            onClick={() => {
-              navigate("/");
-              closeNavigation();
-            }}
+            onClick={handleHomeNavigation}
           >
             🍀 <span>Emerald Visa &amp; Tours</span>
           </div>
@@ -159,10 +182,7 @@ export default function Navbar() {
               className={({ isActive }) =>
                 isActive ? "nav-link active" : "nav-link"
               }
-              onClick={(e) => {
-                e.stopPropagation();
-                closeNavigation();
-              }}
+              onClick={handleHomeNavigation}
             >
               Home
             </NavLink>
