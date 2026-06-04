@@ -192,19 +192,32 @@
   margin: 0;
   outline: none;
   background: transparent;
+  color: #0f172a;
+  caret-color: #00875a;
   flex: 1 1 auto;
-  
   min-width: 0;
   width: auto;
   order: 1;
   font-size: 14px;
+  font-weight: 600;
   line-height: 1.2;
   align-self: center;
   box-sizing: border-box;
 }
 
+.tracking-box input:focus {
+  color: #0f172a;
+}
+
 .tracking-box input::placeholder {
-  color: #94a3b8;
+  color: #64748b;
+  font-weight: 500;
+  opacity: 1;
+}
+
+.tracking-box input::selection {
+  background: rgba(0, 135, 90, 0.18);
+  color: #0f172a;
 }
 
 .tracking-box button {
@@ -303,45 +316,68 @@
 
 .mega-menu {
   position: absolute;
-  top: 100%;       /* flush, no gap */
-  left: -150px;
-  width: 420px;
+  top: calc(100% + 10px);
+  left: 50%;
+  width: min(460px, calc(100vw - 32px));
   background: #fff;
-  padding: 18px;
-  border-radius: 14px;
+  padding: 14px;
+  border-radius: 12px;
   /* Controlled by .open class only */
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
   border: 1px solid rgba(2, 6, 23, 0.06);
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateY(6px);
-  transform-origin: top;
+  transform: translate(-50%, 4px);
+  transform-origin: top center;
   transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+}
+
+.mega-menu::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  background: #ffffff;
+  border-top: 1px solid rgba(2, 6, 23, 0.06);
+  border-left: 1px solid rgba(2, 6, 23, 0.06);
+  border-radius: 2px;
+  transform: translateX(-50%) rotate(45deg);
+  pointer-events: none;
 }
 
 .mega-menu.open {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translateY(10px);
+  transform: translate(-50%, 0);
 }
 
 .mega-item {
   background: #f6f7fb;
-  padding: 14px;
+  min-height: 64px;
+  padding: 14px 15px;
   border-radius: 10px;
+  border: 1px solid transparent;
+  color: #0a5c4d;
+  display: flex;
+  align-items: center;
   font-size: 14px;
+  line-height: 1.35;
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .mega-item:hover {
-  background: #e9efff;
+  background: #eef7f4;
+  border-color: rgba(10, 92, 77, 0.18);
+  color: #063f36;
 }
 
 /* ── Mobile ──────────────────────────────────────────────────────────── */
@@ -474,6 +510,10 @@
     margin-top: 8px;
     border: 1px solid rgba(2, 6, 23, 0.08);
     background: #f8fafc;
+  }
+
+  .mega-menu::before {
+    display: none;
   }
 
   .mega-menu.open {

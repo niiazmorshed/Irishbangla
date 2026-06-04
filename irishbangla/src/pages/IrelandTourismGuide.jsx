@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import "../styles/TourismPages.css";
 import { ScrollReveal } from "../components/ScrollReveal";
@@ -14,7 +14,7 @@ const sectionFade = {
 
 function GuideSection({ id, title, children, className = "" }) {
   return (
-    <motion.section
+    <Motion.section
       id={id}
       className={`tig-section ${className}`.trim()}
       initial="hidden"
@@ -24,7 +24,7 @@ function GuideSection({ id, title, children, className = "" }) {
     >
       <h2 className="tig-h2">{title}</h2>
       {children}
-    </motion.section>
+    </Motion.section>
   );
 }
 

@@ -48,36 +48,12 @@ function Table({ table }) {
   );
 }
 
-export default function InformationTopic() {
-  const { topic } = useParams();
-  const contentRef = useRef(null);
-  const mobileNavRef = useRef(null);
-
-  const current = useMemo(() => getInformationTopic(topic), [topic]);
-  const currentIndex = useMemo(
-    () => informationTopics.findIndex((t) => t.slug === topic),
-    [topic]
-  );
-
-  // Scroll mobile nav tab into view when topic changes
-  useEffect(() => {
-    if (mobileNavRef.current && current) {
-      const activeBtn = mobileNavRef.current.querySelector(".active");
-      if (activeBtn) {
-        activeBtn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-      }
-    }
-    // Scroll content area to top on topic change
-    if (contentRef.current) {
-      contentRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, [topic, current]);
-
-  const SidebarTopicList = () => (
+function SidebarTopicList({ activeSlug }) {
+  return (
     <ul className="info-topic-list">
       {informationTopics.map((t) => {
         const TopicIcon = t.icon;
-        const active = t.slug === (current?.slug ?? topic);
+        const active = t.slug === activeSlug;
         return (
           <li key={t.slug}>
             <Link
@@ -95,6 +71,29 @@ export default function InformationTopic() {
       })}
     </ul>
   );
+}
+
+export default function InformationTopic() {
+  const { topic } = useParams();
+  const mobileNavRef = useRef(null);
+
+  const current = useMemo(() => getInformationTopic(topic), [topic]);
+  const currentIndex = useMemo(
+    () => informationTopics.findIndex((t) => t.slug === topic),
+    [topic]
+  );
+
+  // Scroll mobile nav tab into view when topic changes
+  useEffect(() => {
+    if (mobileNavRef.current && current) {
+      const activeBtn = mobileNavRef.current.querySelector(".active");
+      if (activeBtn) {
+        const nav = mobileNavRef.current;
+        const centeredLeft = activeBtn.offsetLeft - (nav.clientWidth - activeBtn.clientWidth) / 2;
+        nav.scrollTo({ left: Math.max(centeredLeft, 0), behavior: "smooth" });
+      }
+    }
+  }, [topic, current]);
 
   if (!current) {
     return (
@@ -129,7 +128,7 @@ export default function InformationTopic() {
               <span className="info-sidebar-dot" />
               <h2>Topics</h2>
             </div>
-            <SidebarTopicList />
+            <SidebarTopicList activeSlug={topic} />
           </aside>
           <section className="info-content">
             <Disclaimer />
@@ -192,7 +191,7 @@ export default function InformationTopic() {
             <span className="info-sidebar-dot" />
             <h2>Topics</h2>
           </div>
-          <SidebarTopicList />
+          <SidebarTopicList activeSlug={current.slug} />
 
           {current.sources?.length > 0 && (
             <div className="info-sources">
@@ -206,7 +205,7 @@ export default function InformationTopic() {
           )}
         </aside>
 
-        <section className="info-content" ref={contentRef}>
+        <section className="info-content">
           {current.sections.map((sec) => (
             <article className="info-card" key={sec.heading}>
               <h2>{sec.heading}</h2>

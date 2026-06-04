@@ -7,36 +7,29 @@ import { informationTopics } from "../data/informationTopics";
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   const infoCloseTimer = useRef(null);
   const servicesCloseTimer = useRef(null);
+  const lastScrollYRef = useRef(0);
+  const previousPathnameRef = useRef(pathname);
 
   const [show, setShow] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
   const [trackingId, setTrackingId] = useState("");
 
-  const isHome = location.pathname === "/";
-
   // Hide / show navbar on scroll
   useEffect(() => {
     const handleScroll = () => {
-      setShow(window.scrollY < lastScrollY || window.scrollY < 80);
-      setLastScrollY(window.scrollY);
+      const currentScrollY = window.scrollY;
+      setShow(currentScrollY < lastScrollYRef.current || currentScrollY < 80);
+      lastScrollYRef.current = currentScrollY;
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
-
-  // Close dropdowns after navigation
-  useEffect(() => {
-    setInfoOpen(false);
-    setServicesOpen(false);
-    setMenuOpen(false);
-  }, [location.pathname]);
+  }, []);
 
   // Cleanup timers on unmount
   useEffect(() => {
@@ -58,12 +51,55 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
+  const closeNavigation = useCallback(() => {
+    clearTimeout(infoCloseTimer.current);
+    clearTimeout(servicesCloseTimer.current);
+    setInfoOpen(false);
+    setServicesOpen(false);
+    setMenuOpen(false);
+  }, []);
+
+  // Close dropdowns/drawer after any route change, including navigation outside this component.
+  useEffect(() => {
+    if (previousPathnameRef.current === pathname) return;
+    previousPathnameRef.current = pathname;
+
+    const closeTimer = window.setTimeout(closeNavigation, 0);
+    return () => window.clearTimeout(closeTimer);
+  }, [pathname, closeNavigation]);
+
   const handleTrackingSearch = () => {
     if (!trackingId.trim()) return;
     navigate(`/track/${trackingId.trim()}`);
     setTrackingId("");
-    setMenuOpen(false);
+    closeNavigation();
   };
+
+  const scrollToPageTop = useCallback(() => {
+    const scroll = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    };
+
+    if (typeof window.requestAnimationFrame === "function") {
+      window.requestAnimationFrame(() => window.requestAnimationFrame(scroll));
+      return;
+    }
+
+    window.setTimeout(scroll, 0);
+  }, []);
+
+  const handleHomeNavigation = useCallback(
+    (event) => {
+      event?.preventDefault();
+      event?.stopPropagation();
+      closeNavigation();
+      if (pathname !== "/") {
+        navigate("/");
+      }
+      scrollToPageTop();
+    },
+    [closeNavigation, navigate, pathname, scrollToPageTop]
+  );
 
   const infoItems = useMemo(
     () =>
@@ -121,14 +157,17 @@ export default function Navbar() {
         className={`nav-drawer-backdrop ${menuOpen ? "open" : ""}`}
         aria-label="Close menu"
         tabIndex={menuOpen ? 0 : -1}
-        onClick={() => setMenuOpen(false)}
+        onClick={closeNavigation}
       />
 
       <div className="nav-container">
 
         {/* LEFT */}
         <div className="nav-left">
-          <div className="nav-logo" onClick={() => navigate("/")}>
+          <div
+            className="nav-logo"
+            onClick={handleHomeNavigation}
+          >
             🍀 <span>Emerald Visa &amp; Tours</span>
           </div>
         </div>
@@ -143,12 +182,7 @@ export default function Navbar() {
               className={({ isActive }) =>
                 isActive ? "nav-link active" : "nav-link"
               }
-              onClick={(e) => {
-                e.stopPropagation();
-                setMenuOpen(false);
-                setInfoOpen(false);
-                setServicesOpen(false);
-              }}
+              onClick={handleHomeNavigation}
             >
               Home
             </NavLink>
@@ -164,7 +198,7 @@ export default function Navbar() {
                   .querySelector(".about-section")
                   ?.scrollIntoView({ behavior: "smooth" });
               }, 100);
-              setMenuOpen(false);
+              closeNavigation();
             }}
           >
             About us
@@ -200,8 +234,7 @@ export default function Navbar() {
                   }
                   onClick={(e) => {
                     e.stopPropagation();
-                    setMenuOpen(false);
-                    setInfoOpen(false);
+                    closeNavigation();
                   }}
                 >
                   {it.label}
@@ -257,7 +290,7 @@ export default function Navbar() {
             className="nav-cta"
             onClick={() => {
               navigate("/book-trip");
-              setMenuOpen(false);
+              closeNavigation();
             }}
           >
             Book Trip

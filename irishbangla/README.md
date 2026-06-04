@@ -47,7 +47,7 @@ Marketing + information website for **Emerald Visa & Tours**, with formal naviga
 - `src/pages/VisaDetails.jsx`: renders visa requirements based on selection
 - `src/data/irelandVisaGuide.js`: visa country table + category requirements
 - `src/data/informationTopics.js`: Information pages content (topics)
-- `src/firebase.js`: Firebase App + Firestore + Auth
+- `src/firebase.js`: Firebase App + Firestore + Auth, configured from Vite env variables
 - `src/constants/adminRoute.js`: hidden admin console path
 - `src/contexts/AuthContext.jsx`: auth state + sign-in (allowlist enforced after Firebase auth)
 - `src/pages/AdminTrackerConsole.jsx`: load/save `visaTrackers` documents
@@ -66,6 +66,12 @@ Marketing + information website for **Emerald Visa & Tours**, with formal naviga
 cd irishbangla
 npm install
 ```
+
+### Environment variables
+
+Firebase config and admin allowlist settings are read from Vite env variables.
+Use `.env.example` as the reference for required keys. Local values belong in
+`.env.local`, which is ignored by Git.
 
 ### Run (development)
 
@@ -124,7 +130,9 @@ This controls:
 
 The tracking route `/track/:trackingId` reads from Firestore.
 
-Configuration is currently in `src/firebase.js`. If you need to use a different Firebase project, update the config values there.
+Firebase configuration is read from `VITE_FIREBASE_*` variables. If you need to
+use a different Firebase project, update `.env.local` for local development and
+the deployment environment variables for production.
 
 ### Enable Email/Password sign-in
 

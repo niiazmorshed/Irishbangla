@@ -31,15 +31,45 @@ const selectStyles = {
     minHeight: 44,
     borderRadius: 10,
     borderColor: "#e2e8f0",
+    backgroundColor: "#ffffff",
+    color: "#0f172a",
     fontFamily: "Mulish",
     boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
     "&:hover": { borderColor: "#1a9c3d" },
+  }),
+  input: (base) => ({
+    ...base,
+    color: "#0f172a",
+  }),
+  placeholder: (base) => ({
+    ...base,
+    color: "#6b7280",
   }),
   singleValue: (base) => ({
     ...base,
     display: "flex",
     alignItems: "center",
     gap: 8,
+    color: "#0f172a",
+  }),
+  menu: (base) => ({
+    ...base,
+    backgroundColor: "#ffffff",
+    color: "#0f172a",
+    zIndex: 30,
+  }),
+  menuList: (base) => ({
+    ...base,
+    backgroundColor: "#ffffff",
+  }),
+  option: (base, state) => ({
+    ...base,
+    backgroundColor: state.isFocused || state.isSelected ? "#dbeafe" : "#ffffff",
+    color: "#0f172a",
+    cursor: "pointer",
+    "&:active": {
+      backgroundColor: "#bfdbfe",
+    },
   }),
 };
 

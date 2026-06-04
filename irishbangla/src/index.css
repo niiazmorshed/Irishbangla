@@ -3,9 +3,9 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color-scheme: light;
+  color: #111827;
+  background-color: #ffffff;
 
   --app-header-offset: 110px;
 
@@ -29,6 +29,9 @@ body,
   min-height: 100%;
   overflow-x: hidden;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #111827;
+  background: #ffffff;
+  color-scheme: light;
 }
 
 html, body {
@@ -50,6 +53,8 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  color: #111827;
+  background: #ffffff;
 }
 
 
@@ -65,7 +70,8 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #ffffff;
+  color: #111827;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -77,20 +83,74 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
 /* Route outlet wrapper (page enter animation in Layout) */
 .layout-outlet {
   width: 100%;
+}
+
+.home-hero-stack {
+  position: relative;
+  margin-bottom: 60px;
+}
+
+.home-scroll-top {
+  position: fixed;
+  right: max(24px, env(safe-area-inset-right));
+  bottom: max(24px, env(safe-area-inset-bottom));
+  z-index: 900;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: #0a5c4d;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 14px 32px rgba(10, 92, 77, 0.28);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.22s ease, visibility 0.22s ease, transform 0.22s ease, background 0.2s ease;
+}
+
+.home-scroll-top.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.home-scroll-top:hover {
+  background: #084d41;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.home-scroll-top:focus-visible {
+  outline: 3px solid rgba(16, 185, 129, 0.35);
+  outline-offset: 3px;
+}
+
+.home-scroll-top svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --app-header-offset: 56px;
+  }
+
+  .home-hero-stack {
+    margin-bottom: 0;
+  }
+
+  .home-scroll-top {
+    right: max(18px, env(safe-area-inset-right));
+    bottom: max(18px, env(safe-area-inset-bottom));
+    width: 42px;
+    height: 42px;
+  }
 }
