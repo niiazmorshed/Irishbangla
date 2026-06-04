@@ -1,6 +1,5 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import "../styles/VisaDetails.css";
-import { ScrollReveal } from "../components/ScrollReveal";
 import {
   getVisaCategory,
   getVisaCountry,
@@ -9,9 +8,11 @@ import {
 } from "../data/irelandVisaGuide";
 
 export default function VisaDetails() {
+  const [searchParams] = useSearchParams();
   const { state } = useLocation();
-  const fromCountryCode = state?.fromCountryCode;
-  const categoryKey = state?.categoryKey;
+
+  const fromCountryCode = searchParams.get("country") || state?.fromCountryCode;
+  const categoryKey = searchParams.get("category") || state?.categoryKey;
 
   const country = fromCountryCode ? getVisaCountry(fromCountryCode) : null;
   const category = categoryKey ? getVisaCategory(categoryKey) : null;
@@ -19,7 +20,7 @@ export default function VisaDetails() {
   const hasSelection = Boolean(country && category);
 
   return (
-    <ScrollReveal as="div" className="visa-details-page" y={22}>
+    <div className="visa-details-page">
       {/* Header */}
       <div className="visa-header">
         <h1>{hasSelection ? `${category.label} for Ireland — from ${country.name}` : "Ireland Visa Guide"}</h1>
@@ -165,19 +166,23 @@ export default function VisaDetails() {
                 <strong>{category.fee}</strong>
               </div>
 
-              <button className="primary-btn">Start Application</button>
+              <Link to="/book-trip" className="primary-btn">
+                Start Application
+              </Link>
             </>
           ) : (
             <>
               <p className="visa-side-note">
                 Use the visa search on the home page to see country-specific and category-specific requirements.
               </p>
-              <button className="primary-btn">Book a Consultation</button>
+              <Link to="/book-trip" className="primary-btn">
+                Book a Consultation
+              </Link>
             </>
           )}
         </aside>
       </div>
-    </ScrollReveal>
+    </div>
   );
 }
 

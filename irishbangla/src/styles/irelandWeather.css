@@ -222,7 +222,7 @@ body {
   }
 
   .editorial-image img {
-    height: 360px;
+    height: min(50vw, 360px);
   }
 
   .editorial-text h2 {

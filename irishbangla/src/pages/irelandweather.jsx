@@ -1,6 +1,5 @@
 import React from "react";
 import "../styles/irelandWeather.css";
-import { ScrollReveal } from "../components/ScrollReveal";
 
 import imgRain from "../assets/hero/rainy.jpg";
 import imgSummer from "../assets/hero/summer.jpg";
@@ -10,7 +9,7 @@ import imgMood3 from "../assets/hero/mood3.jpg";
 
 export default function IrelandWeather() {
   return (
-    <ScrollReveal as="div" className="ireland-weather-page" y={24}>
+    <div className="ireland-weather-page">
       {/* SECTION 1 – RAINY MODE (IMAGE RIGHT) */}
       <section className="editorial-section full-screen fade-in">
         <div className="editorial-grid image-right">
@@ -87,6 +86,6 @@ export default function IrelandWeather() {
           </div>
         </div>
       </section>
-    </ScrollReveal>
+    </div>
   );
 }

@@ -267,7 +267,7 @@
 
 @media (max-width: 640px) {
   .visa-details-page {
-    padding-top: calc(var(--app-header-offset) + 66px);
+    padding-top: var(--app-header-offset);
   }
 
   .visa-header {
@@ -418,6 +418,7 @@
 
 /* BUTTON */
 .primary-btn {
+  display: inline-block;
   margin-top: 20px;
   width: 100%;
   padding: 14px;
@@ -426,8 +427,11 @@
   background: #5ebd00;
   color: #fff;
   font-weight: 700;
+  text-align: center;
+  text-decoration: none;
   cursor: pointer;
   font-size: 15px;
+  box-sizing: border-box;
 }
 
 .primary-btn:hover {

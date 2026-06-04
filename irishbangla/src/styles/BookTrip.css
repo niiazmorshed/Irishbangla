@@ -119,7 +119,7 @@
 
 @media (max-width: 900px) {
   .booktrip-page {
-    padding-top: calc(var(--app-header-offset, 56px) + 72px);
+    padding-top: calc(var(--app-header-offset) + 32px);
   }
 
   .booktrip-card {
@@ -129,7 +129,7 @@
 
 @media (max-width: 640px) {
   .booktrip-page {
-    padding: calc(var(--app-header-offset, 56px) + 78px) 14px 56px;
+    padding: calc(var(--app-header-offset) + 24px) 14px 56px;
   }
 
   .page-title {

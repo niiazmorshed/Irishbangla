@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import { FaArrowUp } from "react-icons/fa";
+import { lazy, Suspense, useRef } from "react";
 
 import Hero from "./components/Hero";
 import VisaSearchCard from "./components/VisaSearchCard";
@@ -42,33 +41,6 @@ function PageSuspense({ children }) {
 
 function SectionSuspense({ children }) {
   return <Suspense fallback={null}>{children}</Suspense>;
-}
-
-// ✅ Home component
-function HomeScrollTopButton() {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setVisible(window.scrollY > 620);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return (
-    <button
-      type="button"
-      className={`home-scroll-top${visible ? " visible" : ""}`}
-      aria-label="Scroll to top"
-      title="Scroll to top"
-      onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
-    >
-      <FaArrowUp aria-hidden="true" />
-    </button>
-  );
 }
 
 function Home() {
@@ -128,8 +100,6 @@ function Home() {
           <ContactSection />
         </SectionSuspense>
       </ScrollReveal>
-
-      <HomeScrollTopButton />
     </>
   );
 }
@@ -140,7 +110,7 @@ function App() {
     <Router>
       <Routes>
         <Route path={ADMIN_CONSOLE_PATH} element={<PageSuspense><AdminRouteShell /></PageSuspense>}>
-          <Route index element={<PageSuspense><AdminTrackerConsole /></PageSuspense>} />
+          <Route index element={<AdminTrackerConsole />} />
         </Route>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} /> {/* only one / route */}

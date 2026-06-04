@@ -59,9 +59,11 @@
   line-height: 1.55;
 }
 
-.contact-info-row lord-icon {
+.contact-info-row .contact-info-icon {
   flex: 0 0 auto;
-  margin-top: 1px;
+  margin-top: 3px;
+  color: #0a5c4d;
+  font-size: 1.1rem;
 }
 
 .social-icons {
@@ -179,5 +181,24 @@
 
   .contact-left {
     padding-right: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .contact-wrapper {
+    padding: 48px 16px;
+  }
+
+  .contact-title {
+    font-size: clamp(1.75rem, 7vw, 2.25rem);
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 16px;
+  }
+
+  .send-btn {
+    width: 100%;
   }
 }
