@@ -107,13 +107,13 @@
 
 @media (max-width: 900px) {
   .notfound-page {
-    padding-top: calc(var(--app-header-offset, 56px) + 84px);
+    padding-top: calc(var(--app-header-offset) + 40px);
   }
 }
 
 @media (max-width: 520px) {
   .notfound-page {
-    padding: calc(var(--app-header-offset, 56px) + 76px) 14px 64px;
+    padding: calc(var(--app-header-offset) + 32px) 14px 64px;
   }
 
   .notfound-card {

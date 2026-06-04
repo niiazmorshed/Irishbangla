@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { FaSearch, FaChevronDown } from "react-icons/fa";
-import { useNavigate, NavLink, useLocation } from "react-router-dom";
+import { useNavigate, NavLink, Link, useLocation } from "react-router-dom";
 import "../styles/Navbar.css";
 import Breadcrumbs from "./Breadcrumbs";
 import { informationTopics } from "../data/informationTopics";
@@ -11,6 +11,7 @@ export default function Navbar() {
 
   const infoCloseTimer = useRef(null);
   const servicesCloseTimer = useRef(null);
+  const tourismCloseTimer = useRef(null);
   const lastScrollYRef = useRef(0);
   const previousPathnameRef = useRef(pathname);
 
@@ -18,16 +19,25 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
+  const [tourismOpen, setTourismOpen] = useState(false);
   const [trackingId, setTrackingId] = useState("");
 
   // Hide / show navbar on scroll
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const isMobile = window.matchMedia("(max-width: 900px)").matches;
+
+      if (isMobile) {
+        setShow(true);
+        lastScrollYRef.current = currentScrollY;
+        return;
+      }
+
       setShow(currentScrollY < lastScrollYRef.current || currentScrollY < 80);
       lastScrollYRef.current = currentScrollY;
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -36,6 +46,7 @@ export default function Navbar() {
     return () => {
       clearTimeout(infoCloseTimer.current);
       clearTimeout(servicesCloseTimer.current);
+      clearTimeout(tourismCloseTimer.current);
     };
   }, []);
 
@@ -54,8 +65,10 @@ export default function Navbar() {
   const closeNavigation = useCallback(() => {
     clearTimeout(infoCloseTimer.current);
     clearTimeout(servicesCloseTimer.current);
+    clearTimeout(tourismCloseTimer.current);
     setInfoOpen(false);
     setServicesOpen(false);
+    setTourismOpen(false);
     setMenuOpen(false);
   }, []);
 
@@ -150,6 +163,22 @@ export default function Navbar() {
     setServicesOpen((v) => !v);
   }, []);
 
+  const handleTourismEnter = useCallback(() => {
+    if (isMobile()) return;
+    clearTimeout(tourismCloseTimer.current);
+    setTourismOpen(true);
+  }, []);
+
+  const handleTourismLeave = useCallback(() => {
+    if (isMobile()) return;
+    tourismCloseTimer.current = setTimeout(() => setTourismOpen(false), 120);
+  }, []);
+
+  const handleTourismClick = useCallback(() => {
+    if (!isMobile()) return;
+    setTourismOpen((v) => !v);
+  }, []);
+
   return (
     <header className={`navbar ${show ? "show" : "hide"}`}>
       <button
@@ -240,6 +269,50 @@ export default function Navbar() {
                   {it.label}
                 </NavLink>
               ))}
+            </div>
+          </li>
+
+          {/* TOURISM */}
+          <li
+            className={`nav-item info tourism${tourismOpen ? " open" : ""}`}
+            onMouseEnter={handleTourismEnter}
+            onMouseLeave={handleTourismLeave}
+            onClick={handleTourismClick}
+          >
+            <span className="nav-item-toggle" role="button" aria-haspopup="menu" aria-expanded={tourismOpen}>
+              <span>Tourism</span>
+              <FaChevronDown className={`dropdown-arrow ${tourismOpen ? "open" : ""}`} />
+            </span>
+            <div
+              className={`info-menu${tourismOpen ? " open" : ""}`}
+              onMouseEnter={() => {
+                if (isMobile()) return;
+                clearTimeout(tourismCloseTimer.current);
+              }}
+              onMouseLeave={handleTourismLeave}
+            >
+              <Link
+                to="/#tourism-ireland"
+                className="info-link"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeNavigation();
+                }}
+              >
+                Tourism overview
+              </Link>
+              <NavLink
+                to="/tourism-ireland/guide"
+                className={({ isActive }) =>
+                  isActive ? "info-link active" : "info-link"
+                }
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeNavigation();
+                }}
+              >
+                Full travel guide
+              </NavLink>
             </div>
           </li>
 

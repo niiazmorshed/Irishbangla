@@ -84,13 +84,11 @@ export default function VisaSearchCard() {
   const handleSubmit = () => {
     if (!isFormValid) return;
 
-    navigate("/visa-details", {
-      state: {
-        fromCountryCode: citizen.value,
-        destination: "Ireland",
-        categoryKey: category,
-      },
+    const params = new URLSearchParams({
+      country: citizen.value,
+      category,
     });
+    navigate(`/visa-details?${params.toString()}`);
   };
 
   return (

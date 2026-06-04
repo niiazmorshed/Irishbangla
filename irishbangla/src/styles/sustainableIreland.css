@@ -107,7 +107,7 @@
   }
 
   .editorial-image img {
-    height: 380px;
+    height: min(52vw, 380px);
   }
 }
 .section-eyebrow {

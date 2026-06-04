@@ -7,7 +7,7 @@ Marketing + information website for **Emerald Visa & Tours**, with formal naviga
 - **React** (Vite)
 - **React Router**
 - **Firebase Firestore** (tracking page)
-- **Framer Motion / GSAP** (animations)
+- **Framer Motion** (animations)
 - **react-select / react-icons**
 
 ## Key features

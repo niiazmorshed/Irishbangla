@@ -1,5 +1,5 @@
 import "../styles/contact.css";
-import { FaFacebookF, FaLinkedinIn, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaInstagram, FaYoutube, FaMapMarkerAlt, FaPhone, FaEnvelope } from "react-icons/fa";
 import { useState, forwardRef } from "react";
 
 const ContactSection = forwardRef((props, ref) => {
@@ -60,31 +60,15 @@ const ContactSection = forwardRef((props, ref) => {
 
           <div className="contact-info">
             <div className="contact-info-row">
-              <lord-icon
-                src="https://cdn.lordicon.com/dhmavvpz.json"
-                trigger="loop"
-                delay="2000"
-                style={{ width: 28, height: 28 }}
-              />
+              <FaMapMarkerAlt className="contact-info-icon" aria-hidden="true" />
               <p>House 76/A, Road 11, Banani, Dhaka 1213</p>
             </div>
             <div className="contact-info-row">
-              <lord-icon
-                src="https://cdn.lordicon.com/xvmmqwjv.json"
-                trigger="loop"
-                delay="2000"
-                colors="primary:#121331,secondary:#109121,tertiary:#ffc738,quaternary:#4bb3fd,quinary:#ebe6ef"
-                style={{ width: 28, height: 28 }}
-              />
+              <FaPhone className="contact-info-icon" aria-hidden="true" />
               <p>+880 1725-982743</p>
             </div>
             <div className="contact-info-row">
-              <lord-icon
-                src="https://cdn.lordicon.com/gtvaxhwv.json"
-                trigger="loop"
-                delay="2000"
-                style={{ width: 28, height: 28 }}
-              />
+              <FaEnvelope className="contact-info-icon" aria-hidden="true" />
               <p>info@irishbangla.com</p>
             </div>
           </div>

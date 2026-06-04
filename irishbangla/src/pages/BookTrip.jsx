@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "../styles/BookTrip.css";
-import { ScrollReveal } from "../components/ScrollReveal";
 
 export default function BookTrip() {
   const [status, setStatus] = useState("");
@@ -31,7 +30,7 @@ export default function BookTrip() {
   };
 
   return (
-    <ScrollReveal as="div" className="booktrip-page" y={22}>
+    <div className="booktrip-page">
       <h1 className="page-title">Book Your Trip </h1>
       <p className="page-subtitle">
         Plan your Ireland journey with confidence. Our experts will contact you shortly.
@@ -100,6 +99,6 @@ export default function BookTrip() {
           </p>
         </div>
       </div>
-    </ScrollReveal>
+    </div>
   );
 }

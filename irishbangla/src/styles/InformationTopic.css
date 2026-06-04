@@ -482,7 +482,7 @@
 
 @media (max-width: 900px) {
   .info-mobile-nav {
-    top: calc(var(--app-header-offset, 56px) + 42px);
+    top: var(--app-header-offset);
   }
 }
 

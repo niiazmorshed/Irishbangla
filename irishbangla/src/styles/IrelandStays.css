@@ -300,3 +300,19 @@
     min-height: 200px;
   }
 }
+
+@media (max-width: 640px) {
+  .ireland-stays {
+    padding: 56px 4%;
+  }
+
+  .ireland-stays-header h2 {
+    font-size: clamp(1.75rem, 7vw, 2rem);
+  }
+
+  .ireland-stay-flip-wrap,
+  .ireland-stay-flip-inner,
+  .ireland-stay-card {
+    min-height: 340px;
+  }
+}

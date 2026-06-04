@@ -1,7 +1,6 @@
 import { motion as Motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import "../styles/TourismPages.css";
-import { ScrollReveal } from "../components/ScrollReveal";
 import cliffs from "../assets/hero/cliffs.jpg";
 import dublin from "../assets/hero/dublin.jpg";
 import wild from "../assets/hero/wild.jpg";
@@ -30,7 +29,7 @@ function GuideSection({ id, title, children, className = "" }) {
 
 export default function IrelandTourismGuide() {
   return (
-    <ScrollReveal as="div" className="tourism-page tig-guide" y={20}>
+    <div className="tourism-page tig-guide">
       <header className="tig-hero-mini">
         <div className="tig-hero-mini-inner">
           <div>
@@ -521,6 +520,6 @@ export default function IrelandTourismGuide() {
           </Link>
         </footer>
       </main>
-    </ScrollReveal>
+    </div>
   );
 }

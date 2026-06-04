@@ -157,3 +157,32 @@
   color: #2fa84f;
   font-weight: 600;
 }
+
+@media (max-width: 900px) {
+  .thinking-trip {
+    padding: 48px 5%;
+  }
+
+  .thinking-trip h2 {
+    font-size: clamp(1.75rem, 6vw, 2.2rem);
+    margin-bottom: 28px;
+  }
+
+  .trip-content h3 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .thinking-trip {
+    padding: 40px 4%;
+  }
+
+  .trip-grid {
+    gap: 20px;
+  }
+
+  .image-wrap {
+    height: 190px;
+  }
+}
