@@ -38,7 +38,7 @@ export default function BookingForm() {
 
   return (
     <section className="booktrip-form-card">
-      <form onSubmit={handleSubmit} className="booktrip-form" noValidate>
+      <form onSubmit={handleSubmit} className="booktrip-form">
         <input type="hidden" name="_subject" value="New Trip Booking Request" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="destination_country" value={destination.name} />
