@@ -31,8 +31,11 @@ export function getDestination(code) {
  * only if a code is somehow missing.
  */
 export function destinationFlagUrl(code) {
-  if (!code) return flagUrl(code);
-  return `https://flagcdn.com/${code.toLowerCase()}.svg`;
+  const safeCode = typeof code === "string" ? code.trim() : "";
+  if (safeCode) return `https://flagcdn.com/${safeCode.toLowerCase()}.svg`;
+
+  const fallback = bookTripDestinations[0]?.code;
+  return fallback ? `https://flagcdn.com/${fallback.toLowerCase()}.svg` : flagUrl("IE");
 }
 
 /** Convert lat/lng to a point on a unit sphere (Three.js Y-up). */
