@@ -11,7 +11,7 @@ const GLOBE_PX = 124;
  */
 const FIXED_ROTATION = 1.52;
 /** Extra texture shift (0–1 wrap) — fine-tunes map under markers */
-const MAP_LNG_SHIFT = 0.06;
+const MAP_LNG_SHIFT = 0.30;
 
 /** Approximate marker positions on the globe (% of ball area). */
 const OFFICE_SPOT = { x: 62, y: 55 };
@@ -58,20 +58,24 @@ function buildMatteTexture(img) {
   const { data } = imageData;
 
   for (let i = 0; i < data.length; i += 4) {
-    const lum = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114;
-    const isLand = lum < 100;
+    const r = data[i];
+    const g = data[i + 1];
+    const b = data[i + 2];
+    const lum = r * 0.299 + g * 0.587 + b * 0.114;
+    /* Blue-marble oceans are dark blue — NOT low-lum land */
+    const isOcean = b > r + 10 && b > g - 5;
 
-    if (isLand) {
-      /* Visible land — medium grey-green on a light sphere */
-      const land = Math.max(100, Math.min(158, lum * 0.9 + 52));
-      data[i] = land - 6;
-      data[i + 1] = land + 2;
-      data[i + 2] = land - 10;
+    if (isOcean) {
+      /* Pure white ocean */
+      data[i] = 255;
+      data[i + 1] = 255;
+      data[i + 2] = 255;
     } else {
-      /* Light ocean */
-      data[i] = 228;
-      data[i + 1] = 236;
-      data[i + 2] = 242;
+      /* Medium-dark grey land — mockup contrast against white ocean */
+      const land = Math.max(105, Math.min(125, 112 + (128 - lum) * 0.08));
+      data[i] = land;
+      data[i + 1] = land;
+      data[i + 2] = land;
     }
   }
 
@@ -123,11 +127,22 @@ function drawSphere(ctx, texture, size, rotationY) {
       const v = 0.5 - lat / Math.PI;
 
       const [r, g, b] = sampleTexture(texture, u, v);
-      const diffuse = Math.max(0.58, (dx * lx + dy * ly + nz * lz) / lLen);
+      const isOcean = r > 240 && g > 240 && b > 240;
+      const ndotl = (dx * lx + dy * ly + nz * lz) / lLen;
 
-      out[i] = Math.min(255, r * diffuse + 12);
-      out[i + 1] = Math.min(255, g * diffuse + 12);
-      out[i + 2] = Math.min(255, b * diffuse + 10);
+      if (isOcean) {
+        /* Keep ocean white — only a whisper of sphere shading */
+        const shade = 0.98 + 0.02 * ndotl;
+        const white = Math.round(255 * shade);
+        out[i] = white;
+        out[i + 1] = white;
+        out[i + 2] = white;
+      } else {
+        const diffuse = 0.9 + 0.1 * ndotl;
+        out[i] = Math.min(255, Math.round(r * diffuse));
+        out[i + 1] = Math.min(255, Math.round(g * diffuse));
+        out[i + 2] = Math.min(255, Math.round(b * diffuse));
+      }
       out[i + 3] = 255;
     }
   }
