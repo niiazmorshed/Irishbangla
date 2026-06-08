@@ -23,6 +23,7 @@ const IrelandWeather = lazy(() => import("./pages/irelandweather"));
 const BookTrip = lazy(() => import("./pages/BookTrip"));
 const InformationTopic = lazy(() => import("./pages/InformationTopic"));
 const IrelandTourismGuide = lazy(() => import("./pages/IrelandTourismGuide"));
+const ServiceTopic = lazy(() => import("./pages/ServiceTopic"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AdminRouteShell = lazy(() => import("./components/AdminRouteShell"));
 const AdminTrackerConsole = lazy(() => import("./pages/AdminTrackerConsole"));
@@ -123,6 +124,12 @@ function App() {
           <Route path="/ireland-weather" element={<PageSuspense><IrelandWeather /></PageSuspense>} />
           <Route path="/sustainable-ireland" element={<PageSuspense><SustainableIreland /></PageSuspense>} />
           <Route path="/tourism-ireland/guide" element={<PageSuspense><IrelandTourismGuide /></PageSuspense>} />
+          <Route path="/services" element={<Navigate to="/services/visa-consultancy" replace />} />
+          <Route
+            path="/services/visa-processing-bangladesh"
+            element={<Navigate to="/services/visa-application-support" replace />}
+          />
+          <Route path="/services/:service" element={<PageSuspense><ServiceTopic /></PageSuspense>} />
           <Route path="*" element={<PageSuspense><NotFound /></PageSuspense>} />
         </Route>
       </Routes>

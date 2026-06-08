@@ -1,4 +1,5 @@
 import { Link, matchPath, useLocation } from "react-router-dom";
+import { serviceTopics } from "../data/serviceTopics";
 import "../styles/Breadcrumbs.css";
 
 const ROUTES = [
@@ -31,6 +32,17 @@ const ROUTES = [
       { to: "/#tourism-ireland", label: "Tourism in Ireland" },
       { label: "Travel Guide" },
     ],
+  },
+  {
+    path: "/services/:service",
+    label: "Services",
+    getCrumbs: ({ service }) => {
+      const topic = serviceTopics.find((t) => t.slug === service);
+      return [
+        { to: "/services/visa-consultancy", label: "Services" },
+        { label: topic?.title ?? titleCaseFromSlug(service) },
+      ];
+    },
   },
 ];
 

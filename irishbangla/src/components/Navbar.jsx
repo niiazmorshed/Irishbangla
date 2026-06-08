@@ -4,6 +4,7 @@ import { useNavigate, NavLink, Link, useLocation } from "react-router-dom";
 import "../styles/Navbar.css";
 import Breadcrumbs from "./Breadcrumbs";
 import { informationTopics } from "../data/informationTopics";
+import { serviceTopics } from "../data/serviceTopics";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -119,6 +120,16 @@ export default function Navbar() {
       informationTopics.map((t) => ({
         to: `/information/${t.slug}`,
         label: t.title,
+      })),
+    []
+  );
+
+  const serviceItems = useMemo(
+    () =>
+      serviceTopics.map((t) => ({
+        to: `/services/${t.slug}`,
+        title: t.title,
+        description: t.menuDescription,
       })),
     []
   );
@@ -335,12 +346,22 @@ export default function Navbar() {
               }}
               onMouseLeave={handleServicesLeave}
             >
-              <div className="mega-item">Visa Consultancy</div>
-              <div className="mega-item">Cross-Border Visa Processing</div>
-              <div className="mega-item">Visa Processing in Bangladesh</div>
-              <div className="mega-item">E-Visa Processing</div>
-              <div className="mega-item">Express Consultation</div>
-              <div className="mega-item">Document Legalization</div>
+              {serviceItems.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  className={({ isActive }) =>
+                    isActive ? "mega-item active" : "mega-item"
+                  }
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    closeNavigation();
+                  }}
+                >
+                  <span className="mega-item-title">{item.title}</span>
+                  <span className="mega-item-desc">{item.description}</span>
+                </NavLink>
+              ))}
             </div>
           </li>
 

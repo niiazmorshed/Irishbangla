@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { motion as Motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { FaClipboardList, FaMapMarkedAlt, FaHotel, FaPlaneDeparture } from "react-icons/fa";
 import "../styles/TourismPages.css";
 import cliffs from "../assets/hero/cliffs.jpg";
 import dublin from "../assets/hero/dublin.jpg";
@@ -21,22 +22,22 @@ const highlights = [
   {
     title: "Visa & entry",
     text: "Short-stay rules, Bangladeshi nationals, documents, and INIS links.",
-    icon: "📋",
+    icon: <FaClipboardList />,
   },
   {
     title: "Top destinations",
     text: "Dublin, Wild Atlantic Way, UNESCO sites, and scenic drives.",
-    icon: "🗺️",
+    icon: <FaMapMarkedAlt />,
   },
   {
     title: "Stay & tours",
     text: "B&Bs to luxury hotels, guided tours, and adventure picks.",
-    icon: "🏨",
+    icon: <FaHotel />,
   },
   {
     title: "Practical tips",
     text: "Seasons, budget, transport on the left, and emergency numbers.",
-    icon: "✈️",
+    icon: <FaPlaneDeparture />,
   },
 ];
 

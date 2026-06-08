@@ -69,7 +69,7 @@ const Services = ({ onEnquiryClick }) => {
   const DetailBody = openId ? SERVICE_DETAIL_COMPONENTS[openId] : null;
 
   return (
-    <section className="services-section">
+    <section className="services-section" id="services">
       <div className="services-left">
         <p className="services-guide-kicker">Comprehensive services guide</p>
         <h2>Our Services</h2>
