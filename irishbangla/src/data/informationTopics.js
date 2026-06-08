@@ -21,46 +21,127 @@ export const informationTopics = [
     icon: FaIdCard,
     heroImage: imgCliffs,
     lead:
-      "Key steps for non‑EEA nationals staying more than 90 days, including registration, IRP, stamp types, long‑term residency and citizenship pathways.",
+      "A step‑by‑step guide for non‑EEA nationals planning to stay more than 90 days — from entry visas and arrival registration to IRP stamp types, renewals, family reunification, long‑term residency and citizenship.",
     sections: [
+      {
+        heading: "Before You Arrive — Entry Visa vs Permission",
+        bullets: [
+          "Check whether you need an entry visa: nationals of many countries must apply before travelling (see the visa‑required list on irishimmigration.ie).",
+          "Short‑stay ‘C’ visa: visits of up to 90 days. Long‑stay ‘D’ visa: stays over 90 days (work, study, joining family).",
+          "Apply online through the AVATS portal, then submit your documents to the nearest Irish embassy or consulate.",
+          "An entry visa only lets you travel to Ireland — it is NOT residence permission. You must still register after arrival.",
+          "Visa‑exempt nationals still need permission to remain beyond 90 days.",
+        ],
+      },
       {
         heading: "Register with Immigration",
         bullets: [
           "Register at your local Garda immigration office (outside Dublin) or the Burgh Quay Registration Office in Dublin.",
           "Register within 90 days of arrival in Ireland.",
-          "Bring: passport, evidence of immigration permission, and registration fee of €300.",
+          "Bring: passport, evidence of immigration permission, and the registration fee of €300.",
           "You receive an IRP (Irish Residence Permit) card — your proof of legal residence.",
+          "Book your appointment in advance; slots can be limited, especially in Dublin.",
+        ],
+      },
+      {
+        heading: "Documents to Bring for Registration",
+        bullets: [
+          "Valid passport (and any previous passports you hold).",
+          "Evidence of your immigration permission, visa or approval letter.",
+          "Proof of address in Ireland (utility bill, tenancy agreement or official letter).",
+          "Proof of finances (bank statements) showing you can support yourself.",
+          "Private medical insurance — required for several stamp types.",
+          "Stamp‑specific documents: job contract (Stamp 1), college letter (Stamp 2), marriage/birth certificates (family).",
+          "Registration fee of €300, payable by card.",
         ],
       },
       {
         heading: "IRP Stamp Types (Overview)",
+        table: {
+          columns: ["Stamp", "Who It’s For", "Work Rights"],
+          rows: [
+            ["Stamp 0", "Limited stay — independent means, visiting academic, elderly dependant", "Not allowed"],
+            ["Stamp 1", "Employment — requires an employment permit", "Yes (with permit)"],
+            ["Stamp 1G", "Graduate scheme / job‑seeking after studies", "Yes (no permit)"],
+            ["Stamp 2", "Full‑time student on a registered course", "Limited (casual work, term rules)"],
+            ["Stamp 3", "Non‑working — joining family, retired, minister of religion", "Not allowed"],
+            ["Stamp 4", "Long‑term — family of Irish/EEA citizen, refugees, etc.", "Yes (no permit)"],
+            ["Stamp 5", "Without Condition as to Time — effectively permanent", "Yes (no permit)"],
+          ],
+        },
+      },
+      {
+        heading: "Renewing Your IRP",
         bullets: [
-          "Stamp 1: Employment (requires employment permit).",
-          "Stamp 1G: Graduated / job‑seeking after studies.",
-          "Stamp 2: Student (registered course, full‑time).",
-          "Stamp 3: Non‑working (joining family, retired).",
-          "Stamp 4: Longer‑term; can work without permit (incl. family of Irish/EEA citizen).",
-          "Stamp 5: Without Condition as to Time — effectively permanent residency.",
+          "Renew before your current IRP expires — do not let your permission lapse.",
+          "Dublin residents renew online; outside Dublin, renew at your local Garda immigration office.",
+          "Renewal fee is €300 (some categories are exempt, e.g. certain students, Stamp 5, EU family members).",
+          "Keep proof that you applied — even a short overstay can affect future applications and citizenship.",
+        ],
+      },
+      {
+        heading: "Bringing Family (Reunification)",
+        bullets: [
+          "Family reunification lets eligible residents bring a spouse, civil partner, de facto partner or children.",
+          "Critical Skills permit holders and many Stamp 4 holders can be joined by family more easily.",
+          "Sponsors usually must meet a minimum income threshold over the preceding years.",
+          "De facto partners must show a durable relationship (typically 2+ years living together).",
+          "Joining family are normally granted Stamp 1G, 3 or 4 depending on the category.",
+        ],
+      },
+      {
+        heading: "EU Treaty Rights",
+        bullets: [
+          "Non‑EEA family members of EU/EEA/Swiss citizens living in Ireland can apply under EU Treaty Rights.",
+          "Covers spouse, partner, children and certain dependent relatives.",
+          "Successful applicants receive a residence card (Stamp 4 EU FAM) — work allowed without a permit.",
+          "This route is separate from standard immigration permission and is often faster.",
         ],
       },
       {
         heading: "Long‑Term Residency",
         bullets: [
-          "Apply after 5 years of legal residency under certain stamps.",
+          "Apply after 5 years of legal residency under eligible stamps (Stamp 1, 4).",
           "Provides Stamp 4 level rights — no employment permit required.",
+          "A separate ‘Long‑Term Residence (EU)’ status can give rights across other EU states.",
           "Applications are handled by Immigration Service Delivery (ISD).",
         ],
       },
       {
         heading: "Irish Citizenship (Naturalisation)",
         bullets: [
-          "Naturalisation typically requires 5 years of continuous residency (some absences may be allowed).",
-          "Generally requires Stamp 1, 1G, 4 or 5 (not Stamp 2 or 3).",
-          "Apply through the Irish Naturalisation and Immigration Service (INIS).",
+          "Typically requires 5 years’ reckonable residence in the last 9 years, including 1 continuous year before applying.",
+          "The final 12 months must be continuous; up to 70 days’ absence is generally allowed (more in exceptional cases).",
+          "Generally requires Stamp 1, 1G, 4 or 5 — time on Stamp 2 (student) or Stamp 3 does not count.",
+          "Applicants must be of good character and intend to continue living in Ireland.",
+          "Apply through Immigration Service Delivery (ISD); spouses of Irish citizens may qualify after 3 years.",
+        ],
+      },
+      {
+        heading: "Costs at a Glance (Indicative)",
+        table: {
+          columns: ["Item", "Approx. Fee", "Notes"],
+          rows: [
+            ["Long‑stay (D) entry visa", "€100", "Paid at application; transit visa €60"],
+            ["IRP registration", "€300", "Per person, on first registration"],
+            ["IRP renewal", "€300", "Each renewal (some categories exempt)"],
+            ["Re‑entry visa (under 16)", "€60–€100", "For visa‑required minors re‑entering"],
+            ["Citizenship", "€175 + €950", "Application fee + certificate fee (adult)"],
+          ],
+        },
+      },
+      {
+        heading: "Important Reminders",
+        bullets: [
+          "Always keep your permission valid — gaps can break the continuous residency needed for citizenship.",
+          "Notify ISD if you change address, employer or circumstances where required.",
+          "Children under 16 do not register for an IRP but are tied to their parent’s permission.",
+          "Store your IRP details safely — you may need them for banking, tenancy and travel.",
+          "Re‑entry visas were abolished for adults in 2019, but visa‑required minors still need one to re‑enter.",
         ],
       },
     ],
-    sources: ["citizensinformation.ie", "irishimmigration.ie"],
+    sources: ["citizensinformation.ie", "irishimmigration.ie", "inis.gov.ie"],
   },
   {
     slug: "employment-in-ireland",
